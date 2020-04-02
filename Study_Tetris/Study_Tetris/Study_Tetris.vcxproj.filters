@@ -4,16 +4,22 @@
     <ClCompile Include="main.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Scene\SceneManager</Filter>
+    <ClCompile Include="TetrisBlock.cpp">
+      <Filter>TetrisBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockCollection.cpp">
+      <Filter>TetrisBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Scene\SceneManager</Filter>
+    <ClInclude Include="BlockCollection.h">
+      <Filter>TetrisBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisBlock.h">
+      <Filter>TetrisBlock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
