@@ -9,6 +9,9 @@
     <ClInclude Include="main.h">
       <Filter>Window</Filter>
     </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -34,6 +37,9 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{ac6b589a-0f0c-4b55-9839-72dcae045c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{2f8c8fae-e1ea-4bac-9817-848396144064}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
