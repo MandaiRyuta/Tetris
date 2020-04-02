@@ -10,6 +10,28 @@
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="NextBlock.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameState.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -22,6 +44,27 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="NextBlock.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameState.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,26 +1,13 @@
 #pragma once
 #include "UI.h"
-#include <vector>
 
-struct Vector2
-{
-	int x;
-	int y;
-};
-struct Color
-{
-	int r;
-	int g;
-	int b;
-	int a;
-};
 namespace TetrisUI
 {
 	class Background : public UI
 	{
 	public:
-		Background();
-		~Background();
+		Background() {}
+		~Background() {}
 	public:
 		virtual void Init() override;
 		virtual void Update() override;
