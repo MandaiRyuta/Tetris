@@ -38,5 +38,8 @@
     <Filter Include="UI\UIManager">
       <UniqueIdentifier>{39b25e76-e8d2-46fc-8344-b777b99f6995}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{ac6b589a-0f0c-4b55-9839-72dcae045c14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
