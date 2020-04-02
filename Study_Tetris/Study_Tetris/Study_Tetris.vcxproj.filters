@@ -7,6 +7,9 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Scene\SceneManager</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -14,6 +17,9 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +43,9 @@
     </Filter>
     <Filter Include="UI\UIManager">
       <UniqueIdentifier>{39b25e76-e8d2-46fc-8344-b777b99f6995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{be19c9af-82dc-40c5-8579-fe9c27db98a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

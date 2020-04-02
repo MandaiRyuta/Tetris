@@ -1,4 +1,3 @@
-#include "DxLib.h"
 #include "main.h"
 
 
