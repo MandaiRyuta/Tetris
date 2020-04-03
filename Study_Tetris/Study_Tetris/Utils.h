@@ -5,6 +5,8 @@
 
 namespace Utils
 {
+	constexpr int KEYFRAME = 1;
+
 	template<typename T>
 	struct ObjectPool
 	{
@@ -25,7 +27,6 @@ namespace Utils
 		S,
 		T,
 		Z,
-		W,
 	};
 
 	enum class SCENETYPE
@@ -50,18 +51,12 @@ namespace Utils
 		int a;
 	};
 	
-	typedef struct Block
+	struct Block
 	{
-		int Handle_;
-		int positionx;
-		int positiony;
-		int rotatex;
-		int rotatey;
-		int saclex;
-		int scaley;
 		int r;
 		int g;
 		int b;
 		int a;
+		int type;
 	};
 }

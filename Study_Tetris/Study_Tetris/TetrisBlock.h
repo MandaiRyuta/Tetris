@@ -1,34 +1,42 @@
 #pragma once
-#include "BlockCollection.h"
 #include "Utils.h"
 
-constexpr int BlockType = 7;
-constexpr int BlockSize = 4;
+constexpr int BLOCKTYPE = 7;
+constexpr int BLOCKSIZE = 4;
 
 namespace TetrisBlocks
 {
 	class TetrisBlock
 	{
 	public:
-		TetrisBlock(){}
+		TetrisBlock():
+			Blocknumber_(0),
+			//Input_(nullptr),
+			Type_(Utils::BlockType::I),
+			Blocktype_()
+		{
+			OneMoveCheck = 0x000;
+			Position_.x = 0;
+			Position_.y = -1;
+		}
 		~TetrisBlock(){}
 	public:
 		void SetBlock(Utils::BlockType type);
-		void SetBlockTransform(int positionX, int positionY);
+		void DrawBlock(int type, int vertical, int side, int positionX, int positionY);
 		void ChangeRotate();
-		void ValidArea();
 		void Init();
 		void Update();
 		void Draw();
 		void Release();
-		void Hold();
-		void Stack();
-		void NowBlockReset();
-		void StackBlockClear();
-		
+	
 	private:
-		Utils::BlockType type_;
-		BlockCollection collection_;
-		Utils::Block blocktype_[BlockType][BlockSize][BlockSize];
+		//Input* Input_;
+		signed short int OneMoveCheck;
+		Utils::Vector2 Position_;
+		int Blocknumber_;
+		Utils::BlockType Type_;
+		Utils::Block Blocktype_[BLOCKTYPE][BLOCKSIZE][BLOCKSIZE];
+		int BlockMaxMoveTime_;
+		int BlockNowMoveTime_;
 	};
 }

@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Utils.h"
 
+const int SCENEINDEX = 3;
 class SceneManager
 {
 public:
@@ -13,10 +14,11 @@ public:
 
 	Scene& GetScene(Utils::SCENETYPE type)
 	{
-		Scenes[static_cast<int>(type)].SetSceneNumber(static_cast<int>(type));
-		return Scenes[static_cast<int>(type)];
+		const auto Index = static_cast<int>(type);
+		Scenes_[Index].SetSceneNumber(Index);
+		return Scenes_[Index];
 	}
 
 private:
-	Scene Scenes[3];
+	Scene Scenes_[SCENEINDEX];
 };

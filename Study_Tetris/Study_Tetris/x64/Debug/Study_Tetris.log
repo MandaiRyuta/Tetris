@@ -1,13 +1,2 @@
-﻿  BlockCollection.cpp
-  Input.cpp
-C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\Utils.h(66,3): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'Utils::Block' の左辺を無視します。
-  main.cpp
-C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\Utils.h(66,3): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'Utils::Block' の左辺を無視します。
-  Scene.cpp
-C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\Utils.h(66,3): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'Utils::Block' の左辺を無視します。
-  SceneManager.cpp
-C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\Utils.h(66,3): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'Utils::Block' の左辺を無視します。
-  TetrisBlock.cpp
-C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\Utils.h(66,3): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'Utils::Block' の左辺を無視します。
-  コードを生成中...
+﻿  TetrisBlock.cpp
   Study_Tetris.vcxproj -> C:\Users\tjddy\source\repos\Tetris\Study_Tetris\x64\Debug\Study_Tetris.exe

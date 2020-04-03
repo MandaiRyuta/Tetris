@@ -1,4 +1,9 @@
 #include "TetrisBlock.h"
+#include "Input.h"
+constexpr int LEFTPADDING = 3;
+constexpr int UPPADDING = 3;
+constexpr int RIGHTPADDING = 17;
+constexpr int DOWNPADDING = 17;
 
 void TetrisBlocks::TetrisBlock::SetBlock(Utils::BlockType type)
 {
@@ -19,478 +24,507 @@ void TetrisBlocks::TetrisBlock::SetBlock(Utils::BlockType type)
 		break;
 	case Utils::BlockType::Z:
 		break;
-	case Utils::BlockType::W:
-		break;
 	}
 }
 
-void TetrisBlocks::TetrisBlock::SetBlockTransform(int positionX, int positionY)
+void TetrisBlocks::TetrisBlock::DrawBlock(int type, int vertical, int side, int positionX, int positionY)
 {
+	if (Blocktype_[type][vertical][side].type == 1)
+	{
+		DrawBox(positionX + LEFTPADDING, positionY + UPPADDING, positionX + RIGHTPADDING, positionY + DOWNPADDING, GetColor(Blocktype_[type][vertical][side].r, Blocktype_[type][vertical][side].g, Blocktype_[type][vertical][side].b), true);
+	}
 }
 
 void TetrisBlocks::TetrisBlock::ChangeRotate()
 {
 }
 
-void TetrisBlocks::TetrisBlock::ValidArea()
-{
-}
-
 void TetrisBlocks::TetrisBlock::Init()
 {
-	int block;
-	block = LoadGraph("/texture/TetrisBlockTexture.png");
+	//Input_ = new Input(1);
+	
+	Blocknumber_ = 0;
+	BlockMaxMoveTime_ = 3400;
+	BlockNowMoveTime_ = 0;
+	const auto TypeI = static_cast<int>(Utils::BlockType::I);
+	const auto TypeJ = static_cast<int>(Utils::BlockType::J);
+	const auto TypeL = static_cast<int>(Utils::BlockType::L);
+	const auto TypeO = static_cast<int>(Utils::BlockType::O);
+	const auto TypeS = static_cast<int>(Utils::BlockType::S);
+	const auto TypeT = static_cast<int>(Utils::BlockType::T);
+	const auto TypeZ = static_cast<int>(Utils::BlockType::Z);
 
 	//I
-	blocktype_[static_cast<int>(Utils::BlockType::I)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][0][0] = {
+		255,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][0][1] = {
-		block,1,0,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeI)][0][1] = {
+		0,165,255,255,1
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][0][2] = {
+		255,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::I)][1][0] = {
-		block,0,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][1][2] = {
-		block,2,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][0][3] = {
+		255,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::I)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][1][0] = {
+		255,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][2][1] = {
-		block,1,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeI)][1][1] = {
+		0,165,255,255,1
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][2][2] = {
-		block,2,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][1][2] = {
+		255,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][1][3] = {
+		255,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::I)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][2][0] = {
+		255,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][3][1] = {
-		block,1,3,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeI)][2][1] = {
+		0,165,255,255,1
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][2][2] = {
+		255,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::I)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeI)][2][3] = {
+		255,255,255,255,0
+	};
+
+	Blocktype_[static_cast<int>(TypeI)][3][0] = {
+		255,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeI)][3][1] = {
+		0,165,255,255,1
+	};
+	Blocktype_[static_cast<int>(TypeI)][3][2] = {
+		255,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeI)][3][3] = {
+		255,255,255,255,0
 	};
 
 	//J
-	blocktype_[static_cast<int>(Utils::BlockType::J)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][0][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][0][1] = {
-		block,1,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][0][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][0][2] = {
-		block,2,0,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeJ)][0][2] = {
+		0,0,255,255,2
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::J)][1][0] = {
-		block,0,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][1][1] = {
-		block,1,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][1][2] = {
-		block,2,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][0][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::J)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][1][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][2][1] = {
-		block,1,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeJ)][1][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][2][2] = {
-		block,2,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeJ)][1][2] = {
+		0,0,255,255,2
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][1][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::J)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][2][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][2][1] = {
+		0,0,255,255,2
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][2][2] = {
+		0,0,255,255,2
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::J)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeJ)][2][3] = {
+		0,255,255,255,0
+	};
+
+	Blocktype_[static_cast<int>(TypeJ)][3][0] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeJ)][3][1] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeJ)][3][2] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeJ)][3][3] = {
+		0,255,255,255,0
 	};
 
 	//L
-	blocktype_[static_cast<int>(Utils::BlockType::L)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][0][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][0][1] = {
-		block,1,0,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeL)][0][1] = {
+		255,140,0,255,3
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][0][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::L)][1][0] = {
-		block,0,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][1][2] = {
-		block,2,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][0][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::L)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][1][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][2][1] = {
-		block,1,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeL)][1][1] = {
+		255,140,0,255,3
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][2][2] = {
-		block,2,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeL)][1][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][1][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::L)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][2][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][2][1] = {
+		255,140,0,255,3
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][2][2] = {
+		255,140,0,255,3
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::L)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeL)][2][3] = {
+		0,255,255,255,0
+	};
+
+	Blocktype_[static_cast<int>(TypeL)][3][0] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeL)][3][1] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeL)][3][2] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeL)][3][3] = {
+		0,255,255,255,0
 	};
 
 	//O
-	blocktype_[static_cast<int>(Utils::BlockType::O)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][0][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][0][1] = {
-		block,1,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][0][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][0][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::O)][1][0] = {
-		block,0,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][1][2] = {
-		block,2,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][0][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::O)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][1][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][2][1] = {
-		block,1,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeO)][1][1] = {
+		255,255,0,255,4
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][2][2] = {
-		block,2,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeO)][1][2] = {
+		255,255,0,255,4
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][1][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::O)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][2][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][2][1] = {
+		255,255,0,255,4
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][3][2] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][2][2] = {
+		255,255,0,255,4
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::O)][3][3] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeO)][2][3] = {
+		0,255,255,255,0
+	};
+
+	Blocktype_[static_cast<int>(TypeO)][3][0] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeO)][3][1] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeO)][3][2] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeO)][3][3] = {
+		0,255,255,255,0
 	};
 
 	//S
-	blocktype_[static_cast<int>(Utils::BlockType::S)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][0][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][0][1] = {
-		block,1,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][0][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][0][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::S)][1][0] = {
-		block,0,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][1][2] = {
-		block,2,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][0][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::S)][2][0] = {
-		block,0,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeS)][1][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][2][1] = {
-		block,1,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeS)][1][1] = {
+		124,252,0,255,5
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][2][2] = {
-		block,2,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][1][2] = {
+		124,252,0,255,5
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][1][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::S)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][2][0] = {
+		124,252,0,255,5
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][2][1] = {
+		124,252,0,255,5
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][2][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::S)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeS)][2][3] = {
+		0,255,255,255,0
+	};
+
+	Blocktype_[static_cast<int>(TypeS)][3][0] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeS)][3][1] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeS)][3][2] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeS)][3][3] = {
+		0,255,255,255,0
 	};
 
 	//T
-	blocktype_[static_cast<int>(Utils::BlockType::T)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][0][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][0][1] = {
-		block,1,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][0][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][0][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::T)][1][0] = {
-		block,0,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][1][2] = {
-		block,2,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][0][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::T)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][1][0] = {
+		255,0,255,255,6
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][2][1] = {
-		block,1,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeT)][1][1] = {
+		255,0,255,255,6
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][2][2] = {
-		block,2,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][1][2] = {
+		255,0,255,255,6
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][1][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::T)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][2][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][2][1] = {
+		255,0,255,255,6
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][2][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::T)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeT)][2][3] = {
+		0,255,255,255,0
+	};
+
+	Blocktype_[static_cast<int>(TypeT)][3][0] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeT)][3][1] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeT)][3][2] = {
+		0,255,255,255,0
+	};
+	Blocktype_[static_cast<int>(TypeT)][3][3] = {
+		0,255,255,255,0
 	};
 
 	//Z
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][0][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][0][1] = {
-		block,1,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][0][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][0][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][1][0] = {
-		block,0,1,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][1][2] = {
-		block,2,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][0][3] = {
+		0,255,255,255,0
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][1][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][2][1] = {
-		block,1,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][1][1] = {
+		255,0,0,255,7
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][2][2] = {
-		block,2,2,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeZ)][1][2] = {
+		255,0,0,255,7
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][2][3] = {
-		block,3,2,0,0,1,1,255,255,255,255,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::Z)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][1][3] = {
+		0,255,255,255,0
 	};
 
-	//W
-	blocktype_[static_cast<int>(Utils::BlockType::W)][0][0] = {
-		block,0,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][2][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][0][1] = {
-		block,1,0,0,0,1,1,255,255,255,255,
+	Blocktype_[static_cast<int>(TypeZ)][2][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][0][2] = {
-		block,2,0,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][2][2] = {
+		255,0,0,255,7
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][0][3] = {
-		block,3,0,0,0,1,1,0,0,0,0,
-	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::W)][1][0] = {
-		block,0,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][1][1] = {
-		block,1,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][1][2] = {
-		block,2,1,0,0,1,1,255,255,255,255,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][1][3] = {
-		block,3,1,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][2][3] = {
+		255,0,0,255,7
 	};
 
-	blocktype_[static_cast<int>(Utils::BlockType::W)][2][0] = {
-		block,0,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][3][0] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][2][1] = {
-		block,1,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][3][1] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][2][2] = {
-		block,2,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][3][2] = {
+		0,255,255,255,0
 	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][2][3] = {
-		block,3,2,0,0,1,1,0,0,0,0,
+	Blocktype_[static_cast<int>(TypeZ)][3][3] = {
+		0,255,255,255,0
 	};
-
-	blocktype_[static_cast<int>(Utils::BlockType::W)][3][0] = {
-		block,0,3,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][3][1] = {
-		block,1,3,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][3][2] = {
-		block,2,3,0,0,1,1,0,0,0,0,
-	};
-	blocktype_[static_cast<int>(Utils::BlockType::W)][3][3] = {
-		block,3,3,0,0,1,1,0,0,0,0,
-	};
-	DeleteGraph(block);
 }
 
 void TetrisBlocks::TetrisBlock::Update()
 {
+	//Input_->Update();
+	if (BlockNowMoveTime_ > BlockMaxMoveTime_)
+	{
+		Position_.y += 20;
+		OneMoveCheck = 0x000;
+		BlockNowMoveTime_ = 0;
+	}
+	if (CheckHitKey(KEY_INPUT_LEFT) == 1)
+	{
+		if (OneMoveCheck == 0x000)
+		{
+			Position_.x -= 20;
+			OneMoveCheck = 0x001;
+		}
+	}
+	if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
+	{
+		if (OneMoveCheck == 0x000)
+		{
+			Position_.x += 20;
+			OneMoveCheck = 0x001;
+		}
+	}
+
+	BlockNowMoveTime_++;
 }
 
 void TetrisBlocks::TetrisBlock::Draw()
 {
+	switch (Blocknumber_)
+	{
+	case 0:
+		for (int i = 0; i < BLOCKSIZE; i++)
+		{
+			for (int j = 0; j < BLOCKSIZE; j++)
+			{   
+				DrawBlock(0, i, j, Position_.x + (j * 20), Position_.y + (i * 20));
+			}
+		}
+		break;
+	//case 1:
+	//	for (int i = 0; i < BLOCKSIZE; i++)
+	//	{
+	//		for (int j = 0; j < BLOCKSIZE; j++)
+	//		{
+	//			DrawBlock(1, Position_.x, Position_.y);
+	//		}
+	//	}
+	//	break;
+	//case 2:
+	//	for (int i = 0; i < BLOCKSIZE; i++)
+	//	{
+	//		for (int j = 0; j < BLOCKSIZE; j++)
+	//		{
+	//			DrawBlock(2, Position_.x, Position_.y);
+	//		}
+	//	}
+	//	break;
+	//case 3:
+	//	for (int i = 0; i < BLOCKSIZE; i++)
+	//	{
+	//		for (int j = 0; j < BLOCKSIZE; j++)
+	//		{
+	//			DrawBlock(3, Position_.x, Position_.y);
+	//		}
+	//	}
+	//	break;
+	//case 4:
+	//	for (int i = 0; i < BLOCKSIZE; i++)
+	//	{
+	//		for (int j = 0; j < BLOCKSIZE; j++)
+	//		{
+	//			DrawBlock(4, Position_.x, Position_.y);
+	//		}
+	//	}
+	//	break;
+	//case 5:
+	//	for (int i = 0; i < BLOCKSIZE; i++)
+	//	{
+	//		for (int j = 0; j < BLOCKSIZE; j++)
+	//		{
+	//			DrawBlock(5, Position_.x, Position_.y);
+	//		}
+	//	}
+	//	break;
+	//case 6:
+	//	for (int i = 0; i < BLOCKSIZE; i++)
+	//	{
+	//		for (int j = 0; j < BLOCKSIZE; j++)
+	//		{
+	//			DrawBlock(6, Position_.x, Position_.y);
+	//		}
+	//	}
+	//	break;
+	}
 }
 
 void TetrisBlocks::TetrisBlock::Release()
-{
-}
-
-void TetrisBlocks::TetrisBlock::Hold()
-{
-}
-
-void TetrisBlocks::TetrisBlock::Stack()
-{
-}
-
-void TetrisBlocks::TetrisBlock::NowBlockReset()
-{
-}
-
-void TetrisBlocks::TetrisBlock::StackBlockClear()
 {
 }

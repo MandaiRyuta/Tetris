@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
 #include "Utils.h"
+#include "BlockCollection.h"
 
 class Input;
+
 class Scene
 {
 public:
@@ -21,9 +23,9 @@ public:
 private:
 	std::vector<int> obj_;
 	int scenenumber_;
+	TetrisBlocks::BlockCollection* collection_;
 	signed short int title_start_end_;
 	signed short int game_start_end_;
 	signed short int result_start_end;
-	Input* input_;
 	signed short int loop_;
 };

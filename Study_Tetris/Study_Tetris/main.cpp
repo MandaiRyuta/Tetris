@@ -1,5 +1,6 @@
 #include "main.h"
 
+const float FRAME_TIME = 1.0f / 60.0f;
 Scene scenes;
 
 void Init();
@@ -13,18 +14,81 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int scene_num = 0;
 	bool change_scene = false;
 	bool loopscene = false;
-	SetGraphMode(800, 600, 64);
+	float frametime = 0;
+
+	LONGLONG NowTime;
+	LONGLONG Time;
+	float x, add;
+	float DeltaTime;
+	int FPS;
+	int FPSCounter;
+	LONGLONG FPSCheckTime;
+
+	ChangeWindowMode(TRUE);
+	
+	SetWaitVSyncFlag(FALSE);
+
+
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
 	{
 		return -1;			// エラーが起きたら直ちに終了
 	}
 
+	// 描画先を裏画面にする
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	x = 0.0f;
+	add = 200.0f;
+	Time = GetNowHiPerformanceCount();
+	DeltaTime = 0.000001f;
+	FPSCheckTime = GetNowHiPerformanceCount();
+	FPS = 0;
+	FPSCounter = 0;
+	
 	Init();
 
 	while (!loopscene)
 	{
+		// メッセージループに代わる処理をする
+		if (ProcessMessage() == -1)
+		{
+			break;        // エラーが起きたらループを抜ける
+		}
+
+		x += add * DeltaTime;
+		if (x < 0.0f)
+		{
+			x = 0.0f;
+			add = -add;
+		}
+		if (x > 640.0f)
+		{
+			x = 640.0f;
+			add = -add;
+		}
+
+		ClearDrawScreen();
+
 		Update(&loopscene, &scene_num, &change_scene);
+
 		Draw();
+
+		ScreenFlip();
+
+		NowTime = GetNowHiPerformanceCount();
+
+		DeltaTime = (NowTime - Time) / 1000000.0f;
+
+		Time = NowTime;
+
+		FPSCounter++;
+
+		if (NowTime - FPSCheckTime > 1000000)
+		{
+			FPS = FPSCounter;
+			FPSCounter = 0;
+			FPSCheckTime = NowTime;
+		}
 	}
 
 	Release();
