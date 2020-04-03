@@ -3,7 +3,7 @@
 Scene scenes;
 
 void Init();
-void Update(int *scenenum, bool *changescene);
+void Update(bool* loop,int *scenenum, bool *changescene);
 void Draw();
 void Release();
 
@@ -12,6 +12,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE);
 	int scene_num = 0;
 	bool change_scene = false;
+	bool loopscene = false;
+	SetGraphMode(800, 600, 64);
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
 	{
 		return -1;			// エラーが起きたら直ちに終了
@@ -19,9 +21,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Init();
 
-	while (1)
+	while (!loopscene)
 	{
-		Update(&scene_num,&change_scene);
+		Update(&loopscene, &scene_num, &change_scene);
 		Draw();
 	}
 
@@ -41,8 +43,10 @@ void Init()
 	scenes.Init();
 }
 
-void Update(int* scenenum, bool* changescene)
+void Update(bool* loop,int* scenenum, bool* changescene)
 {
+	(*loop) = scenes.GetLoop();
+
 	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::TITLE))
 	{
 		if ((*changescene) == true)
@@ -91,6 +95,7 @@ void Update(int* scenenum, bool* changescene)
 		{
 			scenes.Release();
 			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE);
+			scenes.Init();
 			(*scenenum) = static_cast<int>(Utils::SCENETYPE::TITLE);
 			(*changescene) = true;
 		}

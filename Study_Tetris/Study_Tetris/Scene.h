@@ -16,6 +16,8 @@ public:
 	void Delete();
 	void SetSceneNumber(int scenenum);
 	int GetSceneNumber();
+	bool GetLoop();
+	void SetLoop(signed short int loop);
 private:
 	std::vector<int> obj_;
 	int scenenumber_;
@@ -23,4 +25,5 @@ private:
 	signed short int game_start_end_;
 	signed short int result_start_end;
 	Input* input_;
+	signed short int loop_;
 };
