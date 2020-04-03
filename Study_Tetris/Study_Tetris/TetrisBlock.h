@@ -1,31 +1,9 @@
 #pragma once
 #include "BlockCollection.h"
+#include "Utils.h"
 
-enum class BlockType
-{
-	I,
-	J,
-	L,
-	O,
-	S,
-	T,
-	Z,
-	W,
-};
-
-struct Vector2
-{
-	int x;
-	int y;
-};
-
-struct Color
-{
-	int r;
-	int g;
-	int b;
-	int a;
-};
+constexpr int BlockType = 7;
+constexpr int BlockSize = 4;
 
 namespace TetrisBlocks
 {
@@ -35,7 +13,7 @@ namespace TetrisBlocks
 		TetrisBlock(){}
 		~TetrisBlock(){}
 	public:
-		void SetBlock(BlockType type);
+		void SetBlock(Utils::BlockType type);
 		void SetBlockTransform(int positionX, int positionY);
 		void ChangeRotate();
 		void ValidArea();
@@ -47,12 +25,10 @@ namespace TetrisBlocks
 		void Stack();
 		void NowBlockReset();
 		void StackBlockClear();
+		
 	private:
-		Vector2 position_;
-		Vector2 rotate_;
-		Vector2 scale_;
-		Color color_;
-		BlockType type_;
+		Utils::BlockType type_;
 		BlockCollection collection_;
+		Utils::Block blocktype_[BlockType][BlockSize][BlockSize];
 	};
 }

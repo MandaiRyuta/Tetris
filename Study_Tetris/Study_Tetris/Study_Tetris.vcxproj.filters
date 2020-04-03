@@ -4,28 +4,21 @@
     <ClCompile Include="main.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="TetrisBlock.cpp">
-      <Filter>TetrisBlock</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockCollection.cpp">
-      <Filter>TetrisBlock</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="TetrisBlock.cpp">
+      <Filter>TetrisBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockCollection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>Window</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockCollection.h">
-      <Filter>TetrisBlock</Filter>
-    </ClInclude>
-    <ClInclude Include="TetrisBlock.h">
-      <Filter>TetrisBlock</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
@@ -36,6 +29,11 @@
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="TetrisBlock.h">
+      <Filter>TetrisBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">

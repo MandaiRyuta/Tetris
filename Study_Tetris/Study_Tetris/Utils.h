@@ -49,4 +49,19 @@ namespace Utils
 		int b;
 		int a;
 	};
+	
+	typedef struct Block
+	{
+		int Handle_;
+		int positionx;
+		int positiony;
+		int rotatex;
+		int rotatey;
+		int saclex;
+		int scaley;
+		int r;
+		int g;
+		int b;
+		int a;
+	};
 }
