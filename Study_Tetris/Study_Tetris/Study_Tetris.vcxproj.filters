@@ -4,15 +4,26 @@
     <ClCompile Include="main.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -38,6 +49,9 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{ac6b589a-0f0c-4b55-9839-72dcae045c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{53647179-b5d5-43ea-841f-cb7107912dac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

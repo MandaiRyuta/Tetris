@@ -1,4 +1,2 @@
 ﻿  main.cpp
-C:\Users\tjddy\source\repos\Study_Tetris\Study_Tetris\main.cpp(105,40): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-LIBCMTD.lib(exe_main.obj) : error LNK2019: 未解決の外部シンボル main が関数 "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) で参照されました。
-C:\Users\tjddy\source\repos\Study_Tetris\x64\Debug\Study_Tetris.exe : fatal error LNK1120: 1 件の未解決の外部参照
+  Study_Tetris.vcxproj -> C:\Users\tjddy\source\repos\Tetris\Study_Tetris\x64\Debug\Study_Tetris.exe

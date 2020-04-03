@@ -5,6 +5,17 @@
 
 namespace Utils
 {
+	template<typename T>
+	struct ObjectPool
+	{
+		std::vector<T> obj_;
+	};
+
+	enum class ObjectType
+	{
+		BACKGROUND,
+		TETRIS,
+	};
 	enum class BlockType
 	{
 		I,
@@ -15,6 +26,14 @@ namespace Utils
 		T,
 		Z,
 		W,
+	};
+
+	enum class SCENETYPE
+	{
+		TITLE,
+		GAME,
+		RESULT,
+		NONE,
 	};
 
 	struct Vector2
