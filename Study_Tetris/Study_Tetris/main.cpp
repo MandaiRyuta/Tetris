@@ -1,16 +1,17 @@
 #include "main.h"
 
-int SceneNum = 0;
+Scene scenes;
 
 void Init();
-void Update();
+void Update(int *scenenum, bool *changescene);
 void Draw();
 void Release();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	Scene scene;
-
+	scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE);
+	int scene_num = 0;
+	bool change_scene = false;
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
 	{
 		return -1;			// エラーが起きたら直ちに終了
@@ -20,7 +21,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	while (1)
 	{
-		Update();
+		Update(&scene_num,&change_scene);
 		Draw();
 	}
 
@@ -37,49 +38,72 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 void Init()
 {
-	SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE).Init();
-	SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME).Init();
-	SceneManager::GetInstance().GetScene(Utils::SCENETYPE::RESULT).Init();
-
-	SceneNum = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE).GetSceneNumber();
+	scenes.Init();
 }
 
-void Update()
+void Update(int* scenenum, bool* changescene)
 {
-	if (SceneNum == static_cast<int>(Utils::SCENETYPE::TITLE))
+	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::TITLE))
 	{
-		SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE).Update();
+		if ((*changescene) == true)
+		{
+			(*changescene) = false;
+		}
+
+		scenes.Update();
+		if (scenes.GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::GAME) && (*changescene) == false)
+		{
+			scenes.Release();
+			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME);
+			scenes.Init();
+			(*scenenum) = static_cast<int>(Utils::SCENETYPE::GAME);
+			(*changescene) = true;
+		}
 	}
-	if (SceneNum == static_cast<int>(Utils::SCENETYPE::GAME))
+	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::GAME))
 	{
-		SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME).Update();
+		if ((*changescene) == true)
+		{
+			(*changescene) = false;
+		}
+
+		scenes.Update();
+
+		if (scenes.GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::RESULT) && (*changescene) == false)
+		{
+			scenes.Release();
+			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::RESULT);
+			scenes.Init();
+			(*scenenum) = static_cast<int>(Utils::SCENETYPE::RESULT);
+			(*changescene) = true;
+		}
 	}
-	if (SceneNum == static_cast<int>(Utils::SCENETYPE::RESULT))
+	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::RESULT))
 	{
-		SceneManager::GetInstance().GetScene(Utils::SCENETYPE::RESULT).Update();
+		if ((*changescene) == true)
+		{
+			(*changescene) = false;
+		}
+
+		scenes.Update();
+
+		if (scenes.GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::TITLE) && (*changescene) == false)
+		{
+			scenes.Release();
+			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE);
+			(*scenenum) = static_cast<int>(Utils::SCENETYPE::TITLE);
+			(*changescene) = true;
+		}
 	}
 }
 
 void Draw()
 {
-	if (SceneNum == static_cast<int>(Utils::SCENETYPE::TITLE))
-	{
-		SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE).Draw();
-	}
-	if (SceneNum == static_cast<int>(Utils::SCENETYPE::GAME))
-	{
-		SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME).Draw();
-	}
-	if (SceneNum == static_cast<int>(Utils::SCENETYPE::RESULT))
-	{
-		SceneManager::GetInstance().GetScene(Utils::SCENETYPE::RESULT).Draw();
-	}
+	scenes.Draw();
 }
 
 void Release()
 {
-	SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE).Release();
-	SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME).Release();
-	SceneManager::GetInstance().GetScene(Utils::SCENETYPE::RESULT).Release();
+	scenes.Release();
 }
 

@@ -1,6 +1,21 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "Utils.h"
+#include "Input.h"
+
+
+Scene::Scene() :
+	scenenumber_(0),
+	title_start_end_(0x000),
+	game_start_end_(0x000),
+	result_start_end(0x000)
+{
+	input_ = new Input(0);
+}
+
+Scene::~Scene()
+{
+}
 
 void Scene::Init()
 {
@@ -17,24 +32,57 @@ void Scene::Init()
 
 void Scene::Update()
 {
+	input_->Update();
+
 	if (this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::TITLE))
 	{
-		title_start_end_ = 1;
-
-		if (this->title_start_end_ == 1)
+		if (input_->GetKeyDown(KEY_INPUT_UP) == 0x001)
 		{
-			SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME).Create(1);
+			title_start_end_ = 0x001;
+		}
+		if (input_->GetKeyDown(KEY_INPUT_DOWN) == 0x001)
+		{
+			title_start_end_ = 0x000;
+		}
+
+		if (this->title_start_end_ == 0x001 && input_->GetKeyDown(KEY_INPUT_RETURN))
+		{
+			this->SetSceneNumber(static_cast<int>(Utils::SCENETYPE::GAME));
 		}
 	}
 
 	if (this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::GAME))
 	{
-		this->GetSceneNumber();
+		if (input_->GetKeyDown(KEY_INPUT_UP) == 0x001)
+		{
+			game_start_end_ = 0x001;
+		}
+		if (input_->GetKeyDown(KEY_INPUT_DOWN) == 0x001)
+		{
+			game_start_end_ = 0x000;
+		}
+
+		if (this->game_start_end_ == 0x001 && input_->GetKeyDown(KEY_INPUT_RETURN))
+		{
+			this->SetSceneNumber(static_cast<int>(Utils::SCENETYPE::RESULT));
+		}
 	}
 
 	if (this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::RESULT))
 	{
-		this->GetSceneNumber();
+		if (input_->GetKeyDown(KEY_INPUT_UP) == 0x001)
+		{
+			result_start_end = 0x001;
+		}
+		if (input_->GetKeyDown(KEY_INPUT_DOWN) == 0x001)
+		{
+			result_start_end = 0x000;
+		}
+
+		if (this->result_start_end == 0x001 && input_->GetKeyDown(KEY_INPUT_RETURN))
+		{
+			this->SetSceneNumber(static_cast<int>(Utils::SCENETYPE::TITLE));
+		}
 	}
 }
 

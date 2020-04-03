@@ -21,7 +21,6 @@ public:
 	Input(int PadNumber) 
 		: PadNumber_(PadNumber)
 	{
-		Buf_[KeyBuf] = {};
 		Direction_.x = 0;
 		Direction_.y = 0;
 	}

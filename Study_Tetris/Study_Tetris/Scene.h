@@ -1,14 +1,13 @@
 #pragma once
 #include <vector>
 #include "Utils.h"
-class UI;
 
+class Input;
 class Scene
 {
 public:
-	Scene() :
-		title_start_end_(0)
-	{}
+	Scene();
+	~Scene();
 	void Init();
 	void Update();
 	void Draw();
@@ -20,6 +19,8 @@ public:
 private:
 	std::vector<int> obj_;
 	int scenenumber_;
-	int title_start_end_;
-
+	signed short int title_start_end_;
+	signed short int game_start_end_;
+	signed short int result_start_end;
+	Input* input_;
 };
