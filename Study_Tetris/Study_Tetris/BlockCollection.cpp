@@ -5,9 +5,9 @@ void TetrisBlocks::BlockCollection::Init()
 	Block_ = new TetrisBlocks::TetrisBlock();
 	Block_->Init();
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < TetrisGameType::STAGEHEIGHT; i++)
 	{
-		for (int j = 0; j < 12; j++)
+		for (int j = 0; j < TetrisGameType::STAGEWIDTH; j++)
 		{
 			Board_[i][j] = 0;
 
@@ -35,14 +35,15 @@ void TetrisBlocks::BlockCollection::Draw()
 	{
 		for (int j = 0; j < 12; j++)
 		{
-			SetFontSize(25);
 			if (Board_[i][j] == 0)
 			{
-				DrawBox(j * 20 + 2, i * 20 + 2, j * 20 + 20 - 2, i * 20 + 20 -2, GetColor(255, 255, 255), true);
+				DrawBox(j * TetrisGameType::DRAWBLOCKWIDTH + 2, i * TetrisGameType::DRAWBLOCKWIDTH + 2, j * TetrisGameType::DRAWBLOCKWIDTH + TetrisGameType::DRAWBLOCKWIDTH - 2, 
+					i * TetrisGameType::DRAWBLOCKWIDTH + TetrisGameType::DRAWBLOCKWIDTH -2, GetColor(255, 255, 255), true);
 			}
 			else if (Board_[i][j] == 9)
 			{
-				DrawBox(j * 20 + 2, i * 20 + 2, j * 20 + 20 - 2, i * 20 + 20 -2, GetColor(0, 255, 255), true);
+				DrawBox(j * TetrisGameType::DRAWBLOCKWIDTH + 2, i * TetrisGameType::DRAWBLOCKWIDTH + 2,
+					j * TetrisGameType::DRAWBLOCKWIDTH + TetrisGameType::DRAWBLOCKWIDTH - 2, i * TetrisGameType::DRAWBLOCKWIDTH + TetrisGameType::DRAWBLOCKWIDTH -2, GetColor(0, 255, 255), true);
 			}
 		}
 	}
@@ -90,4 +91,33 @@ void TetrisBlocks::BlockCollection::Clear(TetrisGameType::Block block)
 			block.type = 0;
 		}
 	}
+}
+
+void TetrisBlocks::BlockCollection::stage_collision_left()
+{
+
+	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	{
+		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		{
+			if (Board_[Block_->GetYblockCount() + y][Block_->GetBlockXCount() + (x - 1)] != 0)
+			{
+
+			}
+			else if (Block_->GetYblockCount() - (Block_->GetYblockCount() * TetrisGameType::DRAWBLOCKWIDTH) > 0) {
+				if (Board_[ Block_->GetYblockCount() + (y + 1)][Block_->GetBlockXCount() + (x - 1)] != 0)
+				{
+
+				}
+			}
+		}
+	}
+}
+
+void TetrisBlocks::BlockCollection::stage_collision_right()
+{
+}
+
+void TetrisBlocks::BlockCollection::stage_collision_bottom()
+{
 }

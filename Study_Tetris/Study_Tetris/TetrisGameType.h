@@ -21,7 +21,7 @@ namespace TetrisGameType
 	constexpr int BLOCKHEIGHT = 4;
 	constexpr int BLOCKWIDTH = 4;
 	constexpr int STAGEHEIGHT = 23;
-	constexpr int STAGEWIDTH = 18;
+	constexpr int STAGEWIDTH = 12;
 	constexpr int DRAWBLOCKWIDTH = 20;
 
 	constexpr int KEYFRAME = 1;

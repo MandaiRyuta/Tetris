@@ -28,6 +28,9 @@ namespace TetrisBlocks
 		void Stack() {}
 		void NowBlockReset() {}
 		void ValidArea() {}
+		void stage_collision_left();
+		void stage_collision_right();
+		void stage_collision_bottom();
 
 	private:
 		TetrisBlock* Block_;

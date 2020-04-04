@@ -1,11 +1,11 @@
 #pragma once
 #include "TetrisGameType.h"
-
 //constexpr int BLOCKTYPE = 7;
 //constexpr int BLOCKSIZE = 4;
 
 namespace TetrisBlocks
 {
+	class BlockCollection;
 	class TetrisBlock
 	{
 	public:
@@ -15,9 +15,7 @@ namespace TetrisBlocks
 			Type_(TetrisGameType::BlockType::I),
 			Blocktype_()
 		{
-			OneMoveCheck = 0x000;
-			Position_.x = 0;
-			Position_.y = 0;
+
 		}
 		~TetrisBlock(){}
 	public:
@@ -28,9 +26,13 @@ namespace TetrisBlocks
 		void Update();
 		void Draw();
 		void Release();
-	
+		int GetBlockXCount();
+		int GetYblockCount();
+		void SetTetrisBlockStage(BlockCollection* blockcollection);
 	private:
 		//Input* Input_;
+		BlockCollection* Blockcollection_;
+		unsigned int YblockCount_;
 		signed short int OneMoveCheck;
 		TetrisGameType::Vector2 Position_;
 		int Blocknumber_;
@@ -40,5 +42,6 @@ namespace TetrisBlocks
 		int BlockNowMoveTime_;
 		int InputMaxMoveTime_;
 		int InputNowMoveTime_;
+		int Blockmovex_;
 	};
 }

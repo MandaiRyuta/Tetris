@@ -1,6 +1,6 @@
 #include "TetrisBlock.h"
 #include "Input.h"
-
+#include "BlockCollection.h"
 constexpr int LEFTPADDING = 3;
 constexpr int UPPADDING = 3;
 constexpr int RIGHTPADDING = 17;
@@ -32,6 +32,11 @@ void TetrisBlocks::TetrisBlock::Init()
 	BlockNowMoveTime_ = 0;
 	InputMaxMoveTime_ = 1500;
 	InputNowMoveTime_ = 0;
+	Blockmovex_ = 5;
+	OneMoveCheck = 0x000;
+	Position_.x = 20;
+	Position_.y = 0;
+
 	//I
 	Blocktype_[TetrisGameType::TYPEI][0][0] = {
 		255,255,255,255,0
@@ -409,7 +414,8 @@ void TetrisBlocks::TetrisBlock::Update()
 	//Input_->Update();
 	if (BlockNowMoveTime_ > BlockMaxMoveTime_)
 	{
-		Position_.y += 5;
+		YblockCount_ += 100;
+		Position_.y = YblockCount_ / TetrisGameType::DRAWBLOCKWIDTH;
 		BlockNowMoveTime_ = 0;
 	}
 	if (InputNowMoveTime_ > InputMaxMoveTime_)
@@ -420,21 +426,28 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 	{
-		if (OneMoveCheck == 0x000)
+		if (OneMoveCheck == 0x000 && Blockmovex_ > 1)
 		{
+			Blockmovex_ -= 1;
 			Position_.x -= 5;
 			OneMoveCheck = 0x001;
 		}
 	}
 	if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
 	{
-		if (OneMoveCheck == 0x000)
+		if (OneMoveCheck == 0x000 && Blockmovex_ < 10)
 		{
+			Blockmovex_ += 1;
 			Position_.x += 5;
 			OneMoveCheck = 0x001;
 		}
 	}
-
+	
+	if (YblockCount_ > TetrisGameType::DRAWBLOCKWIDTH * 75) {
+		YblockCount_ = 0;
+		Position_.y = 0;
+	}
+	
 	BlockNowMoveTime_++;
 	InputNowMoveTime_++;
 }
@@ -518,4 +531,19 @@ void TetrisBlocks::TetrisBlock::Draw()
 
 void TetrisBlocks::TetrisBlock::Release()
 {
+}
+
+int TetrisBlocks::TetrisBlock::GetBlockXCount()
+{
+	return Blockmovex_;
+}
+
+int TetrisBlocks::TetrisBlock::GetYblockCount()
+{
+	return YblockCount_;
+}
+
+void TetrisBlocks::TetrisBlock::SetTetrisBlockStage(BlockCollection* blockcollection)
+{
+	Blockcollection_ = blockcollection;
 }
