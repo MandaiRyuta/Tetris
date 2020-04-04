@@ -23,9 +23,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -34,6 +31,9 @@
       <Filter>TetrisBlock</Filter>
     </ClInclude>
     <ClInclude Include="BlockCollection.h" />
+    <ClInclude Include="TetrisGameType.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">

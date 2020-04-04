@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "Utils.h"
+#include "TetrisGameType.h"
 
 const int SCENEINDEX = 3;
 class SceneManager
@@ -12,7 +12,7 @@ public:
 		return Inst;
 	}
 
-	Scene& GetScene(Utils::SCENETYPE type)
+	Scene& GetScene(TetrisGameType::SCENETYPE type)
 	{
 		const auto Index = static_cast<int>(type);
 		Scenes_[Index].SetSceneNumber(Index);

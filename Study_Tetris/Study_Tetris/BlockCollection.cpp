@@ -2,8 +2,8 @@
 
 void TetrisBlocks::BlockCollection::Init()
 {
-	block_ = new TetrisBlocks::TetrisBlock();
-	block_->Init();
+	Block_ = new TetrisBlocks::TetrisBlock();
+	Block_->Init();
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -26,7 +26,7 @@ void TetrisBlocks::BlockCollection::Init()
 
 void TetrisBlocks::BlockCollection::Update()
 {
-	block_->Update();
+	Block_->Update();
 }
 
 void TetrisBlocks::BlockCollection::Draw()
@@ -47,7 +47,7 @@ void TetrisBlocks::BlockCollection::Draw()
 		}
 	}
 
-	block_->Draw();
+	Block_->Draw();
 }
 
 void TetrisBlocks::BlockCollection::Release()
@@ -70,22 +70,22 @@ void TetrisBlocks::BlockCollection::SetHold(TetrisBlock* block)
 {
 }
 
-void TetrisBlocks::BlockCollection::CopyBlock(Utils::Block src, Utils::Block dst)
+void TetrisBlocks::BlockCollection::CopyBlock(TetrisGameType::Block src, TetrisGameType::Block dst)
 {
-	for (int i = 0; i < BLOCKSIZE; i++)
+	for (int i = 0; i < TetrisGameType::STAGEHEIGHT; i++)
 	{
-		for (int j = 0; j < BLOCKSIZE; j++)
+		for (int j = 0; j < TetrisGameType::STAGEWIDTH; j++)
 		{
 			dst = src;
 		}
 	}
 }
 
-void TetrisBlocks::BlockCollection::Clear(Utils::Block block)
+void TetrisBlocks::BlockCollection::Clear(TetrisGameType::Block block)
 {
-	for (int i = 0; i < BLOCKSIZE; i++)
+	for (int i = 0; i < TetrisGameType::STAGEHEIGHT; i++)
 	{
-		for (int j = 0; j < BLOCKSIZE; j++)
+		for (int j = 0; j < TetrisGameType::STAGEWIDTH; j++)
 		{
 			block.type = 0;
 		}

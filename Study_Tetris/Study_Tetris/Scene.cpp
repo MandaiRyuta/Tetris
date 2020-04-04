@@ -1,11 +1,13 @@
 #include "Scene.h"
 #include "Input.h"
 
+
+
 Scene::Scene() :
-	scenenumber_(0),
-	title_start_end_(0x000),
-	game_start_end_(0x000),
-	result_start_end(0x000)
+	Scenenumber_(0),
+	Title_start_end_(0x000),
+	Game_start_end_(0x000),
+	Result_start_end_(0x000)
 {
 
 }
@@ -16,24 +18,25 @@ Scene::~Scene()
 
 void Scene::Init()
 {
-	loop_ = 0x000;
+	Loop_ = 0x000;
 
-	collection_ = new TetrisBlocks::BlockCollection();
-	collection_->Init();
-	if(this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::TITLE))
+	Collection_ = new TetrisBlocks::BlockCollection();
+	Collection_->Init();
+
+	switch (Scenenumber_)
 	{
-		title_start_end_ = 0x000;
-		scenenumber_ = static_cast<int>(Utils::SCENETYPE::TITLE);
-	}
-	if(this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::GAME))
-	{
-		game_start_end_ = 0x000;
-		scenenumber_ = static_cast<int>(Utils::SCENETYPE::GAME);
-	}
-	if(this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::RESULT))
-	{
-		result_start_end = 0x000;
-		scenenumber_ = static_cast<int>(Utils::SCENETYPE::RESULT);
+	case TetrisGameType::TITLESCENENUMBER:
+		Title_start_end_ = 0x000;
+		Scenenumber_ = TetrisGameType::TITLESCENENUMBER;
+		break;
+	case TetrisGameType::GAMESCENENUMBER:
+		Game_start_end_ = 0x000;
+		Scenenumber_ = TetrisGameType::GAMESCENENUMBER;
+		break;
+	case TetrisGameType::RESULTSCENENUMBER:
+		Result_start_end_ = 0x000;
+		Scenenumber_ = TetrisGameType::RESULTSCENENUMBER;
+		break;
 	}
 }
 
@@ -41,94 +44,86 @@ void Scene::Update()
 {
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 0x001)
 	{
-		loop_ = 0x001;
+		Loop_ = 0x001;
 	}
 
-	if (this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::TITLE))
+	switch (Scenenumber_)
 	{
+	case TetrisGameType::TITLESCENENUMBER:
 		if (CheckHitKey(KEY_INPUT_UP) == 0x001)
 		{
-			title_start_end_ = 0x001;
+			Title_start_end_ = 0x001;
 		}
 		if (CheckHitKey(KEY_INPUT_DOWN) == 0x001)
 		{
-			title_start_end_ = 0x000;
+			Title_start_end_ = 0x000;
 		}
 
-		if (this->title_start_end_ == 0x001 && CheckHitKey(KEY_INPUT_RETURN))
+		if (this->Title_start_end_ == 0x001 && CheckHitKey(KEY_INPUT_RETURN))
 		{
-			this->SetSceneNumber(static_cast<int>(Utils::SCENETYPE::GAME));
+			this->SetSceneNumber(1);
 		}
-	}
-
-	if (this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::GAME))
-	{
-		collection_->Update();
+		break;
+	case TetrisGameType::GAMESCENENUMBER:
+		Collection_->Update();
 
 		if (CheckHitKey(KEY_INPUT_UP) == 0x001)
 		{
-			game_start_end_ = 0x001;
+			Game_start_end_ = 0x001;
 		}
 		if (CheckHitKey(KEY_INPUT_DOWN) == 0x001)
 		{
-			game_start_end_ = 0x000;
+			Game_start_end_ = 0x000;
 		}
 
-		if (this->game_start_end_ == 0x001 && CheckHitKey(KEY_INPUT_RETURN))
+		if (this->Game_start_end_ == 0x001 && CheckHitKey(KEY_INPUT_RETURN))
 		{
-			this->SetSceneNumber(static_cast<int>(Utils::SCENETYPE::RESULT));
+			this->SetSceneNumber(2);
 		}
-	}
-
-	if (this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::RESULT))
-	{
+		break;
+	case TetrisGameType::RESULTSCENENUMBER:
 		if (CheckHitKey(KEY_INPUT_UP) == 0x001)
 		{
-			result_start_end = 0x001;
+			Result_start_end_ = 0x001;
 		}
 		if (CheckHitKey(KEY_INPUT_DOWN) == 0x001)
 		{
-			result_start_end = 0x000;
+			Result_start_end_ = 0x000;
 		}
 
-		if (this->result_start_end == 0x001 && CheckHitKey(KEY_INPUT_RETURN))
+		if (this->Result_start_end_ == 0x001 && CheckHitKey(KEY_INPUT_RETURN))
 		{
-			this->SetSceneNumber(static_cast<int>(Utils::SCENETYPE::TITLE));
+			this->SetSceneNumber(0);
 		}
+		break;
 	}
 }
 
 void Scene::Draw()
 {
-	if(this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::TITLE))
+	switch (Scenenumber_)
 	{
-		//DrawString(250, 240 - 32, "Game Scene", GetColor(0, 0, 0));
-		//DrawString(250, 240 - 32, "Result Scene", GetColor(0, 0, 0));
+	case TetrisGameType::TITLESCENENUMBER:
 		DrawString(250, 240 - 32, "Title Scene", GetColor(255, 255, 255));
-	}
-	if(this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::GAME))
-	{
-		collection_->Draw();
-		//DrawString(250, 240 - 32, "Title Scene", GetColor(0, 0, 0));
-		//DrawString(250, 240 - 32, "Result Scene", GetColor(0, 0, 0));
+		break;
+	case TetrisGameType::GAMESCENENUMBER:
+		Collection_->Draw();
 		DrawString(450, 32, "Game Scene", GetColor(255, 255, 255));
-	}
-	if(this->GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::RESULT))
-	{
-		//DrawString(250, 240 - 32, "Title Scene", GetColor(0, 0, 0));
-		//DrawString(250, 240 - 32, "Game Scene", GetColor(0, 0, 0));
+		break;
+	case TetrisGameType::RESULTSCENENUMBER:
 		DrawString(250, 240 - 32, "Result Scene", GetColor(255, 255, 255));
+		break;
 	}
 }
 
 void Scene::Release()
 {
-	delete collection_;
+	delete Collection_;
 }
 
 void Scene::Create(int obj)
 {
-	obj_.push_back(obj);
+	Obj_.push_back(obj);
 }
 
 void Scene::Delete()
@@ -137,17 +132,17 @@ void Scene::Delete()
 
 void Scene::SetSceneNumber(int scenenum)
 {
-	scenenumber_ = scenenum;
+	Scenenumber_ = scenenum;
 }
 
 int Scene::GetSceneNumber()
 {
-	return scenenumber_;
+	return Scenenumber_;
 }
 
 bool Scene::GetLoop()
 {
-	if (loop_ == 0x001)
+	if (Loop_ == 0x001)
 	{
 		return true;
 	}

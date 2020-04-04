@@ -3,8 +3,27 @@
 #include <vector>
 #include <array>
 
-namespace Utils
+namespace TetrisGameType
 {
+	constexpr int TITLESCENENUMBER = 0;
+	constexpr int GAMESCENENUMBER = 1;
+	constexpr int RESULTSCENENUMBER = 2;
+
+	constexpr int TYPEI = 0;
+	constexpr int TYPEJ = 1;
+	constexpr int TYPEL = 2;
+	constexpr int TYPEO = 3;
+	constexpr int TYPES = 4;
+	constexpr int TYPET = 5;
+	constexpr int TYPEZ = 6;
+
+	constexpr int BLOCKTYPE = 7;
+	constexpr int BLOCKHEIGHT = 4;
+	constexpr int BLOCKWIDTH = 4;
+	constexpr int STAGEHEIGHT = 23;
+	constexpr int STAGEWIDTH = 18;
+	constexpr int DRAWBLOCKWIDTH = 20;
+
 	constexpr int KEYFRAME = 1;
 
 	template<typename T>

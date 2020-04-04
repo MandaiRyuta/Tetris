@@ -1,6 +1,6 @@
 #pragma once
 #include <array>
-#include "Utils.h"
+#include "TetrisGameType.h"
 #include "TetrisBlock.h"
 
 namespace TetrisBlocks
@@ -22,15 +22,15 @@ namespace TetrisBlocks
 		void StackBlock(TetrisBlock* block);
 		void NowBlock();
 		void SetHold(TetrisBlock* block);
-		void CopyBlock(Utils::Block src, Utils::Block dst);
-		void Clear(Utils::Block block);
+		void CopyBlock(TetrisGameType::Block src, TetrisGameType::Block dst);
+		void Clear(TetrisGameType::Block block);
 		void Hold() {}
 		void Stack() {}
 		void NowBlockReset() {}
 		void ValidArea() {}
 
 	private:
-		TetrisBlock* block_;
-		std::array<std::array<int, 12>, 20> Board_;
+		TetrisBlock* Block_;
+		std::array<std::array<int, TetrisGameType::STAGEWIDTH>, TetrisGameType::STAGEHEIGHT> Board_;
 	};
 }

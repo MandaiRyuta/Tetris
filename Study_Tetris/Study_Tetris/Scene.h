@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Utils.h"
+#include "TetrisGameType.h"
 #include "BlockCollection.h"
 
 class Input;
@@ -21,11 +21,11 @@ public:
 	bool GetLoop();
 	void SetLoop(signed short int loop);
 private:
-	std::vector<int> obj_;
-	int scenenumber_;
-	TetrisBlocks::BlockCollection* collection_;
-	signed short int title_start_end_;
-	signed short int game_start_end_;
-	signed short int result_start_end;
-	signed short int loop_;
+	std::vector<int> Obj_;
+	int Scenenumber_;
+	TetrisBlocks::BlockCollection* Collection_;
+	signed short int Title_start_end_;
+	signed short int Game_start_end_;
+	signed short int Result_start_end_;
+	signed short int Loop_;
 };

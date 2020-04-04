@@ -1,7 +1,7 @@
 #include "main.h"
 
 const float FRAME_TIME = 1.0f / 60.0f;
-Scene scenes;
+Scene Scenes;
 
 void Init();
 void Update(bool* loop,int *scenenum, bool *changescene);
@@ -10,7 +10,7 @@ void Release();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE);
+	Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
 	int scene_num = 0;
 	bool change_scene = false;
 	bool loopscene = false;
@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	LONGLONG NowTime;
 	LONGLONG Time;
-	float x, add;
+	float X, Add;
 	float DeltaTime;
 	int FPS;
 	int FPSCounter;
@@ -37,8 +37,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// 描画先を裏画面にする
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	x = 0.0f;
-	add = 200.0f;
+	X = 0.0f;
+	Add = 200.0f;
 	Time = GetNowHiPerformanceCount();
 	DeltaTime = 0.000001f;
 	FPSCheckTime = GetNowHiPerformanceCount();
@@ -55,16 +55,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			break;        // エラーが起きたらループを抜ける
 		}
 
-		x += add * DeltaTime;
-		if (x < 0.0f)
+		X += Add * DeltaTime;
+		if (X < 0.0f)
 		{
-			x = 0.0f;
-			add = -add;
+			X = 0.0f;
+			Add = -Add;
 		}
-		if (x > 640.0f)
+		if (X > 640.0f)
 		{
-			x = 640.0f;
-			add = -add;
+			X = 640.0f;
+			Add = -Add;
 		}
 
 		ClearDrawScreen();
@@ -104,75 +104,74 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 void Init()
 {
-	scenes.Init();
+	Scenes.Init();
 }
 
 void Update(bool* loop,int* scenenum, bool* changescene)
 {
-	(*loop) = scenes.GetLoop();
-
-	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::TITLE))
+	(*loop) = Scenes.GetLoop();
+	switch (*scenenum)
 	{
+	case TetrisGameType::TITLESCENENUMBER:
 		if ((*changescene) == true)
 		{
 			(*changescene) = false;
 		}
 
-		scenes.Update();
-		if (scenes.GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::GAME) && (*changescene) == false)
+		Scenes.Update();
+		if (Scenes.GetSceneNumber() == TetrisGameType::GAMESCENENUMBER && (*changescene) == false)
 		{
-			scenes.Release();
-			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::GAME);
-			scenes.Init();
-			(*scenenum) = static_cast<int>(Utils::SCENETYPE::GAME);
+			Scenes.Release();
+			Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::GAME);
+			Scenes.Init();
+			(*scenenum) = TetrisGameType::GAMESCENENUMBER;
 			(*changescene) = true;
 		}
-	}
-	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::GAME))
-	{
+		break;
+	case TetrisGameType::GAMESCENENUMBER:
 		if ((*changescene) == true)
 		{
 			(*changescene) = false;
 		}
 
-		scenes.Update();
+		Scenes.Update();
 
-		if (scenes.GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::RESULT) && (*changescene) == false)
+		if (Scenes.GetSceneNumber() == TetrisGameType::RESULTSCENENUMBER && (*changescene) == false)
 		{
-			scenes.Release();
-			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::RESULT);
-			scenes.Init();
-			(*scenenum) = static_cast<int>(Utils::SCENETYPE::RESULT);
+			Scenes.Release();
+			Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::RESULT);
+			Scenes.Init();
+			(*scenenum) = TetrisGameType::RESULTSCENENUMBER;
 			(*changescene) = true;
 		}
-	}
-	if ((*scenenum) == static_cast<int>(Utils::SCENETYPE::RESULT))
-	{
+		break;
+	case TetrisGameType::RESULTSCENENUMBER:
 		if ((*changescene) == true)
 		{
 			(*changescene) = false;
 		}
 
-		scenes.Update();
+		Scenes.Update();
 
-		if (scenes.GetSceneNumber() == static_cast<int>(Utils::SCENETYPE::TITLE) && (*changescene) == false)
+		if (Scenes.GetSceneNumber() == TetrisGameType::TITLESCENENUMBER && (*changescene) == false)
 		{
-			scenes.Release();
-			scenes = SceneManager::GetInstance().GetScene(Utils::SCENETYPE::TITLE);
-			scenes.Init();
-			(*scenenum) = static_cast<int>(Utils::SCENETYPE::TITLE);
+			Scenes.Release();
+			Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
+			Scenes.Init();
+			(*scenenum) = TetrisGameType::TITLESCENENUMBER;
 			(*changescene) = true;
 		}
+		break;
 	}
 }
 
 void Draw()
 {
-	scenes.Draw();
+	Scenes.Draw();
 }
 
 void Release()
 {
-	scenes.Release();
+	Scenes.Release();
 }
 

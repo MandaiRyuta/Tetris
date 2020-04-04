@@ -1,3 +1,3 @@
 #pragma once
-#include "Utils.h"
+#include "TetrisGameType.h"
 #include "SceneManager.h"
