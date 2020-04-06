@@ -5,7 +5,6 @@
 
 namespace TetrisBlocks
 {
-	class BlockCollection;
 	class TetrisBlock
 	{
 	public:
@@ -28,21 +27,27 @@ namespace TetrisBlocks
 		void Release();
 		int GetXBlockPosition();
 		int GetYblockPosition();
-		TetrisGameType::Block GetBlockInfo(int x, int y);
+		int GetBlockInfo(int x, int y);
 		void CopyBlock(int blocktype);
-		void SetBoardInfo(BlockCollection boardinfo);
+		void SetBoardInfo(int boardinfo, int x, int y);
+		void StageBlockCollisionLeft();
+		void StageBlockCollisionRight();
+		void StageBlockCollisionBottom();
+		void MakeBlock();
 	private:
-		BlockCollection Blockcollection_;
-		unsigned int YblockCount_;
-		signed short int OneMoveCheck;
+		int YblockCount_;
+		signed short int OneMoveCheck_;
+		signed short int MakeBlock_;
 		TetrisGameType::Vector2 Position_;
 		int Blocknumber_;
 		TetrisGameType::BlockType Type_;
 		TetrisGameType::Block Blocktype_[TetrisGameType::BLOCKTYPE][TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		TetrisGameType::Block CopyBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		int CopyBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		int Board_[TetrisGameType::STAGEHEIGHT][TetrisGameType::STAGEWIDTH];
 		int BlockMaxMoveTime_;
 		int BlockNowMoveTime_;
 		int InputMaxMoveTime_;
 		int InputNowMoveTime_;
+		int Collision_;
 	};
 }

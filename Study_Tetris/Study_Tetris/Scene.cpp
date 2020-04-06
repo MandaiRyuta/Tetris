@@ -20,9 +20,6 @@ void Scene::Init()
 {
 	Loop_ = 0x000;
 
-	Collection_ = new TetrisBlocks::BlockCollection();
-	Collection_->Init();
-
 	switch (Scenenumber_)
 	{
 	case TetrisGameType::TITLESCENENUMBER:
@@ -30,6 +27,8 @@ void Scene::Init()
 		Scenenumber_ = TetrisGameType::TITLESCENENUMBER;
 		break;
 	case TetrisGameType::GAMESCENENUMBER:
+		Collection_ = new TetrisBlocks::BlockCollection();
+		Collection_->Init();
 		Game_start_end_ = 0x000;
 		Scenenumber_ = TetrisGameType::GAMESCENENUMBER;
 		break;

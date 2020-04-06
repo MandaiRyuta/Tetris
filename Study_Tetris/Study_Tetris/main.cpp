@@ -38,6 +38,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	X = 0.0f;
 	Add = 200.0f;
+	NowTime = GetNowHiPerformanceCount();
 	Time = GetNowHiPerformanceCount();
 	DeltaTime = 0.000001f;
 	FPSCheckTime = GetNowHiPerformanceCount();

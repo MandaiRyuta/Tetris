@@ -4,13 +4,11 @@ void TetrisBlocks::BlockCollection::Init()
 {
 	Block_ = new TetrisBlocks::TetrisBlock();
 	Block_->Init();
-
 	for (int i = 0; i < TetrisGameType::STAGEHEIGHT; i++)
 	{
 		for (int j = 0; j < TetrisGameType::STAGEWIDTH; j++)
 		{
 			Board_[i][j] = 0;
-
 			if (j == 0 || j == 12)
 			{
 				Board_[i][j] = 9;
@@ -19,9 +17,16 @@ void TetrisBlocks::BlockCollection::Init()
 			{
 				Board_[i][j] = 9;
 			}
-
 		}
 	}
+
+	//for (int y = 0; y < TetrisGameType::STAGEHEIGHT; y++)
+	//{
+	//	for (int x = 0; x < TetrisGameType::STAGEWIDTH; x++)
+	//	{
+	//		Block_->SetBoardInfo(Board_[y][x], x, y);
+	//	}
+	//}
 }
 
 void TetrisBlocks::BlockCollection::Update()
@@ -94,32 +99,9 @@ void TetrisBlocks::BlockCollection::Clear(TetrisGameType::Block block)
 	}
 }
 
-void TetrisBlocks::BlockCollection::stage_collision_left()
-{
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
-	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
-		{
-		}
-	}
-}
 
-void TetrisBlocks::BlockCollection::stage_collision_right()
-{
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
-	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
-		{
-		}
-	}
-}
 
-void TetrisBlocks::BlockCollection::stage_collision_bottom()
+int TetrisBlocks::BlockCollection::GetBoardInfo(int x, int y)
 {
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
-	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
-		{
-		}
-	}
+	return Board_[x][y];
 }

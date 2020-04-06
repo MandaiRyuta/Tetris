@@ -31,7 +31,7 @@ namespace TetrisBlocks
 		void stage_collision_left();
 		void stage_collision_right();
 		void stage_collision_bottom();
-
+		int GetBoardInfo(int x, int y);
 	private:
 		TetrisBlock* Block_;
 		std::array<std::array<int, TetrisGameType::STAGEWIDTH>, TetrisGameType::STAGEHEIGHT> Board_;
