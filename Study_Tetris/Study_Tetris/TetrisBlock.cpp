@@ -32,9 +32,8 @@ void TetrisBlocks::TetrisBlock::Init()
 	BlockNowMoveTime_ = 0;
 	InputMaxMoveTime_ = 1500;
 	InputNowMoveTime_ = 0;
-	Blockmovex_ = 5;
 	OneMoveCheck = 0x000;
-	Position_.x = 20;
+	Position_.x = 4;
 	Position_.y = 0;
 
 	//I
@@ -414,8 +413,7 @@ void TetrisBlocks::TetrisBlock::Update()
 	//Input_->Update();
 	if (BlockNowMoveTime_ > BlockMaxMoveTime_)
 	{
-		YblockCount_ += 100;
-		Position_.y = YblockCount_ / TetrisGameType::DRAWBLOCKWIDTH;
+		Position_.y++;
 		BlockNowMoveTime_ = 0;
 	}
 	if (InputNowMoveTime_ > InputMaxMoveTime_)
@@ -426,25 +424,32 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 	{
-		if (OneMoveCheck == 0x000 && Blockmovex_ > 1)
+		if (OneMoveCheck == 0x000 && Position_.x > 0)
 		{
-			Blockmovex_ -= 1;
-			Position_.x -= 5;
+			Position_.x -= 1;
 			OneMoveCheck = 0x001;
 		}
 	}
 	if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
 	{
-		if (OneMoveCheck == 0x000 && Blockmovex_ < 10)
+		if (OneMoveCheck == 0x000 && Position_.x < 10)
 		{
-			Blockmovex_ += 1;
-			Position_.x += 5;
+			Position_.x += 1;
+			OneMoveCheck = 0x001;
+		}
+	}
+
+	if (CheckHitKey(KEY_INPUT_SPACE))
+	{
+		if (OneMoveCheck == 0x000 && Position_.y < 22)
+		{
+			Position_.y = 18;
 			OneMoveCheck = 0x001;
 		}
 	}
 	
-	if (YblockCount_ > TetrisGameType::DRAWBLOCKWIDTH * 75) {
-		YblockCount_ = 0;
+	if (Position_.y >= 18) {
+		CopyBlock(Blocknumber_);
 		Position_.y = 0;
 	}
 	
@@ -460,9 +465,9 @@ void TetrisBlocks::TetrisBlock::Draw()
 		for (int i = 0; i < TetrisGameType::BLOCKHEIGHT; i++)
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
-			{   
-				DrawBlock(TetrisGameType::TYPEI, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH, 
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+			{
+				DrawBlock(TetrisGameType::TYPEI, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -471,8 +476,8 @@ void TetrisBlocks::TetrisBlock::Draw()
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 			{
-				DrawBlock(TetrisGameType::TYPEJ, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+				DrawBlock(TetrisGameType::TYPEJ, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -481,8 +486,8 @@ void TetrisBlocks::TetrisBlock::Draw()
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 			{
-				DrawBlock(TetrisGameType::TYPEL, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+				DrawBlock(TetrisGameType::TYPEL, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -491,8 +496,8 @@ void TetrisBlocks::TetrisBlock::Draw()
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 			{
-				DrawBlock(TetrisGameType::TYPEO, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+				DrawBlock(TetrisGameType::TYPEO, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -501,8 +506,8 @@ void TetrisBlocks::TetrisBlock::Draw()
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 			{
-				DrawBlock(TetrisGameType::TYPES, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+				DrawBlock(TetrisGameType::TYPES, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -511,8 +516,8 @@ void TetrisBlocks::TetrisBlock::Draw()
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 			{
-				DrawBlock(TetrisGameType::TYPET, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+				DrawBlock(TetrisGameType::TYPET, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -521,8 +526,8 @@ void TetrisBlocks::TetrisBlock::Draw()
 		{
 			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 			{
-				DrawBlock(TetrisGameType::TYPEZ, i, j, Position_.x * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-					Position_.y * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+				DrawBlock(TetrisGameType::TYPEZ, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
+					(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
 			}
 		}
 		break;
@@ -533,17 +538,33 @@ void TetrisBlocks::TetrisBlock::Release()
 {
 }
 
-int TetrisBlocks::TetrisBlock::GetBlockXCount()
+int TetrisBlocks::TetrisBlock::GetXBlockPosition()
 {
-	return Blockmovex_;
+	return Position_.x;
 }
 
-int TetrisBlocks::TetrisBlock::GetYblockCount()
+int TetrisBlocks::TetrisBlock::GetYblockPosition()
 {
-	return YblockCount_;
+	return Position_.y;
 }
 
-void TetrisBlocks::TetrisBlock::SetTetrisBlockStage(BlockCollection* blockcollection)
+TetrisGameType::Block TetrisBlocks::TetrisBlock::GetBlockInfo(int x, int y)
 {
-	Blockcollection_ = blockcollection;
+	return CopyBlock_[x][y];
+}
+
+void TetrisBlocks::TetrisBlock::CopyBlock(int blocktype)
+{
+	for (int i = 0; i < TetrisGameType::STAGEHEIGHT; i++)
+	{
+		for (int j = 0; j < TetrisGameType::STAGEWIDTH; j++)
+		{
+			CopyBlock_[i][j] = Blocktype_[blocktype][i][j];
+		}
+	}
+}
+
+void TetrisBlocks::TetrisBlock::SetBoardInfo(BlockCollection boardinfo)
+{
+	Blockcollection_ = boardinfo;
 }

@@ -26,22 +26,23 @@ namespace TetrisBlocks
 		void Update();
 		void Draw();
 		void Release();
-		int GetBlockXCount();
-		int GetYblockCount();
-		void SetTetrisBlockStage(BlockCollection* blockcollection);
+		int GetXBlockPosition();
+		int GetYblockPosition();
+		TetrisGameType::Block GetBlockInfo(int x, int y);
+		void CopyBlock(int blocktype);
+		void SetBoardInfo(BlockCollection boardinfo);
 	private:
-		//Input* Input_;
-		BlockCollection* Blockcollection_;
+		BlockCollection Blockcollection_;
 		unsigned int YblockCount_;
 		signed short int OneMoveCheck;
 		TetrisGameType::Vector2 Position_;
 		int Blocknumber_;
 		TetrisGameType::BlockType Type_;
 		TetrisGameType::Block Blocktype_[TetrisGameType::BLOCKTYPE][TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		TetrisGameType::Block CopyBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
 		int BlockMaxMoveTime_;
 		int BlockNowMoveTime_;
 		int InputMaxMoveTime_;
 		int InputNowMoveTime_;
-		int Blockmovex_;
 	};
 }

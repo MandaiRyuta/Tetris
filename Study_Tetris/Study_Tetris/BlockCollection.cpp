@@ -11,11 +11,11 @@ void TetrisBlocks::BlockCollection::Init()
 		{
 			Board_[i][j] = 0;
 
-			if (j == 0 || j == 11)
+			if (j == 0 || j == 12)
 			{
 				Board_[i][j] = 9;
 			}
-			else if (i == 19)
+			else if (i == 22)
 			{
 				Board_[i][j] = 9;
 			}
@@ -31,10 +31,11 @@ void TetrisBlocks::BlockCollection::Update()
 
 void TetrisBlocks::BlockCollection::Draw()
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < TetrisGameType::STAGEHEIGHT; i++)
 	{
-		for (int j = 0; j < 12; j++)
+		for (int j = 0; j < TetrisGameType::STAGEWIDTH; j++)
 		{
+			//if(Block_->)
 			if (Board_[i][j] == 0)
 			{
 				DrawBox(j * TetrisGameType::DRAWBLOCKWIDTH + 2, i * TetrisGameType::DRAWBLOCKWIDTH + 2, j * TetrisGameType::DRAWBLOCKWIDTH + TetrisGameType::DRAWBLOCKWIDTH - 2, 
@@ -95,29 +96,30 @@ void TetrisBlocks::BlockCollection::Clear(TetrisGameType::Block block)
 
 void TetrisBlocks::BlockCollection::stage_collision_left()
 {
-
 	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
-			if (Board_[Block_->GetYblockCount() + y][Block_->GetBlockXCount() + (x - 1)] != 0)
-			{
-
-			}
-			else if (Block_->GetYblockCount() - (Block_->GetYblockCount() * TetrisGameType::DRAWBLOCKWIDTH) > 0) {
-				if (Board_[ Block_->GetYblockCount() + (y + 1)][Block_->GetBlockXCount() + (x - 1)] != 0)
-				{
-
-				}
-			}
 		}
 	}
 }
 
 void TetrisBlocks::BlockCollection::stage_collision_right()
 {
+	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	{
+		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		{
+		}
+	}
 }
 
 void TetrisBlocks::BlockCollection::stage_collision_bottom()
 {
+	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	{
+		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		{
+		}
+	}
 }

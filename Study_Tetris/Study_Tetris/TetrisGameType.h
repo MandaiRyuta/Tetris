@@ -21,9 +21,9 @@ namespace TetrisGameType
 	constexpr int BLOCKHEIGHT = 4;
 	constexpr int BLOCKWIDTH = 4;
 	constexpr int STAGEHEIGHT = 23;
-	constexpr int STAGEWIDTH = 12;
+	constexpr int STAGEWIDTH = 13;
 	constexpr int DRAWBLOCKWIDTH = 20;
-
+	constexpr int BLOCKSPEED = 5;
 	constexpr int KEYFRAME = 1;
 
 	template<typename T>
