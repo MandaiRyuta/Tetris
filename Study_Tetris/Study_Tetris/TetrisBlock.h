@@ -27,17 +27,25 @@ namespace TetrisBlocks
 		void Release();
 		int GetXBlockPosition();
 		int GetYblockPosition();
+		int GetBlockType();
 		int GetBlockInfo(int x, int y);
 		void CopyBlock(int blocktype);
 		void SetBoardInfo(int boardinfo, int x, int y);
 		void StageBlockCollisionLeft();
 		void StageBlockCollisionRight();
 		void StageBlockCollisionBottom();
+		void StageBlockCollisionCenter();
+		void BlockCollisionTurn();
 		void MakeBlock();
+		
 	private:
 		int YblockCount_;
+		signed short int SpaceDownCheck_;
 		signed short int OneMoveCheck_;
 		signed short int MakeBlock_;
+		signed short int BottomBlockCheck_;
+		signed short int CheckBlock_;
+		signed short int Blockdown_;
 		TetrisGameType::Vector2 Position_;
 		int Blocknumber_;
 		TetrisGameType::BlockType Type_;
@@ -48,6 +56,12 @@ namespace TetrisBlocks
 		int BlockNowMoveTime_;
 		int InputMaxMoveTime_;
 		int InputNowMoveTime_;
+		int SpaceDownMaxTime_;
+		int SpaceDownNowTime_;
 		int Collision_;
+		int TurnPoint_;
+		TetrisGameType::Color NowBlockColor_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		int NowBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		int TurnBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
 	};
 }
