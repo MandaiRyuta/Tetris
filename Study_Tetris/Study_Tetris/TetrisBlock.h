@@ -60,8 +60,7 @@ namespace TetrisBlocks
 		int SpaceDownNowTime_;
 		int Collision_;
 		int TurnPoint_;
-		TetrisGameType::Color NowBlockColor_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		int NowBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		TetrisGameType::Color turncolor[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
 		int TurnBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
 	};
 }

@@ -16,9 +16,10 @@ void TetrisBlocks::TetrisBlock::SetBlock(TetrisGameType::BlockType type)
 
 void TetrisBlocks::TetrisBlock::DrawBlock(int type, int vertical, int side, int positionX, int positionY)
 {
-	if (NowBlock_[vertical][side] != 9)
+	if (Blocktype_[type][vertical][side].type != 9)
 	{
-		DrawBox(positionX + LEFTPADDING, positionY + UPPADDING, positionX + RIGHTPADDING, positionY + DOWNPADDING, GetColor(NowBlockColor_[vertical][side].r, NowBlockColor_[vertical][side].g, NowBlockColor_[vertical][side].b), true);
+		DrawBox(positionX + LEFTPADDING, positionY + UPPADDING, positionX + RIGHTPADDING, positionY + DOWNPADDING,
+			GetColor(Blocktype_[Blocknumber_][vertical][side].r, Blocktype_[Blocknumber_][vertical][side].g, Blocktype_[Blocknumber_][vertical][side].b), true);
 	}
 }
 
@@ -26,19 +27,18 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 {
 	TurnPoint_++;
 
-	TetrisGameType::Color turncolor[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH] = {};
-
 	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
-			TurnBlock_[y][x] = NowBlock_[3 - x][y];
-			turncolor[y][x].r = Blocktype_[Blocknumber_][x][y].r;
-			turncolor[y][x].g = Blocktype_[Blocknumber_][x][y].g;
-			turncolor[y][x].b = Blocktype_[Blocknumber_][x][y].b;
-			NowBlockColor_[y][x].r = turncolor[3 - x][y].r;
-			NowBlockColor_[y][x].g = turncolor[3 - x][y].g;
-			NowBlockColor_[y][x].b = turncolor[3 - x][y].b;
+			TurnBlock_[y][x] = Blocktype_[Blocknumber_][3 - x][y].type;
+			turncolor[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+			turncolor[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+			turncolor[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+
+			Blocktype_[Blocknumber_][y][x].r = turncolor[3 - x][y].r;
+			Blocktype_[Blocknumber_][y][x].g = turncolor[3 - x][y].g;
+			Blocktype_[Blocknumber_][y][x].b = turncolor[3 - x][y].b;
 		}
 	}
 
@@ -46,11 +46,12 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 
 	if (Collision_ == 0)
 	{
+
 		for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
 		{
 			for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 			{
-				NowBlock_[y][x] = TurnBlock_[y][x];
+				Blocktype_[Blocknumber_][y][x].type = TurnBlock_[y][x];
 			}
 		}
 	}
@@ -469,8 +470,7 @@ void TetrisBlocks::TetrisBlock::Init()
 	Blocktype_[TetrisGameType::TYPEZ][3][3] = {
 		0,255,255,255,9
 	};
-	//–¾“úC³
-	NowBlockColor_[4][4] = {};
+
 	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
@@ -478,8 +478,9 @@ void TetrisBlocks::TetrisBlock::Init()
 			TurnBlock_[y][x] = 0;
 			CopyBlock_[y][x] = 0;
 			CopyBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
-			NowBlock_[y][x] = 0;
-			NowBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+			turncolor[y][x].r = 0;
+			turncolor[y][x].g = 0;
+			turncolor[y][x].b = 0;
 		}
 	}
 	CheckBlock_ = 0x000;
@@ -488,6 +489,16 @@ void TetrisBlocks::TetrisBlock::Init()
 
 void TetrisBlocks::TetrisBlock::Update()
 {	
+	for (int y = 0; y < 4; y++)
+	{
+		for (int x = 0; x < 4; x++)
+		{
+			turncolor[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+			turncolor[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+			turncolor[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+		}
+	}
+
 	if (MakeBlock_ == 0x001)
 	{
 		MakeBlock();
@@ -615,9 +626,9 @@ void TetrisBlocks::TetrisBlock::CopyBlock(int blocktype)
 	{
 		for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
 		{
-			if (NowBlock_[i][j] != 9)
+			if (Blocktype_[Blocknumber_][i][j].type != 9)
 			{
-				CopyBlock_[i][j] = NowBlock_[i][j];
+				CopyBlock_[i][j] = Blocktype_[Blocknumber_][i][j].type;
 				Board_[Position_.y + i][Position_.x + j] = CopyBlock_[i][j];
 			}
 			
@@ -638,7 +649,7 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionLeft()
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
-			if (NowBlock_[y][x] != 9)
+			if (Blocktype_[Blocknumber_][y][x].type != 9)
 			{
 				if (Board_[Position_.y + y][Position_.x + (x - 1)] != 0)
 				{
@@ -664,7 +675,7 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionRight()
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
-			if (NowBlock_[y][x] != 9)
+			if (Blocktype_[Blocknumber_][y][x].type != 9)
 			{
 				if (Board_[Position_.y + y][Position_.x + (x + 1)] != 0)
 				{
@@ -690,7 +701,7 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionBottom()
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
-			if (NowBlock_[y][x] != 9)
+			if (Blocktype_[Blocknumber_][y][x].type != 9)
 			{
 				if (Board_[Position_.y + (y + 1)][Position_.x + x] != 0)
 				{
@@ -709,7 +720,7 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionCenter()
 	{
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
-			if (NowBlock_[y][x] != 9)
+			if (Blocktype_[Blocknumber_][y][x].type != 9)
 			{
 				if (Board_[Position_.y + y][Position_.x + x] != 0)
 				{
@@ -752,13 +763,5 @@ void TetrisBlocks::TetrisBlock::MakeBlock()
 	Position_.x = 4;
 	Position_.y = 0;
 	YblockCount_ = 0;
-
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
-	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
-		{
-			NowBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
-		}
-	}
 }
 
