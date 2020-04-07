@@ -28,9 +28,9 @@ namespace TetrisBlocks
 		int GetXBlockPosition();
 		int GetYblockPosition();
 		int GetBlockType();
-		int GetBlockInfo(int x, int y);
+		int GetBlockData(int x, int y);
 		void CopyBlock(int blocktype);
-		void SetBoardInfo(int boardinfo, int x, int y);
+		void SetBoardData(int boardinfo, int x, int y);
 		void StageBlockCollisionLeft();
 		void StageBlockCollisionRight();
 		void StageBlockCollisionBottom();
@@ -59,8 +59,12 @@ namespace TetrisBlocks
 		int SpaceDownMaxTime_;
 		int SpaceDownNowTime_;
 		int Collision_;
+		bool LeftCollision_;
+		bool RightCollision_;
 		int TurnPoint_;
-		TetrisGameType::Color turncolor[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		TetrisGameType::Color TurnColor_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		int DrawBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		TetrisGameType::Color DrawBlockColor_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
 		int TurnBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
 	};
 }

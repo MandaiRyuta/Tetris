@@ -10,11 +10,15 @@
     <ClCompile Include="Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TetrisBlock.cpp">
       <Filter>TetrisBlock</Filter>
     </ClCompile>
-    <ClCompile Include="BlockCollection.cpp" />
+    <ClCompile Include="BlockCollection.cpp">
+      <Filter>TetrisBlock\BlockCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene\SceneManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -26,13 +30,17 @@
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TetrisBlock.h">
       <Filter>TetrisBlock</Filter>
     </ClInclude>
-    <ClInclude Include="BlockCollection.h" />
     <ClInclude Include="TetrisGameType.h">
-      <Filter>Utils</Filter>
+      <Filter>TetrisGameType</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockCollection.h">
+      <Filter>TetrisBlock\BlockCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene\SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +68,13 @@
     <Filter Include="Input">
       <UniqueIdentifier>{ac6b589a-0f0c-4b55-9839-72dcae045c14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utils">
+    <Filter Include="Blocks">
+      <UniqueIdentifier>{07901cf1-578e-4bef-9e60-d3f5d9be5a70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TetrisBlock\BlockCollection">
+      <UniqueIdentifier>{7f58f0e5-c6d2-47b2-bbc2-d030e436c4ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TetrisGameType">
       <UniqueIdentifier>{53647179-b5d5-43ea-841f-cb7107912dac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

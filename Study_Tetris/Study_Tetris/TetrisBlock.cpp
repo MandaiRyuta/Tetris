@@ -32,13 +32,13 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
 		{
 			TurnBlock_[y][x] = Blocktype_[Blocknumber_][3 - x][y].type;
-			turncolor[y][x].r = Blocktype_[Blocknumber_][y][x].r;
-			turncolor[y][x].g = Blocktype_[Blocknumber_][y][x].g;
-			turncolor[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+			TurnColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+			TurnColor_[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+			TurnColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
 
-			Blocktype_[Blocknumber_][y][x].r = turncolor[3 - x][y].r;
-			Blocktype_[Blocknumber_][y][x].g = turncolor[3 - x][y].g;
-			Blocktype_[Blocknumber_][y][x].b = turncolor[3 - x][y].b;
+			Blocktype_[Blocknumber_][y][x].r = TurnColor_[3 - x][y].r;
+			Blocktype_[Blocknumber_][y][x].g = TurnColor_[3 - x][y].g;
+			Blocktype_[Blocknumber_][y][x].b = TurnColor_[3 - x][y].b;
 		}
 	}
 
@@ -46,7 +46,6 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 
 	if (Collision_ == 0)
 	{
-
 		for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
 		{
 			for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
@@ -57,6 +56,74 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 	}
 	else
 	{
+		int changeblock[4][4] = { 9 };
+
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 4; x++)
+			{
+				changeblock[y][x] = TurnBlock_[y][x];
+				Blocktype_[Blocknumber_][y][x].type = TurnBlock_[y][x];
+			}
+		}
+
+		if (LeftCollision_)
+		{
+			switch (Blocknumber_)
+			{
+			case 0: 
+				Position_.x += 2;
+				break;
+			case 1:
+				Position_.x += 1;
+				break;
+			case 2:
+				Position_.x += 1;
+				break;
+			case 3:
+				break;
+			case 4:
+				Position_.x += 1;
+				break;
+			case 5:
+				Position_.x += 1;
+				break;
+			case 6:
+				Position_.x += 1;
+				break;
+			}
+			LeftCollision_ = false;
+		}
+		else if (RightCollision_)
+		{
+			switch (Blocknumber_)
+			{
+			case 0:
+				Position_.x -= 2;
+				break;
+			case 1:
+				Position_.x -= 1;
+				break;
+			case 2:
+				Position_.x -= 2;
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				Position_.x -= 2;
+				break;
+			case 5:
+				Position_.x -= 1;
+				break;
+			case 6:
+				Position_.x -= 2;
+				break;
+			}
+			RightCollision_ = false;
+		}
+
+
 		TurnPoint_--;
 	}
 }
@@ -478,13 +545,15 @@ void TetrisBlocks::TetrisBlock::Init()
 			TurnBlock_[y][x] = 0;
 			CopyBlock_[y][x] = 0;
 			CopyBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
-			turncolor[y][x].r = 0;
-			turncolor[y][x].g = 0;
-			turncolor[y][x].b = 0;
+			TurnColor_[y][x].r = 0;
+			TurnColor_[y][x].g = 0;
+			TurnColor_[y][x].b = 0;
 		}
 	}
 	CheckBlock_ = 0x000;
 	Blockdown_ = 0x000;
+	LeftCollision_ = false;
+	RightCollision_ = false;
 }
 
 void TetrisBlocks::TetrisBlock::Update()
@@ -493,9 +562,9 @@ void TetrisBlocks::TetrisBlock::Update()
 	{
 		for (int x = 0; x < 4; x++)
 		{
-			turncolor[y][x].r = Blocktype_[Blocknumber_][y][x].r;
-			turncolor[y][x].g = Blocktype_[Blocknumber_][y][x].g;
-			turncolor[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+			TurnColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+			TurnColor_[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+			TurnColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
 		}
 	}
 
@@ -615,7 +684,7 @@ int TetrisBlocks::TetrisBlock::GetBlockType()
 	return Blocknumber_;
 }
 
-int TetrisBlocks::TetrisBlock::GetBlockInfo(int x, int y)
+int TetrisBlocks::TetrisBlock::GetBlockData(int x, int y)
 {
 	return Board_[y][x];
 }
@@ -636,7 +705,7 @@ void TetrisBlocks::TetrisBlock::CopyBlock(int blocktype)
 	}
 }
 
-void TetrisBlocks::TetrisBlock::SetBoardInfo(int boardinfo, int x, int y)
+void TetrisBlocks::TetrisBlock::SetBoardData(int boardinfo, int x, int y)
 {
 	Board_[x][y] = boardinfo;
 }
@@ -654,12 +723,14 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionLeft()
 				if (Board_[Position_.y + y][Position_.x + (x - 1)] != 0)
 				{
 					Collision_ = 1;
+					LeftCollision_ = true;
 				}
 				else if (YblockCount_ - (Position_.y * TetrisGameType::BLOCKHEIGHT * TetrisGameType::DRAWBLOCKWIDTH) > 0)
 				{
 					if (Board_[Position_.y + (y + 1)][Position_.x + (x - 1)] != 0)
 					{
 						Collision_ = 1;
+						LeftCollision_ = true;
 					}
 				}
 			}
@@ -680,12 +751,14 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionRight()
 				if (Board_[Position_.y + y][Position_.x + (x + 1)] != 0)
 				{
 					Collision_ = 1;
+					RightCollision_ = true;
 				}
 				else if (YblockCount_ - (Position_.y * TetrisGameType::BLOCKHEIGHT * TetrisGameType::DRAWBLOCKWIDTH) > 0)
 				{
 					if (Board_[Position_.y + (y + 1)][Position_.x + (x + 1)] != 0)
 					{
 						Collision_ = 1;
+						RightCollision_ = true;
 					}
 				}
 			}

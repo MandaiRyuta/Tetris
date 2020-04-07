@@ -37,7 +37,7 @@ void TetrisBlocks::BlockCollection::Update()
 	{
 		for (int x = 0; x < TetrisGameType::STAGEWIDTH; x++)
 		{
-			Board_[y][x] = Block_->GetBlockInfo(x, y);
+			Board_[y][x] = Block_->GetBlockData(x, y);
 		}
 	}
 }
