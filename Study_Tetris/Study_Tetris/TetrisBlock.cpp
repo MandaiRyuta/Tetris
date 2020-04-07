@@ -27,9 +27,9 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 {
 	TurnPoint_++;
 
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
 			TurnBlock_[y][x] = DrawBlock_[3 - x][y];
 
@@ -43,9 +43,9 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 
 	if (Collision_ == 0)
 	{
-		for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+		for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 		{
-			for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 			{
 				DrawBlock_[y][x] = TurnBlock_[y][x];
 			}
@@ -93,20 +93,18 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 			switch (Blocknumber_)
 			{
 			case 0:
-				Position_.x -= 4;
+				Position_.x -= 2;
 				break;
 			case 1:
-				//
-				Position_.x -= 4;
+				Position_.x -= 1;
 				break;
 			case 2:
-				Position_.x -= 4;
+				Position_.x -= 1;
 				break;
 			case 3:
-				
 				break;
 			case 4:
-				Position_.x -= 2;
+				Position_.x -= 3;
 				break;
 			case 5:
 				Position_.x -= 3;
@@ -131,42 +129,12 @@ void TetrisBlocks::TetrisBlock::Init()
 	std::uniform_int_distribution<> rndblocktype(0, 6);
 
 	Blocknumber_ = rndblocktype(rnd);
-	BlockMaxMoveTime_ = 2500;
-	BlockNowMoveTime_ = 0;
-	InputMaxMoveTime_ = 1200;
-	InputNowMoveTime_ = 0;
-	LeftMoveAcceleration_ = 0;
-	LeftMoveMaxTime_ = 1200;
-	LeftMoveNowTime_ = 0;
-	LeftMoveCheck_ = 0x000;
-	RightMoveAcceleration_ = 0;
-	RightMoveMaxTime_ = 1200;
-	RightMoveNowTime_ = 0;
-	RightMoveCheck_ = 0x000;
-	DownMoveAcceleration_ = 0;
-	DownMoveMaxTime_ = 2000;
-	DownMoveNowTime_ = 0;
-	DownMoveCheck_ = 0x000;
-	SpaceDownCheck_ = 0x000;
-	SpaceDownMaxTime_ = 1800;
-	SpaceDownNowTime_ = 0;
-	RotateNowTime_ = 0;
-	RotateMaxTime_ = 1200;
-	BlockDownCheck_ = 0x000;
-	OneMoveCheck_ = 0x000;
-	Position_.x = 4;
-	Position_.y = 0;
-	YblockCount_ = 0;
-	Collision_ = 0;
-	MakeBlock_ = 0x000;
-	TurnPoint_ = 0;
 
-	for (int y = 0; y < TetrisGameType::STAGEHEIGHT; y++)
+
+	for (int y = 0; y < TetrisGameType::StageHeight; y++)
 	{
-		for (int x = 0 ; x < TetrisGameType::STAGEWIDTH; x++)
+		for (int x = 0 ; x < TetrisGameType::StageWidth; x++)
 		{
-			Board_[y][x] = 0;
-
 			if (x == 0 || x == 12)
 			{
 				Board_[y][x] = 9;
@@ -175,382 +143,386 @@ void TetrisBlocks::TetrisBlock::Init()
 			{
 				Board_[y][x] = 9;
 			}
+			else
+			{
+				Board_[y][x] = 0;
+			}
 		}
 	}
 	//I
-	Blocktype_[TetrisGameType::TYPEI][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][0][1] = {
 		0,165,255,255,1
 	};
-	Blocktype_[TetrisGameType::TYPEI][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][0][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][0][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEI][1][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][1][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][1][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][1][1] = {
 		0,165,255,255,1
 	};
-	Blocktype_[TetrisGameType::TYPEI][1][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][1][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][1][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEI][2][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][2][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][2][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][2][1] = {
 		0,165,255,255,1
 	};
-	Blocktype_[TetrisGameType::TYPEI][2][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][2][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][2][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEI][3][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][3][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][3][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][3][1] = {
 		0,165,255,255,1
 	};
-	Blocktype_[TetrisGameType::TYPEI][3][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][3][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEI][3][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEI][3][3] = {
 		0,255,255,255,9
 	};
 
 	//J
-	Blocktype_[TetrisGameType::TYPEJ][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][0][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][0][2] = {
 		0,0,255,255,2
 	};
-	Blocktype_[TetrisGameType::TYPEJ][0][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEJ][1][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][1][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][1][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][1][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][1][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][1][2] = {
 		0,0,255,255,2
 	};
-	Blocktype_[TetrisGameType::TYPEJ][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][1][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEJ][2][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][2][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][2][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][2][1] = {
 		0,0,255,255,2
 	};
-	Blocktype_[TetrisGameType::TYPEJ][2][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][2][2] = {
 		0,0,255,255,2
 	};
-	Blocktype_[TetrisGameType::TYPEJ][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][2][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEJ][3][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][3][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][3][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][3][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][3][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][3][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEJ][3][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEJ][3][3] = {
 		0,255,255,255,9
 	};
 
 	//L
-	Blocktype_[TetrisGameType::TYPEL][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][0][1] = {
 		255,140,0,255,3
 	};
-	Blocktype_[TetrisGameType::TYPEL][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][0][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][0][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEL][1][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][1][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][1][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][1][1] = {
 		255,140,0,255,3
 	};
-	Blocktype_[TetrisGameType::TYPEL][1][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][1][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][1][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEL][2][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][2][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][2][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][2][1] = {
 		255,140,0,255,3
 	};
-	Blocktype_[TetrisGameType::TYPEL][2][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][2][2] = {
 		255,140,0,255,3
 	};
-	Blocktype_[TetrisGameType::TYPEL][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][2][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEL][3][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][3][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][3][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][3][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][3][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][3][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEL][3][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEL][3][3] = {
 		0,255,255,255,9
 	};
 
 	//O
-	Blocktype_[TetrisGameType::TYPEO][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][0][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][0][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][0][3] = {
-		0,255,255,255,9
-	};
-
-	Blocktype_[TetrisGameType::TYPEO][1][0] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPEO][1][1] = {
-		255,255,0,255,4
-	};
-	Blocktype_[TetrisGameType::TYPEO][1][2] = {
-		255,255,0,255,4
-	};
-	Blocktype_[TetrisGameType::TYPEO][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEO][2][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][2][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][1] = {
 		255,255,0,255,4
 	};
-	Blocktype_[TetrisGameType::TYPEO][2][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][2] = {
 		255,255,0,255,4
 	};
-	Blocktype_[TetrisGameType::TYPEO][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEO][3][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][3][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][1] = {
+		255,255,0,255,4
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][2] = {
+		255,255,0,255,4
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][3] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][3][2] = {
+
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][3][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEO][3][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][3][1] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][3][2] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][3][3] = {
 		0,255,255,255,9
 	};
 
 	//S
-	Blocktype_[TetrisGameType::TYPES][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][0][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][0][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][0][3] = {
-		0,255,255,255,9
-	};
-
-	Blocktype_[TetrisGameType::TYPES][1][0] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPES][1][1] = {
-		124,252,0,255,5
-	};
-	Blocktype_[TetrisGameType::TYPES][1][2] = {
-		124,252,0,255,5
-	};
-	Blocktype_[TetrisGameType::TYPES][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPES][2][0] = {
-		124,252,0,255,5
-	};
-	Blocktype_[TetrisGameType::TYPES][2][1] = {
-		124,252,0,255,5
-	};
-	Blocktype_[TetrisGameType::TYPES][2][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][1][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][1][1] = {
+		124,252,0,255,5
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][1][2] = {
+		124,252,0,255,5
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][1][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPES][3][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][2][0] = {
+		124,252,0,255,5
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][2][1] = {
+		124,252,0,255,5
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][2][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][3][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][2][3] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][3][2] = {
+
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][3][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPES][3][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][3][1] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][3][2] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPES][3][3] = {
 		0,255,255,255,9
 	};
 
 	//T
-	Blocktype_[TetrisGameType::TYPET][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPET][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][0][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPET][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][0][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPET][0][3] = {
-		0,255,255,255,9
-	};
-
-	Blocktype_[TetrisGameType::TYPET][1][0] = {
-		255,0,255,255,6
-	};
-	Blocktype_[TetrisGameType::TYPET][1][1] = {
-		255,0,255,255,6
-	};
-	Blocktype_[TetrisGameType::TYPET][1][2] = {
-		255,0,255,255,6
-	};
-	Blocktype_[TetrisGameType::TYPET][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPET][2][0] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPET][2][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][1][0] = {
 		255,0,255,255,6
 	};
-	Blocktype_[TetrisGameType::TYPET][2][2] = {
-		0,255,255,255,9
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][1][1] = {
+		255,0,255,255,6
 	};
-	Blocktype_[TetrisGameType::TYPET][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][1][2] = {
+		255,0,255,255,6
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][1][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPET][3][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][2][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPET][3][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][2][1] = {
+		255,0,255,255,6
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][2][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPET][3][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][2][3] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPET][3][3] = {
+
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][3][0] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][3][1] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][3][2] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPET][3][3] = {
 		0,255,255,255,9
 	};
 
 	//Z
-	Blocktype_[TetrisGameType::TYPEZ][0][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][0][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEZ][0][1] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][0][1] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEZ][0][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][0][2] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEZ][0][3] = {
-		0,255,255,255,9
-	};
-
-	Blocktype_[TetrisGameType::TYPEZ][1][0] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPEZ][1][1] = {
-		255,0,0,255,7
-	};
-	Blocktype_[TetrisGameType::TYPEZ][1][2] = {
-		255,0,0,255,7
-	};
-	Blocktype_[TetrisGameType::TYPEZ][1][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][0][3] = {
 		0,255,255,255,9
 	};
 
-	Blocktype_[TetrisGameType::TYPEZ][2][0] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][1][0] = {
 		0,255,255,255,9
 	};
-	Blocktype_[TetrisGameType::TYPEZ][2][1] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPEZ][2][2] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][1][1] = {
 		255,0,0,255,7
 	};
-	Blocktype_[TetrisGameType::TYPEZ][2][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][1][2] = {
 		255,0,0,255,7
 	};
-
-	Blocktype_[TetrisGameType::TYPEZ][3][0] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPEZ][3][1] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPEZ][3][2] = {
-		0,255,255,255,9
-	};
-	Blocktype_[TetrisGameType::TYPEZ][3][3] = {
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][1][3] = {
 		0,255,255,255,9
 	};
 
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][2][0] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][2][1] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][2][2] = {
+		255,0,0,255,7
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][2][3] = {
+		255,0,0,255,7
+	};
+
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][3][0] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][3][1] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][3][2] = {
+		0,255,255,255,9
+	};
+	Blocktype_[TetrisGameType::TetrisBlockType::TYPEZ][3][3] = {
+		0,255,255,255,9
+	};
+
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
 			TurnBlock_[y][x] = 0;
 			CopyBlock_[y][x] = 0;
@@ -564,14 +536,7 @@ void TetrisBlocks::TetrisBlock::Init()
 			DrawBlockColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
 		}
 	}
-	CheckBlock_ = 0x000;
-	Blockdown_ = 0x000;
-	LeftCollision_ = false;
-	RightCollision_ = false;
-	BlockDoneCheck_ = 0x000;
-	SpaceBarRefreshNowTime_ = 0;
-	SpaceBarRefreshCheck_ = 0x000;
-	SpaceBarRefreshMaxTime_ = 1000;
+
 }
 
 void TetrisBlocks::TetrisBlock::Update()
@@ -600,8 +565,8 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (Blockdown_ != 0x000)
 	{
-		YblockCount_ += TetrisGameType::BLOCKSPEED;
-		Position_.y = YblockCount_ / TetrisGameType::DRAWBLOCKWIDTH;
+		YblockCount_ += TetrisGameType::BlockSpeed;
+		Position_.y = YblockCount_ / TetrisGameType::DrawBlockWidth;
 		DownMoveNowTime_ = 0;
 		BlockDownCheck_ = 0x001;
 	}
@@ -609,8 +574,8 @@ void TetrisBlocks::TetrisBlock::Update()
 	{
 		if (BlockNowMoveTime_ > BlockMaxMoveTime_)
 		{
-			YblockCount_ += TetrisGameType::BLOCKSPEED;
-			Position_.y = YblockCount_ / TetrisGameType::DRAWBLOCKWIDTH;
+			YblockCount_ += TetrisGameType::BlockSpeed;
+			Position_.y = YblockCount_ / TetrisGameType::DrawBlockWidth;
 			BlockNowMoveTime_ = 0;
 		}
 		if (RotateNowTime_ > RotateMaxTime_)
@@ -618,11 +583,7 @@ void TetrisBlocks::TetrisBlock::Update()
 			RotateNowTime_ = 0;
 			BlockRotateCheck_ = 0x000;
 		}
-		if (InputNowMoveTime_ > InputMaxMoveTime_)
-		{
-			InputNowMoveTime_ = 0x000;
-			OneMoveCheck_ = 0x000;
-		}
+
 		if(SpaceDownNowTime_ > SpaceDownMaxTime_)
 		{
 			SpaceDownNowTime_ = 0;
@@ -734,16 +695,13 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (CheckBlock_ == 0x001)
 	{
-		for (int i = 0; i < TetrisGameType::BLOCKHEIGHT; i++)
+		for (int i = 0; i < TetrisGameType::BlockHeight; i++)
 		{
-			for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
+			for (int j = 0; j < TetrisGameType::BlockWidth; j++)
 			{
-				if (DrawBlock_[i][j] != 9)
-				{
-					CopyBlock_[i][j] = DrawBlock_[i][j];
-					Board_[Position_.y + i][Position_.x + j] = CopyBlock_[i][j];
-				}
-
+				if (DrawBlock_[i][j] == 9) continue;
+				CopyBlock_[i][j] = DrawBlock_[i][j];
+				Board_[Position_.y + i][Position_.x + j] = CopyBlock_[i][j];
 			}
 		}
 		BlockDoneCheck_ = 0x001;
@@ -765,17 +723,16 @@ void TetrisBlocks::TetrisBlock::Update()
 		SpaceBarRefreshNowTime_++;
 	}
 	BlockNowMoveTime_++;
-	InputNowMoveTime_++;
 }
 
 void TetrisBlocks::TetrisBlock::Draw()
 {
-	for (int i = 0; i < TetrisGameType::BLOCKHEIGHT; i++)
+	for (int i = 0; i < TetrisGameType::BlockHeight; i++)
 	{
-		for (int j = 0; j < TetrisGameType::BLOCKWIDTH; j++)
+		for (int j = 0; j < TetrisGameType::BlockWidth; j++)
 		{
-			DrawBlock(Blocknumber_, i, j, (Position_.x * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKWIDTH + j * TetrisGameType::DRAWBLOCKWIDTH,
-				(Position_.y * TetrisGameType::BLOCKSPEED) * TetrisGameType::BLOCKHEIGHT + i * TetrisGameType::DRAWBLOCKWIDTH);
+			DrawBlock(Blocknumber_, i, j, (Position_.x * TetrisGameType::BlockSpeed) * TetrisGameType::BlockWidth + j * TetrisGameType::DrawBlockWidth,
+				(Position_.y * TetrisGameType::BlockSpeed) * TetrisGameType::BlockHeight + i * TetrisGameType::DrawBlockWidth);
 		}
 	}
 }
@@ -804,40 +761,22 @@ int TetrisBlocks::TetrisBlock::GetBlockData(int x, int y)
 	return Board_[y][x];
 }
 
-//void TetrisBlocks::TetrisBlock::CopyBlock(int blocktype)
-//{
-//
-//}
-
-//void TetrisBlocks::TetrisBlock::SetBoardData(int boardinfo, int x, int y)
-//{
-//	Board_[x][y] = boardinfo;
-//}
-
 void TetrisBlocks::TetrisBlock::StageBlockCollisionLeft()
 {
 	Collision_ = 0;
 
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
-			if (DrawBlock_[y][x] != 9)
-			{
-				if (Board_[Position_.y + y][Position_.x + (x - 1)] != 0)
-				{
-					Collision_ = 1;
-					LeftCollision_ = true;
-				}
-				else if (YblockCount_ - (Position_.y * TetrisGameType::BLOCKHEIGHT * TetrisGameType::DRAWBLOCKWIDTH) > 0)
-				{
-					if (Board_[Position_.y + (y + 1)][Position_.x + (x - 1)] != 0)
-					{
-						Collision_ = 1;
-						LeftCollision_ = true;
-					}
-				}
-			}
+			if (DrawBlock_[y][x] == 9) continue;
+			if (Board_[Position_.y + y][Position_.x + (x - 1)] == 0) continue;
+			Collision_ = 1;
+			LeftCollision_ = true;
+			if (YblockCount_ - (Position_.y * TetrisGameType::BlockHeight * TetrisGameType::DrawBlockWidth) <= 0) continue;
+			if (Board_[Position_.y + (y + 1)][Position_.x + (x - 1)] == 0) continue;
+			Collision_ = 1;
+			LeftCollision_ = true;
 		}
 	}
 }
@@ -846,26 +785,18 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionRight()
 {
 	Collision_ = 0;
 
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
-			if (DrawBlock_[y][x] != 9)
-			{
-				if (Board_[Position_.y + y][Position_.x + (x + 1)] != 0)
-				{
-					Collision_ = 1;
-					RightCollision_ = true;
-				}
-				else if (YblockCount_ - (Position_.y * TetrisGameType::BLOCKHEIGHT * TetrisGameType::DRAWBLOCKWIDTH) > 0)
-				{
-					if (Board_[Position_.y + (y + 1)][Position_.x + (x + 1)] != 0)
-					{
-						Collision_ = 1;
-						RightCollision_ = true;
-					}
-				}
-			}
+			if (DrawBlock_[y][x] == 9) continue;
+			if (Board_[Position_.y + y][Position_.x + (x + 1)] == 0) continue;
+			Collision_ = 1;
+			RightCollision_ = true;
+			if (YblockCount_ - (Position_.y * TetrisGameType::BlockHeight * TetrisGameType::DrawBlockWidth) <= 0) continue;
+			if (Board_[Position_.y + (y + 1)][Position_.x + (x + 1)] == 0) continue;
+			Collision_ = 1;
+			RightCollision_ = true;
 		}
 	}
 }
@@ -874,18 +805,16 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionBottom()
 {
 	Collision_ = 0;
 
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
-			if (DrawBlock_[y][x] != 9)
-			{
-				if (Board_[Position_.y + (y + 1)][Position_.x + x] != 0)
-				{
-					MakeBlock_ = 0x001;
-					Collision_ = 1;
-				}
-			}
+			if (DrawBlock_[y][x] == 9) continue;
+
+			if (Board_[Position_.y + (y + 1)][Position_.x + x] == 0) continue;
+
+			MakeBlock_ = 0x001;
+			Collision_ = 1;
 		}
 	}
 }
@@ -893,34 +822,26 @@ void TetrisBlocks::TetrisBlock::StageBlockCollisionBottom()
 void TetrisBlocks::TetrisBlock::StageBlockCollisionCenter()
 {
 	Collision_ = 0;
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
-			if (Blocktype_[Blocknumber_][y][x].type != 9)
-			{
-				if (Board_[Position_.y + y][Position_.x + x] != 0)
-				{
-					Collision_ = 1;
-				}
-			}
+			if (DrawBlock_[y][x] == 9) continue;
+			if (Board_[Position_.y + y][Position_.x + x] == 0) continue;
+			Collision_ = 1;
 		}
 	}
 }
 
 void TetrisBlocks::TetrisBlock::BlockCollisionTurn()
 {
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
-			if (TurnBlock_[y][x] != 9)
-			{
-				if (Board_[Position_.y + y][Position_.x + x] != 0)
-				{
-					Collision_ = 1;
-				}
-			}
+			if (TurnBlock_[y][x] == 9) continue;
+			if (Board_[Position_.y + y][Position_.x + x] == 0) continue;
+			Collision_ = 1;
 		}
 	}
 }
@@ -938,9 +859,9 @@ void TetrisBlocks::TetrisBlock::MakeBlock()
 		MakeBlock_ = 0x000;
 	}
 
-	for (int y = 0; y < TetrisGameType::BLOCKHEIGHT; y++)
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 	{
-		for (int x = 0; x < TetrisGameType::BLOCKWIDTH; x++)
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 		{
 			DrawBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
 			DrawBlockColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;

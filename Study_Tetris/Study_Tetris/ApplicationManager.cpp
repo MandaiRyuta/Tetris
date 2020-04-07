@@ -19,23 +19,23 @@ void ApplicationManager::Update(bool* loop, int* scenenum, bool* changescene)
 	(*loop) = Scene_.GetLoop();
 	switch (*scenenum)
 	{
-	case TetrisGameType::TITLESCENENUMBER:
+	case SceneNumber::TitleSceneNumber:
 		if ((*changescene) == true)
 		{
 			(*changescene) = false;
 		}
 
 		Scene_.Update();
-		if (Scene_.GetSceneNumber() == TetrisGameType::GAMESCENENUMBER && (*changescene) == false)
+		if (Scene_.GetSceneNumber() == SceneNumber::GameSceneNumber && (*changescene) == false)
 		{
 			Scene_.Release();
 			Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::GAME);
 			Scene_.Init();
-			(*scenenum) = TetrisGameType::GAMESCENENUMBER;
+			(*scenenum) = SceneNumber::GameSceneNumber;
 			(*changescene) = true;
 		}
 		break;
-	case TetrisGameType::GAMESCENENUMBER:
+	case SceneNumber::GameSceneNumber:
 		if ((*changescene) == true)
 		{
 			(*changescene) = false;
@@ -43,16 +43,16 @@ void ApplicationManager::Update(bool* loop, int* scenenum, bool* changescene)
 
 		Scene_.Update();
 
-		if (Scene_.GetSceneNumber() == TetrisGameType::RESULTSCENENUMBER && (*changescene) == false)
+		if (Scene_.GetSceneNumber() == SceneNumber::ResultSceneNumber && (*changescene) == false)
 		{
 			Scene_.Release();
 			Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::RESULT);
 			Scene_.Init();
-			(*scenenum) = TetrisGameType::RESULTSCENENUMBER;
+			(*scenenum) = SceneNumber::ResultSceneNumber;
 			(*changescene) = true;
 		}
 		break;
-	case TetrisGameType::RESULTSCENENUMBER:
+	case SceneNumber::ResultSceneNumber:
 		if ((*changescene) == true)
 		{
 			(*changescene) = false;
@@ -60,12 +60,12 @@ void ApplicationManager::Update(bool* loop, int* scenenum, bool* changescene)
 
 		Scene_.Update();
 
-		if (Scene_.GetSceneNumber() == TetrisGameType::TITLESCENENUMBER && (*changescene) == false)
+		if (Scene_.GetSceneNumber() == SceneNumber::TitleSceneNumber && (*changescene) == false)
 		{
 			Scene_.Release();
 			Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
 			Scene_.Init();
-			(*scenenum) = TetrisGameType::TITLESCENENUMBER;
+			(*scenenum) = SceneNumber::TitleSceneNumber;
 			(*changescene) = true;
 		}
 		break;

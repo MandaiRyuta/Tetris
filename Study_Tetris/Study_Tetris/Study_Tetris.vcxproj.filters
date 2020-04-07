@@ -74,9 +74,6 @@
     <Filter Include="Input">
       <UniqueIdentifier>{ac6b589a-0f0c-4b55-9839-72dcae045c14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blocks">
-      <UniqueIdentifier>{07901cf1-578e-4bef-9e60-d3f5d9be5a70}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TetrisBlock\BlockCollection">
       <UniqueIdentifier>{7f58f0e5-c6d2-47b2-bbc2-d030e436c4ed}</UniqueIdentifier>
     </Filter>

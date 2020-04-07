@@ -8,13 +8,81 @@ namespace TetrisBlocks
 	class TetrisBlock
 	{
 	public:
-		TetrisBlock():
+		TetrisBlock() :
 			Blocknumber_(0),
 			//Input_(nullptr),
 			Type_(TetrisGameType::BlockType::I),
-			Blocktype_()
+			BlockMaxMoveTime_(2500),
+			BlockNowMoveTime_(0),
+			BlockDoneCheck_(0x000),
+			LeftMoveAcceleration_(0),
+			LeftMoveMaxTime_(1500),
+			LeftMoveNowTime_(0),
+			LeftMoveCheck_(0x000),
+			RightMoveAcceleration_(0),
+			RightMoveMaxTime_(1500),
+			RightMoveNowTime_(0),
+			RightMoveCheck_(0x000),
+			DownMoveAcceleration_(0),
+			DownMoveCheck_(0x000),
+			DownMoveMaxTime_(2000),
+			DownMoveNowTime_(0),
+			SpaceDownCheck_(0x000),
+			SpaceDownMaxTime_(1800),
+			SpaceDownNowTime_(0),
+			RotateNowTime_(0),
+			RotateMaxTime_(900),
+			BlockDownCheck_(0x000),
+			YblockCount_(0),
+			Collision_(0),
+			MakeBlock_(0x000),
+			TurnPoint_(0),
+			CheckBlock_(0x000),
+			Blockdown_(0x000),
+			LeftCollision_(0x000),
+			RightCollision_(0x000),
+			SpaceBarRefreshNowTime_(0),
+			SpaceBarRefreshMaxTime_(1000),
+			SpaceBarRefreshCheck_(0x000)
 		{
+			Position_.y = 0;
+			Position_.x = 4;
+			
+			/*BlockMaxMoveTime_ = 2500;
+			BlockNowMoveTime_ = 0;
+			LeftMoveAcceleration_ = 0;
+			LeftMoveMaxTime_ = 1500;
+			LeftMoveNowTime_ = 0;
+			LeftMoveCheck_ = 0x000;
+			RightMoveAcceleration_ = 0;
+			RightMoveMaxTime_ = 1500;
+			RightMoveNowTime_ = 0;
+			RightMoveCheck_ = 0x000;
+			DownMoveAcceleration_ = 0;
+			DownMoveMaxTime_ = 2000;
+			DownMoveNowTime_ = 0;
+			DownMoveCheck_ = 0x000;
+			SpaceDownCheck_ = 0x000;
+			SpaceDownMaxTime_ = 1800;
+			SpaceDownNowTime_ = 0;
+			RotateNowTime_ = 0;
+			RotateMaxTime_ = 900;
+			BlockDownCheck_ = 0x000;
+			Position_.x = 4;
+			Position_.y = 0;
+			YblockCount_ = 0;
+			Collision_ = 0;
+			MakeBlock_ = 0x000;
+			TurnPoint_ = 0;
 
+			CheckBlock_ = 0x000;
+			Blockdown_ = 0x000;
+			LeftCollision_ = false;
+			RightCollision_ = false;
+			BlockDoneCheck_ = 0x000;
+			SpaceBarRefreshNowTime_ = 0;
+			SpaceBarRefreshCheck_ = 0x000;
+			SpaceBarRefreshMaxTime_ = 1000;*/
 		}
 		~TetrisBlock(){}
 	public:
@@ -29,8 +97,6 @@ namespace TetrisBlocks
 		int GetYblockPosition();
 		int GetBlockType();
 		int GetBlockData(int x, int y);
-		void CopyBlock(int blocktype);
-		void SetBoardData(int boardinfo, int x, int y);
 		void StageBlockCollisionLeft();
 		void StageBlockCollisionRight();
 		void StageBlockCollisionBottom();
@@ -42,7 +108,6 @@ namespace TetrisBlocks
 	private:
 		int YblockCount_;
 		signed short int SpaceDownCheck_;
-		signed short int OneMoveCheck_;
 		signed short int LeftMoveCheck_;
 		signed short int RightMoveCheck_;
 		signed short int DownMoveCheck_;
@@ -50,6 +115,13 @@ namespace TetrisBlocks
 		signed short int BlockRotateCheck_;
 		signed short int BlockDoneCheck_;
 		signed short int SpaceBarRefreshCheck_;
+		signed short int MakeBlock_;
+		signed short int BottomBlockCheck_;
+		signed short int CheckBlock_;
+		signed short int Blockdown_;
+		signed short int LeftCollision_;
+		signed short int RightCollision_;
+
 		int SpaceBarRefreshNowTime_;
 		int SpaceBarRefreshMaxTime_;
 		int RotateNowTime_;
@@ -63,29 +135,23 @@ namespace TetrisBlocks
 		int LeftMoveAcceleration_;
 		int RightMoveAcceleration_;
 		int DownMoveAcceleration_;
-		signed short int MakeBlock_;
-		signed short int BottomBlockCheck_;
-		signed short int CheckBlock_;
-		signed short int Blockdown_;
-		TetrisGameType::Vector2 Position_;
 		int Blocknumber_;
+
+		TetrisGameType::Vector2 Position_;
 		TetrisGameType::BlockType Type_;
-		TetrisGameType::Block Blocktype_[TetrisGameType::BLOCKTYPE][TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		int CopyBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		int Board_[TetrisGameType::STAGEHEIGHT][TetrisGameType::STAGEWIDTH];
+		TetrisGameType::Block Blocktype_[TetrisGameType::TetrisBlockTypeNum::MaxNumber][TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
+		int CopyBlock_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
+		int Board_[TetrisGameType::StageHeight][TetrisGameType::StageWidth];
 		int BlockMaxMoveTime_;
 		int BlockNowMoveTime_;
-		int InputMaxMoveTime_;
-		int InputNowMoveTime_;
+
 		int SpaceDownMaxTime_;
 		int SpaceDownNowTime_;
 		int Collision_;
-		bool LeftCollision_;
-		bool RightCollision_;
 		int TurnPoint_;
-		TetrisGameType::Color TurnColor_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		int DrawBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		TetrisGameType::Color DrawBlockColor_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
-		int TurnBlock_[TetrisGameType::BLOCKHEIGHT][TetrisGameType::BLOCKWIDTH];
+		TetrisGameType::Color TurnColor_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
+		int DrawBlock_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
+		TetrisGameType::Color DrawBlockColor_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
+		int TurnBlock_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 	};
 }

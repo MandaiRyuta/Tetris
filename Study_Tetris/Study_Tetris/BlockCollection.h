@@ -10,6 +10,8 @@ namespace TetrisBlocks
 	public:
 		BlockCollection()
 		{
+			Block_ = new TetrisBlocks::TetrisBlock();
+			Block_->Init();
 			Board_ = {};
 		}
 		~BlockCollection(){}
@@ -31,6 +33,6 @@ namespace TetrisBlocks
 		int GetBoardInfo(int x, int y);
 	private:
 		TetrisBlock* Block_;
-		std::array<std::array<int, TetrisGameType::STAGEWIDTH>, TetrisGameType::STAGEHEIGHT> Board_;
+		std::array<std::array<int, TetrisGameType::StageWidth>, TetrisGameType::StageHeight> Board_;
 	};
 }
