@@ -93,13 +93,13 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 			switch (Blocknumber_)
 			{
 			case 0:
-				Position_.x -= 3;
+				Position_.x -= 4;
 				break;
 			case 1:
-				Position_.x -= 1;
+				Position_.x -= 4;
 				break;
 			case 2:
-				Position_.x -= 2;
+				Position_.x -= 4;
 				break;
 			case 3:
 				
@@ -108,7 +108,7 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 				Position_.x -= 2;
 				break;
 			case 5:
-				Position_.x -= 1;
+				Position_.x -= 3;
 				break;
 			case 6:
 				Position_.x -= 2;
@@ -134,9 +134,24 @@ void TetrisBlocks::TetrisBlock::Init()
 	BlockNowMoveTime_ = 0;
 	InputMaxMoveTime_ = 1200;
 	InputNowMoveTime_ = 0;
+	LeftMoveAcceleration_ = 0;
+	LeftMoveMaxTime_ = 1200;
+	LeftMoveNowTime_ = 0;
+	LeftMoveCheck_ = 0x000;
+	RightMoveAcceleration_ = 0;
+	RightMoveMaxTime_ = 1200;
+	RightMoveNowTime_ = 0;
+	RightMoveCheck_ = 0x000;
+	DownMoveAcceleration_ = 0;
+	DownMoveMaxTime_ = 2000;
+	DownMoveNowTime_ = 0;
+	DownMoveCheck_ = 0x000;
 	SpaceDownCheck_ = 0x000;
-	SpaceDownMaxTime_ = 10000;
+	SpaceDownMaxTime_ = 1800;
 	SpaceDownNowTime_ = 0;
+	RotateNowTime_ = 0;
+	RotateMaxTime_ = 900;
+	BlockDownCheck_ = 0x000;
 	OneMoveCheck_ = 0x000;
 	Position_.x = 4;
 	Position_.y = 0;
@@ -568,21 +583,30 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (MakeBlock_ == 0x001)
 	{
+		BlockDownCheck_ = 0x000;
 		MakeBlock();
 		MakeBlock_ = 0x000;
 	}
+
 	if (Blockdown_ != 0x000)
 	{
 		YblockCount_ += TetrisGameType::BLOCKSPEED;
 		Position_.y = YblockCount_ / TetrisGameType::DRAWBLOCKWIDTH;
+		DownMoveNowTime_ = 0;
+		BlockDownCheck_ = 0x001;
 	}
-	else if (Blockdown_ == 0x000)
+	else if (Blockdown_ == 0x000 && BlockDownCheck_ == 0x000)
 	{
 		if (BlockNowMoveTime_ > BlockMaxMoveTime_)
 		{
 			YblockCount_ += TetrisGameType::BLOCKSPEED;
 			Position_.y = YblockCount_ / TetrisGameType::DRAWBLOCKWIDTH;
 			BlockNowMoveTime_ = 0;
+		}
+		if (RotateNowTime_ > RotateMaxTime_)
+		{
+			RotateNowTime_ = 0;
+			BlockRotateCheck_ = 0x000;
 		}
 		if (InputNowMoveTime_ > InputMaxMoveTime_)
 		{
@@ -594,38 +618,93 @@ void TetrisBlocks::TetrisBlock::Update()
 			SpaceDownNowTime_ = 0;
 			SpaceDownCheck_ = 0x000;
 		}
+		if (RightMoveAcceleration_ > 400)
+		{
+			RightMoveNowTime_ += 3;
+		}
+		if (LeftMoveAcceleration_ > 400)
+		{
+			LeftMoveNowTime_ += 3;
+		}
+		if (DownMoveAcceleration_ > 200)
+		{
+			DownMoveNowTime_ += 2;
+		}
+		if (RightMoveNowTime_ > RightMoveMaxTime_)
+		{
+			RightMoveNowTime_ = 0;
+			RightMoveCheck_ = 0x000;
+		}
+		if (LeftMoveNowTime_ > LeftMoveMaxTime_)
+		{
+			LeftMoveNowTime_ = 0;
+			LeftMoveCheck_ = 0x000;
+		}
+		if (DownMoveNowTime_ > DownMoveMaxTime_)
+		{
+			DownMoveNowTime_ = 0;
+			DownMoveCheck_ = 0x000;
+		}
 	}
+
 	if (CheckHitKey(KEY_INPUT_UP) == 1)
 	{
-		if (OneMoveCheck_ == 0x000 && Collision_ == 0)
+		if (BlockRotateCheck_ == 0x000 && Collision_ == 0)
 		{
 			ChangeRotate();
-			OneMoveCheck_ = 0x001;
+			BlockRotateCheck_ = 0x001;
 		}
 	}
 
 	if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 	{
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1 && SpaceDownCheck_ == 0x000)
+		{
+			if (Collision_ == 0)
+			{
+				Blockdown_ = 0x001;
+				SpaceDownCheck_ = 0x001;
+			}
+		}
+		LeftMoveAcceleration_++;
 		StageBlockCollisionLeft();
-		if (OneMoveCheck_ == 0x000 && Collision_ == 0)
+		if (LeftMoveCheck_ == 0x000 && Collision_ == 0)
 		{
 			Position_.x -= 1;
-			OneMoveCheck_ = 0x001;
+			LeftMoveCheck_ = 0x001;
 		}
+	}
+	else
+	{
+		LeftMoveAcceleration_ = 0;
 	}
 	if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
 	{
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1 && SpaceDownCheck_ == 0x000)
+		{
+			if (Collision_ == 0)
+			{
+				Blockdown_ = 0x001;
+				SpaceDownCheck_ = 0x001;
+			}
+		}
+
+		RightMoveAcceleration_++;
 		StageBlockCollisionRight();
-		if (OneMoveCheck_ == 0x000 && Collision_ == 0)
+		if (RightMoveCheck_ == 0x000 && Collision_ == 0)
 		{
 			Position_.x += 1;
-			OneMoveCheck_ = 0x001;
+			RightMoveCheck_ = 0x001;
 		}
 	}
-
-	if (CheckHitKey(KEY_INPUT_SPACE))
+	else
 	{
-		if (SpaceDownCheck_ == 0x000 && Collision_ == 0)
+		RightMoveAcceleration_ = 0;
+	}
+
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && SpaceDownCheck_ == 0x000)
+	{
+		if (Collision_ == 0)
 		{
 			Blockdown_ = 0x001;
 			SpaceDownCheck_ = 0x001;
@@ -645,6 +724,11 @@ void TetrisBlocks::TetrisBlock::Update()
 		CopyBlock(Blocknumber_);
 		CheckBlock_ = 0x000;
 	}
+	RotateNowTime_++;
+
+	RightMoveNowTime_++;
+	LeftMoveNowTime_++;
+	DownMoveNowTime_++;
 
 	SpaceDownNowTime_++;
 	BlockNowMoveTime_++;
