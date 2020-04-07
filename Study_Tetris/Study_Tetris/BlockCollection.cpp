@@ -33,12 +33,16 @@ void TetrisBlocks::BlockCollection::Update()
 {
 	Block_->Update();
 
-	for (int y = 0; y < TetrisGameType::STAGEHEIGHT; y++)
+	if (Block_->GetBlockDone() == 0x001)
 	{
-		for (int x = 0; x < TetrisGameType::STAGEWIDTH; x++)
+		for (int y = 0; y < TetrisGameType::STAGEHEIGHT; y++)
 		{
-			Board_[y][x] = Block_->GetBlockData(x, y);
+			for (int x = 0; x < TetrisGameType::STAGEWIDTH; x++)
+			{
+				Board_[y][x] = Block_->GetBlockData(x, y);
+			}
 		}
+		Block_->SetBlockDone(0x000);
 	}
 }
 

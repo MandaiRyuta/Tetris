@@ -1,16 +1,11 @@
 #include "main.h"
 
 const float FRAME_TIME = 1.0f / 60.0f;
-Scene Scenes;
-
-void Init();
-void Update(bool* loop,int *scenenum, bool *changescene);
-void Draw();
-void Release();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
+	ApplicationManager app;
+	//Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
 	int scene_num = 0;
 	bool change_scene = false;
 	bool loopscene = false;
@@ -23,6 +18,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int FPS;
 	int FPSCounter;
 	LONGLONG FPSCheckTime;
+	
 
 	ChangeWindowMode(TRUE);
 	
@@ -45,7 +41,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	FPS = 0;
 	FPSCounter = 0;
 	
-	Init();
+	//Init();
+	app.Init();
 
 	while (!loopscene)
 	{
@@ -69,9 +66,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		ClearDrawScreen();
 
-		Update(&loopscene, &scene_num, &change_scene);
+		app.Update(&loopscene, &scene_num, &change_scene);
 
-		Draw();
+		app.Draw();
 
 		ScreenFlip();
 
@@ -91,87 +88,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 
-	Release();
-
-	//DrawPixel(400, 240, GetColor(255, 255, 255));	// 点を打つ
-
-	//WaitKey();				// キー入力待ち
+	app.Release();
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
 	return 0;				// ソフトの終了 
 }
-
-void Init()
-{
-	Scenes.Init();
-}
-
-void Update(bool* loop,int* scenenum, bool* changescene)
-{
-	(*loop) = Scenes.GetLoop();
-	switch (*scenenum)
-	{
-	case TetrisGameType::TITLESCENENUMBER:
-		if ((*changescene) == true)
-		{
-			(*changescene) = false;
-		}
-
-		Scenes.Update();
-		if (Scenes.GetSceneNumber() == TetrisGameType::GAMESCENENUMBER && (*changescene) == false)
-		{
-			Scenes.Release();
-			Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::GAME);
-			Scenes.Init();
-			(*scenenum) = TetrisGameType::GAMESCENENUMBER;
-			(*changescene) = true;
-		}
-		break;
-	case TetrisGameType::GAMESCENENUMBER:
-		if ((*changescene) == true)
-		{
-			(*changescene) = false;
-		}
-
-		Scenes.Update();
-
-		if (Scenes.GetSceneNumber() == TetrisGameType::RESULTSCENENUMBER && (*changescene) == false)
-		{
-			Scenes.Release();
-			Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::RESULT);
-			Scenes.Init();
-			(*scenenum) = TetrisGameType::RESULTSCENENUMBER;
-			(*changescene) = true;
-		}
-		break;
-	case TetrisGameType::RESULTSCENENUMBER:
-		if ((*changescene) == true)
-		{
-			(*changescene) = false;
-		}
-
-		Scenes.Update();
-
-		if (Scenes.GetSceneNumber() == TetrisGameType::TITLESCENENUMBER && (*changescene) == false)
-		{
-			Scenes.Release();
-			Scenes = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
-			Scenes.Init();
-			(*scenenum) = TetrisGameType::TITLESCENENUMBER;
-			(*changescene) = true;
-		}
-		break;
-	}
-}
-
-void Draw()
-{
-	Scenes.Draw();
-}
-
-void Release()
-{
-	Scenes.Release();
-}
-

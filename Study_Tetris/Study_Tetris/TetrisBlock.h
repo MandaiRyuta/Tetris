@@ -37,7 +37,8 @@ namespace TetrisBlocks
 		void StageBlockCollisionCenter();
 		void BlockCollisionTurn();
 		void MakeBlock();
-		
+		signed short int GetBlockDone();
+		void SetBlockDone(signed short int blockdonecheck);
 	private:
 		int YblockCount_;
 		signed short int SpaceDownCheck_;
@@ -47,6 +48,10 @@ namespace TetrisBlocks
 		signed short int DownMoveCheck_;
 		signed short int BlockDownCheck_;
 		signed short int BlockRotateCheck_;
+		signed short int BlockDoneCheck_;
+		signed short int SpaceBarRefreshCheck_;
+		int SpaceBarRefreshNowTime_;
+		int SpaceBarRefreshMaxTime_;
 		int RotateNowTime_;
 		int RotateMaxTime_;
 		int LeftMoveNowTime_;
