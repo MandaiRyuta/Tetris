@@ -1,43 +1,119 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Window\main.cpp" />
-    <ClCompile Include="UI\Background.cpp" />
-    <ClCompile Include="UI\Fade.cpp" />
-    <ClCompile Include="UI\InGameState.cpp" />
-    <ClCompile Include="UI\Menu.cpp" />
-    <ClCompile Include="UI\NextBlock.cpp" />
-    <ClCompile Include="UI\Particle.cpp" />
-    <ClCompile Include="UI\Score.cpp" />
-    <ClCompile Include="UI\Time.cpp" />
-    <ClCompile Include="UI\UI.cpp" />
-    <ClCompile Include="UI\UIManager\UIManager.cpp" />
-    <ClCompile Include="TetrisBlock\TetrisBlock.cpp" />
-    <ClCompile Include="TetrisBlock\BlockCollection\BlockCollection.cpp" />
-    <ClCompile Include="Scene\Scene.cpp" />
-    <ClCompile Include="Scene\SceneManager\SceneManager.cpp" />
-    <ClCompile Include="App\ApplicationManager.cpp" />
-    <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="App\ApplicationManager.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Background.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisBlock\BlockCollection\BlockCollection.cpp">
+      <Filter>TetrisBlock\BlockCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Fade.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Hold.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\InGameState.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\main.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NextBlock.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Particle.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager\SceneManager.cpp">
+      <Filter>Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Score.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Time.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager\UIManager.cpp">
+      <Filter>UI\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisBlock\TetrisBlock.cpp">
+      <Filter>TetrisBlock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window\main.h" />
-    <ClInclude Include="UI\Background.h" />
-    <ClInclude Include="UI\Fade.h" />
-    <ClInclude Include="UI\InGameState.h" />
-    <ClInclude Include="UI\Menu.h" />
-    <ClInclude Include="UI\NextBlock.h" />
-    <ClInclude Include="UI\Particle.h" />
-    <ClInclude Include="UI\Score.h" />
-    <ClInclude Include="UI\Time.h" />
-    <ClInclude Include="UI\UI.h" />
-    <ClInclude Include="UI\UIManager\UIManager.h" />
-    <ClInclude Include="TetrisGameType\TetrisGameType.h" />
-    <ClInclude Include="TetrisBlock\TetrisBlock.h" />
-    <ClInclude Include="TetrisBlock\BlockCollection\BlockCollection.h" />
-    <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Scene\SceneManager\SceneManager.h" />
-    <ClInclude Include="App\ApplicationManager.h" />
-    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="App\ApplicationManager.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Background.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisBlock\BlockCollection\BlockCollection.h">
+      <Filter>TetrisBlock\BlockCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Fade.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Hold.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\InGameState.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\main.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NextBlock.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Particle.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager\SceneManager.h">
+      <Filter>Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Score.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Time.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIManager\UIManager.h">
+      <Filter>UI\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisBlock\TetrisBlock.h">
+      <Filter>TetrisBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisGameType\TetrisGameType.h">
+      <Filter>TetrisGameType</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">

@@ -6,6 +6,37 @@ constexpr int UPPADDING = 3;
 constexpr int RIGHTPADDING = 17;
 constexpr int DOWNPADDING = 17;
 
+void TetrisBlocks::TetrisBlock::BlockSwapHold()
+{
+
+
+}
+
+int TetrisBlocks::TetrisBlock::GetHoldBlockType()
+{
+	std::random_device rnd;
+	std::mt19937 mt(rnd());
+	std::uniform_int_distribution<> rndblocktype(0, 6);
+
+	SwapHoldBlockType_ = Blocknumber_;
+
+	for (int i = 0; i < TetrisGameType::StockBlockSize; i++)
+	{
+		if (i < 3)
+		{
+			StockBlocks_[i] = StockBlocks_[i + 1];
+		}
+		else if (i == 3)
+		{
+			StockBlocks_[i] = rndblocktype(rnd);
+		}
+	}
+
+	Blocknumber_ = StockBlocks_[1];
+
+	return SwapHoldBlockType_;
+}
+
 void TetrisBlocks::TetrisBlock::DrawBlock(int type, int vertical, int side, int positionX, int positionY)
 {
 	if (DrawBlock_[vertical][side] != 9)

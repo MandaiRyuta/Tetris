@@ -2,6 +2,15 @@
 #include <vector>
 #include "../../TetrisGameType/TetrisGameType.h"
 #include "../NextBlock.h"
+#include "../Hold.h"
+#include "Time.h"
+//#include "Score.h"
+//#include "Particle.h"
+//#include "NextBlock.h"
+//#include "Menu.h"
+//#include "InGameState.h"
+//#include "Fade.h"
+//#include "Background.h"
 #include "../UI.h"
 
 namespace TetrisUI

@@ -116,6 +116,8 @@ void Scene::Draw()
 
 void Scene::Release()
 {
+	Ui_->ReleaseAll();
+	delete Ui_;
 	delete Collection_;
 }
 

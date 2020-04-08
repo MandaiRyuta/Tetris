@@ -159,6 +159,7 @@
     <ClCompile Include="TetrisBlock\TetrisBlock.cpp" />
     <ClCompile Include="UI\Background.cpp" />
     <ClCompile Include="UI\Fade.cpp" />
+    <ClCompile Include="UI\Hold.cpp" />
     <ClCompile Include="UI\InGameState.cpp" />
     <ClCompile Include="UI\Menu.cpp" />
     <ClCompile Include="UI\NextBlock.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="TetrisGameType\TetrisGameType.h" />
     <ClInclude Include="UI\Background.h" />
     <ClInclude Include="UI\Fade.h" />
+    <ClInclude Include="UI\Hold.h" />
     <ClInclude Include="UI\InGameState.h" />
     <ClInclude Include="UI\Menu.h" />
     <ClInclude Include="UI\NextBlock.h" />

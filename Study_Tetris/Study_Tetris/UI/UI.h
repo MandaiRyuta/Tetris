@@ -2,17 +2,9 @@
 #include <DxLib.h>
 #include <vector>
 #include "../TetrisGameType/TetrisGameType.h"
-#include "Time.h"
-#include "Score.h"
-#include "Particle.h"
-#include "NextBlock.h"
-#include "Menu.h"
-#include "InGameState.h"
-#include "Fade.h"
-#include "Background.h"
 
-//namespace TetrisUI
-//{
+namespace TetrisUI
+{
 	class UI
 	{
 	public:
@@ -24,4 +16,4 @@
 		virtual void Draw() = 0;
 		virtual void Release() = 0;
 	};
-//}
+}

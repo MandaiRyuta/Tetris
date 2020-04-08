@@ -1,5 +1,6 @@
 #include "BlockCollection.h"
 #include "../../UI/NextBlock.h"
+#include "../../UI/Hold.h"
 
 void TetrisBlocks::BlockCollection::Init()
 {
@@ -35,6 +36,11 @@ void TetrisBlocks::BlockCollection::Update()
 	for (int i = 0; i < 3; i++)
 	{
 		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
+	}
+
+	if (CheckHitKey(KEY_INPUT_H) == 1)
+	{
+		TetrisUI::Hold::GetHoldBlockType(Block_->GetHoldBlockType());
 	}
 
 	if (Block_->GetBlockDone() == 0x001)
@@ -155,7 +161,7 @@ void TetrisBlocks::BlockCollection::StackBlockClearLineCheck()
 
 void TetrisBlocks::BlockCollection::StageBlockLineClear()
 {
-		int clearlinepoint[23] = { 0 };
+	int clearlinepoint[23] = { 0 };
 	int remainline = 0;
 
 	if (ClearCheck_ == 0x001)

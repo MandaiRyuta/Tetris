@@ -47,7 +47,9 @@ namespace TetrisBlocks
 			SideSpeed_(1),
 			InputDownMoveCheck_(0x000),
 			InputDownMoveMaxTime_(100),
-			InputDownMoveNowTime_(0)
+			InputDownMoveNowTime_(0),
+			SwapHoldBlockType_(9),
+			HoldCheck_(0x000)
 		{
 			Position_.y = 0;
 			Position_.x = 4;
@@ -90,8 +92,8 @@ namespace TetrisBlocks
 		}
 		~TetrisBlock(){}
 	public:
-		void FrameCount();
-		void SetBlock(TetrisGameType::BlockType type);
+		void BlockSwapHold();
+		int GetHoldBlockType();
 		void DrawBlock(int type, int vertical, int side, int positionX, int positionY);
 		void ChangeRotate();
 		void Init();
@@ -115,6 +117,9 @@ namespace TetrisBlocks
 		void SetBlockDone(signed short int blockdonecheck);
 		void InitBlocks();
 	private:
+		int SwapHoldBlockType_;
+		signed short int HoldCheck_;
+
 		std::array<int, 4> StockBlocks_;
 		int YblockCount_;
 		signed short int SpaceDownCheck_;
