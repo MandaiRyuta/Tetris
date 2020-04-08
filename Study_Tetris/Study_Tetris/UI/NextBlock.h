@@ -4,18 +4,24 @@
 namespace TetrisUI
 {
 	class NextBlock : public UI
-	{
+	{	
 	public:
-		NextBlock(){}
-		~NextBlock(){}
+		NextBlock(){
+		}
+		~NextBlock() {}
 	public:
 		virtual void Init() override;
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void Release() override;
-		void SetNextBlockType(BlockType type);
-		BlockType GetNextBlockType();
-	private:
-		BlockType type_;
+		void NextBlockPlaceDraw();
+		void BlockInit();
+		static void GetNextBlockType(int num, int type)
+		{
+			BlockNumber_[num] = type;
+		}
+	private:	
+		static std::array<int, 3> BlockNumber_;
+		TetrisGameType::Block Blocktype_[TetrisGameType::TetrisBlockTypeNum::MaxNumber][TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 	};
 }

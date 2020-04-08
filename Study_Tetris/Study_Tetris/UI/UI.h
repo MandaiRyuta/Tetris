@@ -1,43 +1,27 @@
 #pragma once
 #include <DxLib.h>
 #include <vector>
+#include "../TetrisGameType/TetrisGameType.h"
+#include "Time.h"
+#include "Score.h"
+#include "Particle.h"
+#include "NextBlock.h"
+#include "Menu.h"
+#include "InGameState.h"
+#include "Fade.h"
+#include "Background.h"
 
-struct Vector2
-{
-	int x;
-	int y;
-};
-
-struct Color
-{
-	int r;
-	int g;
-	int b;
-	int a;
-};
-
-enum class BlockType
-{
-	I,
-	J,
-	L,
-	O,
-	S,
-	T,
-	Z,
-	W,
-};
-namespace TetrisUI
-{
+//namespace TetrisUI
+//{
 	class UI
 	{
 	public:
-		UI() {}
-		~UI() {}
+		UI(){}
+		virtual ~UI() {}
 	public:
 		virtual void Init() = 0;
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
 		virtual void Release() = 0;
 	};
-}
+//}

@@ -115,7 +115,7 @@ namespace TetrisBlocks
 		void SetBlockDone(signed short int blockdonecheck);
 		void InitBlocks();
 	private:
-		std::array<int, TetrisGameType::TetrisBlockTypeNum::MaxNumber> StockBlocks_;
+		std::array<int, 4> StockBlocks_;
 		int YblockCount_;
 		signed short int SpaceDownCheck_;
 		signed short int LeftMoveCheck_;

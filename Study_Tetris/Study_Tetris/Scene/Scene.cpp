@@ -1,7 +1,5 @@
 #include "Scene.h"
 
-
-
 Scene::Scene() :
 	Scenenumber_(0),
 	Title_start_end_(0x000),
@@ -26,6 +24,7 @@ void Scene::Init()
 		Scenenumber_ = SceneNumber::TitleSceneNumber;
 		break;
 	case SceneNumber::GameSceneNumber:
+		Ui_ = new TetrisUI::UIManager();
 		Collection_ = new TetrisBlocks::BlockCollection();
 		Collection_->Init();
 		Game_start_end_ = 0x000;
@@ -64,7 +63,7 @@ void Scene::Update()
 		break;
 	case SceneNumber::GameSceneNumber:
 		Collection_->Update();
-
+		Ui_->UpdateAll();
 		if (CheckHitKey(KEY_INPUT_UP) == 0x001)
 		{
 			Game_start_end_ = 0x001;
@@ -106,6 +105,7 @@ void Scene::Draw()
 		break;
 	case SceneNumber::GameSceneNumber:
 		Collection_->Draw();
+		Ui_->DrawAll();
 		DrawString(450, 32, "Game Scene", GetColor(255, 255, 255));
 		break;
 	case SceneNumber::ResultSceneNumber:

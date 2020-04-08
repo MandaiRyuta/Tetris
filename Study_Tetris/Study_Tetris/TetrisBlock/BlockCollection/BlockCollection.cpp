@@ -1,4 +1,5 @@
 #include "BlockCollection.h"
+#include "../../UI/NextBlock.h"
 
 void TetrisBlocks::BlockCollection::Init()
 {
@@ -31,6 +32,11 @@ void TetrisBlocks::BlockCollection::Update()
 {
 	Block_->Update();
 
+	for (int i = 0; i < 3; i++)
+	{
+		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
+	}
+
 	if (Block_->GetBlockDone() == 0x001)
 	{
 		for (int y = 0; y < TetrisGameType::StageHeight; y++)
@@ -42,6 +48,9 @@ void TetrisBlocks::BlockCollection::Update()
 		}
 		Block_->SetBlockDone(0x000);
 	}
+
+	StackBlockClearLineCheck();
+	StageBlockLineClear();
 }
 
 void TetrisBlocks::BlockCollection::Draw()
@@ -116,8 +125,76 @@ void TetrisBlocks::BlockCollection::Release()
 {
 }
 
-void TetrisBlocks::BlockCollection::StackBlockClear()
+void TetrisBlocks::BlockCollection::StackBlockClearLineCheck()
 {
+	for (int y = 0; y < TetrisGameType::StageHeight - 1; y++)
+	{
+		ClearLine_[y] = 0;
+	}
+
+	for (int y = 0; y < TetrisGameType::StageHeight - 1; y++)
+	{
+		for (int x = 1; x < TetrisGameType::StageWidth - 1; x++)
+		{
+			if (Board_[y][x] == 0)
+			{
+				ClearLine_[y] = 1;
+				break;
+			}
+		}
+	}
+
+	for (int y = 0; y < TetrisGameType::StageHeight - 1; y++)
+	{
+		if (ClearLine_[y] == 0)
+		{
+			ClearCheck_ = 0x001;
+		}
+	}
+}
+
+void TetrisBlocks::BlockCollection::StageBlockLineClear()
+{
+		int clearlinepoint[23] = { 0 };
+	int remainline = 0;
+
+	if (ClearCheck_ == 0x001)
+	{
+		
+		for (int i = 1; i < TetrisGameType::StageHeight - 2; i++) 
+		{
+			if (ClearLine_[i] == 0) 
+			{
+				if (ClearCount_ < 13) 
+				{
+					Board_[i][ClearCount_] = 0;
+					ClearCount_++;
+				}
+			}
+		}
+
+		for (int i = TetrisGameType::StageHeight - 2; i >= 0; i--)
+		{
+			if (ClearLine_[i] != 0)
+			{
+				clearlinepoint[remainline] = i;
+				remainline++;
+			}
+		}
+
+		remainline = 0;
+		for (int i = TetrisGameType::StageHeight - 2; i >= 0; i--) 
+		{
+			for (int j = 1; j < TetrisGameType::StageWidth ; j++) 
+			{
+				Board_[i][j] = Board_[clearlinepoint[remainline]][j];
+			}
+			remainline++;
+		}
+
+		ClearCheck_ = 0x000;
+		ClearCount_ = 1;
+	}
 }
 
 void TetrisBlocks::BlockCollection::StackBlock(TetrisBlock* block)

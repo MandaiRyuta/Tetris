@@ -2,8 +2,7 @@
 #include <vector>
 #include "../TetrisGameType\TetrisGameType.h"
 #include "../TetrisBlock\BlockCollection\BlockCollection.h"
-
-class Input;
+#include "../UI/UIManager/UIManager.h"
 
 class Scene
 {
@@ -23,6 +22,7 @@ public:
 private:
 	std::vector<int> Obj_;
 	int Scenenumber_;
+	TetrisUI::UIManager* Ui_;
 	TetrisBlocks::BlockCollection* Collection_;
 	signed short int Title_start_end_;
 	signed short int Game_start_end_;

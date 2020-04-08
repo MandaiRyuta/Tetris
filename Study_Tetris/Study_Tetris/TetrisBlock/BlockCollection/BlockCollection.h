@@ -13,6 +13,9 @@ namespace TetrisBlocks
 			Block_ = new TetrisBlocks::TetrisBlock();
 			Block_->Init();
 			Board_ = {};
+			*ClearLine_ = {};
+			ClearCheck_ = 0x000;
+			ClearCount_ = 1;
 		}
 		~BlockCollection(){}
 	public:
@@ -20,7 +23,8 @@ namespace TetrisBlocks
 		void Update();
 		void Draw();
 		void Release();
-		void StackBlockClear();
+		void StackBlockClearLineCheck();
+		void StageBlockLineClear();
 		void StackBlock(TetrisBlock* block);
 		void NowBlock();
 		void SetHold(TetrisBlock* block);
@@ -31,8 +35,12 @@ namespace TetrisBlocks
 		void NowBlockReset() {}
 		void ValidArea() {}
 		int GetBoardInfo(int x, int y);
+		TetrisBlock* GetBlock();
 	private:
+		int ClearLine_[23];
+		signed short int ClearCheck_;
 		TetrisBlock* Block_;
+		int ClearCount_;
 		std::array<std::array<int, TetrisGameType::StageWidth>, TetrisGameType::StageHeight> Board_;
 	};
 }
