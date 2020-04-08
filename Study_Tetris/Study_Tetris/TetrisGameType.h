@@ -26,6 +26,7 @@ namespace TetrisGameType
 		constexpr int TYPEZ = 6;
 	}
 
+	constexpr int StockBlockSize = 4;
 	constexpr int BlockHeight = 4;
 	constexpr int BlockWidth = 4;
 	constexpr int StageHeight = 23;

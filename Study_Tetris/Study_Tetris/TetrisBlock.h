@@ -39,8 +39,8 @@ namespace TetrisBlocks
 			TurnPoint_(0),
 			CheckBlock_(0x000),
 			Blockdown_(0x000),
-			LeftCollision_(0x000),
-			RightCollision_(0x000),
+			LeftCollision_(false),
+			RightCollision_(false),
 			SpaceBarRefreshNowTime_(0),
 			SpaceBarRefreshMaxTime_(1000),
 			SpaceBarRefreshCheck_(0x000)
@@ -93,6 +93,8 @@ namespace TetrisBlocks
 		void Update();
 		void Draw();
 		void Release();
+		void StockBlock();
+		void SwapBlock();
 		int GetXBlockPosition();
 		int GetYblockPosition();
 		int GetBlockType();
@@ -103,9 +105,12 @@ namespace TetrisBlocks
 		void StageBlockCollisionCenter();
 		void BlockCollisionTurn();
 		void MakeBlock();
+		int GetStockBlock(int num);
 		signed short int GetBlockDone();
 		void SetBlockDone(signed short int blockdonecheck);
+		void InitBlocks();
 	private:
+		std::array<int, TetrisGameType::TetrisBlockTypeNum::MaxNumber> StockBlocks_;
 		int YblockCount_;
 		signed short int SpaceDownCheck_;
 		signed short int LeftMoveCheck_;
@@ -119,8 +124,8 @@ namespace TetrisBlocks
 		signed short int BottomBlockCheck_;
 		signed short int CheckBlock_;
 		signed short int Blockdown_;
-		signed short int LeftCollision_;
-		signed short int RightCollision_;
+		bool LeftCollision_;
+		bool RightCollision_;
 
 		int SpaceBarRefreshNowTime_;
 		int SpaceBarRefreshMaxTime_;
