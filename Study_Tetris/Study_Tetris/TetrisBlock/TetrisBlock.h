@@ -1,5 +1,5 @@
 #pragma once
-#include "TetrisGameType.h"
+#include "../TetrisGameType/TetrisGameType.h"
 //constexpr int BLOCKTYPE = 7;
 //constexpr int BLOCKSIZE = 4;
 
@@ -16,11 +16,11 @@ namespace TetrisBlocks
 			BlockNowMoveTime_(0),
 			BlockDoneCheck_(0x000),
 			LeftMoveAcceleration_(0),
-			LeftMoveMaxTime_(1500),
+			LeftMoveMaxTime_(2100),
 			LeftMoveNowTime_(0),
 			LeftMoveCheck_(0x000),
 			RightMoveAcceleration_(0),
-			RightMoveMaxTime_(1500),
+			RightMoveMaxTime_(2100),
 			RightMoveNowTime_(0),
 			RightMoveCheck_(0x000),
 			DownMoveAcceleration_(0),
@@ -31,7 +31,7 @@ namespace TetrisBlocks
 			SpaceDownMaxTime_(1800),
 			SpaceDownNowTime_(0),
 			RotateNowTime_(0),
-			RotateMaxTime_(900),
+			RotateMaxTime_(720),
 			BlockDownCheck_(0x000),
 			YblockCount_(0),
 			Collision_(0),
@@ -43,7 +43,11 @@ namespace TetrisBlocks
 			RightCollision_(false),
 			SpaceBarRefreshNowTime_(0),
 			SpaceBarRefreshMaxTime_(1000),
-			SpaceBarRefreshCheck_(0x000)
+			SpaceBarRefreshCheck_(0x000),
+			SideSpeed_(1),
+			InputDownMoveCheck_(0x000),
+			InputDownMoveMaxTime_(100),
+			InputDownMoveNowTime_(0)
 		{
 			Position_.y = 0;
 			Position_.x = 4;
@@ -86,6 +90,7 @@ namespace TetrisBlocks
 		}
 		~TetrisBlock(){}
 	public:
+		void FrameCount();
 		void SetBlock(TetrisGameType::BlockType type);
 		void DrawBlock(int type, int vertical, int side, int positionX, int positionY);
 		void ChangeRotate();
@@ -115,6 +120,7 @@ namespace TetrisBlocks
 		signed short int SpaceDownCheck_;
 		signed short int LeftMoveCheck_;
 		signed short int RightMoveCheck_;
+		signed short int InputDownMoveCheck_;
 		signed short int DownMoveCheck_;
 		signed short int BlockDownCheck_;
 		signed short int BlockRotateCheck_;
@@ -134,9 +140,11 @@ namespace TetrisBlocks
 		int LeftMoveNowTime_;
 		int RightMoveNowTime_;
 		int DownMoveNowTime_;
+		int InputDownMoveNowTime_;
 		int LeftMoveMaxTime_;
 		int RightMoveMaxTime_;
 		int DownMoveMaxTime_;
+		int InputDownMoveMaxTime_;
 		int LeftMoveAcceleration_;
 		int RightMoveAcceleration_;
 		int DownMoveAcceleration_;
@@ -149,7 +157,6 @@ namespace TetrisBlocks
 		int Board_[TetrisGameType::StageHeight][TetrisGameType::StageWidth];
 		int BlockMaxMoveTime_;
 		int BlockNowMoveTime_;
-
 		int SpaceDownMaxTime_;
 		int SpaceDownNowTime_;
 		int Collision_;
@@ -158,5 +165,6 @@ namespace TetrisBlocks
 		int DrawBlock_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 		TetrisGameType::Color DrawBlockColor_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 		int TurnBlock_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
+		int SideSpeed_;
 	};
 }

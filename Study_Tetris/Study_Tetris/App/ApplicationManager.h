@@ -1,6 +1,6 @@
 #pragma once
-#include "TetrisGameType.h"
-#include "SceneManager.h"
+#include "../TetrisGameType/TetrisGameType.h"
+#include "../Scene\SceneManager/SceneManager.h"
 
 class ApplicationManager
 {

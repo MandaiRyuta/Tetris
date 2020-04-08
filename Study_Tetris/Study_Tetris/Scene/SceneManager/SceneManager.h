@@ -1,6 +1,6 @@
 #pragma once
-#include "Scene.h"
-#include "TetrisGameType.h"
+#include "../Scene.h"
+#include "../../TetrisGameType\TetrisGameType.h"
 
 const int SCENEINDEX = 3;
 class SceneManager

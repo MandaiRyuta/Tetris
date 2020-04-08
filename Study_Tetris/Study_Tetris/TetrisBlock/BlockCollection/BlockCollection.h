@@ -1,7 +1,7 @@
 #pragma once
 #include <array>
-#include "TetrisGameType.h"
-#include "TetrisBlock.h"
+#include "../../TetrisGameType\TetrisGameType.h"
+#include "../TetrisBlock.h"
 
 namespace TetrisBlocks
 {

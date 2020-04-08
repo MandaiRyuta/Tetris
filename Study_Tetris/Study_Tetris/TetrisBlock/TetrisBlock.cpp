@@ -6,14 +6,6 @@ constexpr int UPPADDING = 3;
 constexpr int RIGHTPADDING = 17;
 constexpr int DOWNPADDING = 17;
 
-/*
-	明日、ブロックの種類ごとに回転指定＋色の表示バグ修正。
-*/
-void TetrisBlocks::TetrisBlock::SetBlock(TetrisGameType::BlockType type)
-{
-
-}
-
 void TetrisBlocks::TetrisBlock::DrawBlock(int type, int vertical, int side, int positionX, int positionY)
 {
 	if (DrawBlock_[vertical][side] != 9)
@@ -63,59 +55,43 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 
 		if (LeftCollision_)
 		{
-			switch (Blocknumber_)
+			StageBlockCollisionLeft();
+			if (Collision_ == 1)
 			{
-			case 0: 
-				Position_.x += 2;
-				break;
-			case 1:
-				Position_.x += 1;
-				break;
-			case 2:
-				Position_.x += 1;
-				break;
-			case 3:
-				break;
-			case 4:
-				Position_.x += 1;
-				break;
-			case 5:
-				Position_.x += 1;
-				break;
-			case 6:
-				Position_.x += 1;
-				break;
+				if (Blocknumber_ != 3)
+				{
+					Position_.x = 1;
+				}
 			}
+			StageBlockCollisionCenter();
+			if (Collision_ == 1)
+			{
+				Position_.x += 1;
+			}
+
 			LeftCollision_ = false;
 		}
 		if (RightCollision_)
 		{
-			switch (Blocknumber_)
+			StageBlockCollisionRight();
+			if (Collision_ == 1)
 			{
-			case 0:
-				Position_.x -= 2;
-				break;
-			case 1:
-				Position_.x -= 1;
-				break;
-			case 2:
-				Position_.x -= 1;
-				break;
-			case 3:
-				break;
-			case 4:
-				Position_.x -= 3;
-				break;
-			case 5:
-				Position_.x -= 3;
-				break;
-			case 6:
-				Position_.x -= 3;
-				break;
+				if (Blocknumber_ != 3)
+				{
+					Position_.x = 8;
+				}
 			}
+			StageBlockCollisionCenter();
+			if (Collision_)
+			{
+				if (Blocknumber_ != 3)
+				{
+					Position_.x -= 1;
+				}
+			}
+
 			RightCollision_ = false;
 		}
-
 
 		TurnPoint_--;
 	}
@@ -169,6 +145,12 @@ void TetrisBlocks::TetrisBlock::Init()
 
 void TetrisBlocks::TetrisBlock::Update()
 {	
+	StageBlockCollisionCenter();
+	if (Collision_ == 1)
+	{
+		Position_.y = Position_.y - 1;
+	}
+
 	if (SpaceBarRefreshNowTime_ > SpaceBarRefreshMaxTime_)
 	{
 		SpaceDownCheck_ = 0x000;
@@ -219,13 +201,17 @@ void TetrisBlocks::TetrisBlock::Update()
 			SpaceDownNowTime_ = 0;
 			SpaceDownCheck_ = 0x000;
 		}
-		if (RightMoveAcceleration_ > 400)
+		if (RightMoveAcceleration_ > 600)
 		{
 			RightMoveNowTime_ += 3;
+			SideSpeed_ = 2;
+			//RightMoveAcceleration_ = 0;
 		}
-		if (LeftMoveAcceleration_ > 400)
+		if (LeftMoveAcceleration_ > 600)
 		{
 			LeftMoveNowTime_ += 3;
+			SideSpeed_ = 2;
+			//LeftMoveAcceleration_ = 0;
 		}
 		if (DownMoveAcceleration_ > 200)
 		{
@@ -246,12 +232,34 @@ void TetrisBlocks::TetrisBlock::Update()
 			DownMoveNowTime_ = 0;
 			DownMoveCheck_ = 0x000;
 		}
+		if (InputDownMoveNowTime_ > InputDownMoveMaxTime_)
+		{
+			InputDownMoveNowTime_ = 0;
+			InputDownMoveCheck_ = 0x000;
+		}
 	}
 
-	if (CheckHitKey(KEY_INPUT_UP) == 1)
+	if (CheckHitKey(KEY_INPUT_DOWN) == 1 && InputDownMoveCheck_ == 0x000)
 	{
-		if (BlockRotateCheck_ == 0x000 && Collision_ == 0)
+		StageBlockCollisionLeft();
+		StageBlockCollisionRight();
+		StageBlockCollisionBottom();
+		StageBlockCollisionCenter();
+		if (Collision_ == 0)
+		{	
+			YblockCount_ += TetrisGameType::BlockSpeed;
+			Position_.y = YblockCount_ / TetrisGameType::DrawBlockWidth;
+			InputDownMoveCheck_ = 0x001;
+		}
+	}
+	if (CheckHitKey(KEY_INPUT_UP) == 1 && BlockRotateCheck_ == 0x000)
+	{
+		SideSpeed_ = 0;
+		LeftMoveAcceleration_ = 0;
+		RightMoveAcceleration_ = 0;
+		if (Collision_ == 0)
 		{
+			RotateNowTime_ = 0;
 			ChangeRotate();
 			BlockRotateCheck_ = 0x001;
 		}
@@ -259,8 +267,11 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 	{
+		RightMoveAcceleration_ = 0;
+
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1 && SpaceDownCheck_ == 0x000)
 		{
+			SideSpeed_ = 0;
 			if (Collision_ == 0)
 			{
 				Blockdown_ = 0x001;
@@ -268,11 +279,16 @@ void TetrisBlocks::TetrisBlock::Update()
 				SpaceBarRefreshCheck_ = 0x001;
 			}
 		}
+		else
+		{
+			SideSpeed_ = 1;
+		}
 		LeftMoveAcceleration_++;
 		StageBlockCollisionLeft();
-		if (LeftMoveCheck_ == 0x000 && Collision_ == 0)
+
+		if (LeftMoveCheck_ == 0x000 && Collision_ == 0 )
 		{
-			Position_.x -= 1;
+			Position_.x -= SideSpeed_;
 			LeftMoveCheck_ = 0x001;
 		}
 	}
@@ -282,8 +298,10 @@ void TetrisBlocks::TetrisBlock::Update()
 	}
 	if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
 	{
+		LeftMoveAcceleration_ = 0;
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1 && SpaceDownCheck_ == 0x000)
 		{
+			SideSpeed_ = 0;
 			if (Collision_ == 0)
 			{
 				Blockdown_ = 0x001;
@@ -291,14 +309,19 @@ void TetrisBlocks::TetrisBlock::Update()
 				SpaceBarRefreshCheck_ = 0x001;
 			}
 		}
+		else
+		{
+			SideSpeed_ = 1;
+		}
 
 		RightMoveAcceleration_++;
 		StageBlockCollisionRight();
 		if (RightMoveCheck_ == 0x000 && Collision_ == 0)
 		{
-			Position_.x += 1;
+			Position_.x += SideSpeed_;
 			RightMoveCheck_ = 0x001;
 		}
+
 	}
 	else
 	{
@@ -343,6 +366,7 @@ void TetrisBlocks::TetrisBlock::Update()
 	RightMoveNowTime_++;
 	LeftMoveNowTime_++;
 	DownMoveNowTime_++;
+	InputDownMoveNowTime_++;
 
 	if (SpaceDownCheck_ == 0x000)
 	{

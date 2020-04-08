@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "TetrisGameType.h"
-#include "BlockCollection.h"
+#include "../TetrisGameType\TetrisGameType.h"
+#include "../TetrisBlock\BlockCollection\BlockCollection.h"
 
 class Input;
 

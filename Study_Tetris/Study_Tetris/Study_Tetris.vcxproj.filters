@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Window\main.cpp" />
+    <ClCompile Include="UI\Background.cpp" />
+    <ClCompile Include="UI\Fade.cpp" />
+    <ClCompile Include="UI\InGameState.cpp" />
+    <ClCompile Include="UI\Menu.cpp" />
+    <ClCompile Include="UI\NextBlock.cpp" />
+    <ClCompile Include="UI\Particle.cpp" />
+    <ClCompile Include="UI\Score.cpp" />
+    <ClCompile Include="UI\Time.cpp" />
+    <ClCompile Include="UI\UI.cpp" />
+    <ClCompile Include="UI\UIManager\UIManager.cpp" />
+    <ClCompile Include="TetrisBlock\TetrisBlock.cpp" />
+    <ClCompile Include="TetrisBlock\BlockCollection\BlockCollection.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="App\ApplicationManager.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window\main.h" />
+    <ClInclude Include="UI\Background.h" />
+    <ClInclude Include="UI\Fade.h" />
+    <ClInclude Include="UI\InGameState.h" />
+    <ClInclude Include="UI\Menu.h" />
+    <ClInclude Include="UI\NextBlock.h" />
+    <ClInclude Include="UI\Particle.h" />
+    <ClInclude Include="UI\Score.h" />
+    <ClInclude Include="UI\Time.h" />
+    <ClInclude Include="UI\UI.h" />
+    <ClInclude Include="UI\UIManager\UIManager.h" />
+    <ClInclude Include="TetrisGameType\TetrisGameType.h" />
+    <ClInclude Include="TetrisBlock\TetrisBlock.h" />
+    <ClInclude Include="TetrisBlock\BlockCollection\BlockCollection.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneManager\SceneManager.h" />
+    <ClInclude Include="App\ApplicationManager.h" />
+    <ClInclude Include="Input\Input.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Window">
+      <UniqueIdentifier>{ffd6cbd0-a230-4784-b749-c1fcfc8a4623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e724a218-3eaf-4065-9067-e356f15e9443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{268c72bc-b8d9-4659-9bcf-8b49628f8e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TetrisBlock">
+      <UniqueIdentifier>{ef11fec1-628e-4d2b-b431-20ced837c3d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\SceneManager">
+      <UniqueIdentifier>{7067cd6f-f85a-43d5-b69c-27a1dd56d038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\UIManager">
+      <UniqueIdentifier>{39b25e76-e8d2-46fc-8344-b777b99f6995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{79a2d256-0375-4268-91a6-c41a72390ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TetrisGameType">
+      <UniqueIdentifier>{b1042caf-e71f-4e17-aab2-a501f94e7510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{741fa816-e396-43f3-8f1e-95f6cca89ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TetrisBlock\BlockCollection">
+      <UniqueIdentifier>{1703cb48-b9d6-4c7a-ac89-9f7c278c18b6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
