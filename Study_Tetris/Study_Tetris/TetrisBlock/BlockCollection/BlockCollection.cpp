@@ -37,10 +37,11 @@ void TetrisBlocks::BlockCollection::Update()
 	{
 		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
 	}
-
-	if (CheckHitKey(KEY_INPUT_H) == 1)
+	static bool s = false;
+	if (CheckHitKey(KEY_INPUT_H) == 1 && !s)
 	{
 		TetrisUI::Hold::GetHoldBlockType(Block_->GetHoldBlockType());
+		s = true;
 	}
 
 	if (Block_->GetBlockDone() == 0x001)
@@ -161,13 +162,13 @@ void TetrisBlocks::BlockCollection::StackBlockClearLineCheck()
 
 void TetrisBlocks::BlockCollection::StageBlockLineClear()
 {
-	int clearlinepoint[23] = { 0 };
+	int clearlinepoint[22] = { 0 };
 	int remainline = 0;
 
 	if (ClearCheck_ == 0x001)
 	{
 		
-		for (int i = 1; i < TetrisGameType::StageHeight - 2; i++) 
+		for (int i = 1; i < TetrisGameType::StageHeight - 1; i++) 
 		{
 			if (ClearLine_[i] == 0) 
 			{

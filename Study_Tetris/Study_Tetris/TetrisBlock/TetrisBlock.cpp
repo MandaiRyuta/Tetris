@@ -34,6 +34,21 @@ int TetrisBlocks::TetrisBlock::GetHoldBlockType()
 
 	Blocknumber_ = StockBlocks_[1];
 
+	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
+	{
+		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
+		{
+			CopyBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+			DrawBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+			DrawBlockColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+			DrawBlockColor_[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+			DrawBlockColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+		}
+	}
+
+	Position_.x = 4;
+	Position_.y = 0;
+
 	return SwapHoldBlockType_;
 }
 
