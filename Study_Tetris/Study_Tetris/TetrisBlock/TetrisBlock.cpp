@@ -124,6 +124,7 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 			}
 		}
 
+
 		if (LeftCollision_)
 		{
 			StageBlockCollisionLeft();
@@ -301,18 +302,35 @@ void TetrisBlocks::TetrisBlock::Update()
 			SpaceDownNowTime_ = 0;
 			SpaceDownCheck_ = 0x000;
 		}
-		if (RightMoveAcceleration_ > 10)
+		if (RightMoveAcceleration_ > 2)
 		{
-			RightMoveNowTime_ += 3;
-			SideSpeed_ = 2;
-			//RightMoveAcceleration_ = 0;
+			if (RightArrowFrame_ > RightArrowMaxMoveTime_)
+			{
+				RightMoveAcceleration_ = 0;
+				Position_.x += SideSpeed_;
+				RightArrowFrame_ = 0;
+			}
+
+			//RightMoveMaxTime_ = 5;
 		}
-		if (LeftMoveAcceleration_ > 10)
+		/*else
 		{
-			LeftMoveNowTime_ += 3;
-			SideSpeed_ = 2;
-			//LeftMoveAcceleration_ = 0;
+			RightMoveMaxTime_ = 10;
+		}*/
+		if (LeftMoveAcceleration_ > 2)
+		{
+			if (LeftArrowFrame_ > LeftArrowMaxMoveTime_)
+			{
+				LeftMoveAcceleration_ = 0;
+				Position_.x -= SideSpeed_;
+				LeftArrowFrame_ = 0;
+			}
+			//LeftMoveMaxTime_ = 5;
 		}
+		/*else
+		{
+			LeftMoveMaxTime_ = 10;
+		}*/
 		if (DownMoveAcceleration_ > 5)
 		{
 			DownMoveNowTime_ += 2;
@@ -326,6 +344,22 @@ void TetrisBlocks::TetrisBlock::Update()
 		{
 			LeftMoveNowTime_ = 0;
 			LeftMoveCheck_ = 0x000;
+		}
+		if(LeftArrowCheck_ == 0x001)
+		{
+			if (LeftArrowFrame_ > LeftArrowMaxMoveTime_)
+			{
+				Position_.x -= SideSpeed_;
+				LeftArrowFrame_ = 0;
+			}
+		}
+		if (RightArrowCheck_ == 0x001)
+		{
+			if (RightArrowFrame_ > RightArrowMaxMoveTime_)
+			{
+				Position_.x += SideSpeed_;
+				RightArrowFrame_ = 0;
+			}
 		}
 		if (DownMoveNowTime_ > DownMoveMaxTime_)
 		{
@@ -353,18 +387,7 @@ void TetrisBlocks::TetrisBlock::Update()
 				InputDownMoveCheck_ = 0x001;
 			}
 		}
-		if (CheckHitKey(KEY_INPUT_UP) == 1 && BlockRotateCheck_ == 0x000)
-		{
-			SideSpeed_ = 0;
-			LeftMoveAcceleration_ = 0;
-			RightMoveAcceleration_ = 0;
-			if (Collision_ == 0)
-			{
-				RotateNowTime_ = 0;
-				ChangeRotate();
-				BlockRotateCheck_ = 0x001;
-			}
-		}
+
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 		{
@@ -384,17 +407,33 @@ void TetrisBlocks::TetrisBlock::Update()
 			{
 				SideSpeed_ = 1;
 			}
+			if (CheckHitKey(KEY_INPUT_UP) == 1 && BlockRotateCheck_ == 0x000)
+			{
+				SideSpeed_ = 0;
+				LeftMoveAcceleration_ = 0;
+				RightMoveAcceleration_ = 0;
+				if (Collision_ == 0)
+				{
+					RotateNowTime_ = 0;
+					ChangeRotate();
+					BlockRotateCheck_ = 0x001;
+				}
+			}
+
 			LeftMoveAcceleration_++;
 			StageBlockCollisionLeft();
 
 			if (LeftMoveCheck_ == 0x000 && Collision_ == 0)
 			{
-				Position_.x -= SideSpeed_;
+				LeftArrowCheck_ = 0x001;
+				LeftArrowFrame_++;
+				//Position_.x -= SideSpeed_;
 				LeftMoveCheck_ = 0x001;
 			}
 		}
 		else
 		{
+			LeftArrowCheck_ = 0x000;
 			LeftMoveAcceleration_ = 0;
 		}
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
@@ -415,17 +454,33 @@ void TetrisBlocks::TetrisBlock::Update()
 				SideSpeed_ = 1;
 			}
 
+			if (CheckHitKey(KEY_INPUT_UP) == 1 && BlockRotateCheck_ == 0x000)
+			{
+				SideSpeed_ = 0;
+				LeftMoveAcceleration_ = 0;
+				RightMoveAcceleration_ = 0;
+				if (Collision_ == 0)
+				{
+					RotateNowTime_ = 0;
+					ChangeRotate();
+					BlockRotateCheck_ = 0x001;
+				}
+			}
+
 			RightMoveAcceleration_++;
 			StageBlockCollisionRight();
 			if (RightMoveCheck_ == 0x000 && Collision_ == 0)
 			{
-				Position_.x += SideSpeed_;
+				RightArrowFrame_++;
+				RightArrowCheck_ = 0x001;
+				//Position_.x += SideSpeed_;
 				RightMoveCheck_ = 0x001;
 			}
 
 		}
 		else
 		{
+			RightArrowCheck_ = 0x000;
 			RightMoveAcceleration_ = 0;
 		}
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1 && SpaceDownCheck_ == 0x000)
@@ -435,6 +490,18 @@ void TetrisBlocks::TetrisBlock::Update()
 				Blockdown_ = 0x001;
 				SpaceDownCheck_ = 0x001;
 				SpaceBarRefreshCheck_ = 0x001;
+			}
+		}
+		if (CheckHitKey(KEY_INPUT_UP) == 1 && BlockRotateCheck_ == 0x000)
+		{
+			SideSpeed_ = 0;
+			LeftMoveAcceleration_ = 0;
+			RightMoveAcceleration_ = 0;
+			if (Collision_ == 0)
+			{
+				RotateNowTime_ = 0;
+				ChangeRotate();
+				BlockRotateCheck_ = 0x001;
 			}
 		}
 	}

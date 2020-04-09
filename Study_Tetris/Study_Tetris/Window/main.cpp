@@ -22,7 +22,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	app.Init();
-
+	int bg = 0;
+	bg = LoadGraph("Background.png");
 	while (!loopscene)
 	{
 		
@@ -34,6 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ClearDrawScreen();
 		fps.Update();
 		app.Update(&loopscene);
+		DrawGraph(0, 0, bg, true);
 		app.Draw();
 		fps.Draw();
 		fps.WaitTime();

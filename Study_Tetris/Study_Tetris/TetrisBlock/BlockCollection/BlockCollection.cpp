@@ -1,6 +1,7 @@
 #include "BlockCollection.h"
 #include "../../UI/NextBlock.h"
 #include "../../UI/Hold.h"
+#include "../../UI/Score.h"
 
 void TetrisBlocks::BlockCollection::Init()
 {
@@ -185,6 +186,10 @@ void TetrisBlocks::BlockCollection::StageBlockLineClear()
 			{
 				clearlinepoint[remainline] = i;
 				remainline++;
+			}
+			else
+			{
+				TetrisUI::Score::AddScore(10);
 			}
 		}
 

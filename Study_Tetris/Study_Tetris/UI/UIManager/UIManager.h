@@ -4,7 +4,7 @@
 #include "../NextBlock.h"
 #include "../Hold.h"
 #include "../Time.h"
-//#include "Score.h"
+#include "../Score.h"
 //#include "Particle.h"
 //#include "NextBlock.h"
 //#include "Menu.h"

@@ -16,11 +16,11 @@ namespace TetrisBlocks
 			BlockNowMoveTime_(0),
 			BlockDoneCheck_(0x000),
 			LeftMoveAcceleration_(0),
-			LeftMoveMaxTime_(15),
+			LeftMoveMaxTime_(3),
 			LeftMoveNowTime_(0),
 			LeftMoveCheck_(0x000),
 			RightMoveAcceleration_(0),
-			RightMoveMaxTime_(15),
+			RightMoveMaxTime_(3),
 			RightMoveNowTime_(0),
 			RightMoveCheck_(0x000),
 			DownMoveAcceleration_(0),
@@ -31,7 +31,7 @@ namespace TetrisBlocks
 			SpaceDownMaxTime_(5),
 			SpaceDownNowTime_(0),
 			RotateNowTime_(0),
-			RotateMaxTime_(8),
+			RotateMaxTime_(10),
 			BlockDownCheck_(0x000),
 			YblockCount_(0),
 			Collision_(0),
@@ -51,10 +51,16 @@ namespace TetrisBlocks
 			SwapHoldBlockType_(9),
 			HoldCheck_(0x000),
 			HoldStockCheck_(1),
-			BreakStockCheck_(0x000)
+			BreakStockCheck_(0x000),
+			LeftArrowCheck_(0x000),
+			RightArrowCheck_(0x000),
+			LeftArrowFrame_(0),
+			RightArrowFrame_(0),
+			LeftArrowMaxMoveTime_(1),
+			RightArrowMaxMoveTime_(1)
 		{
 			Position_.y = 0;
-			Position_.x = 4;
+			Position_.x = 5;
 			
 			/*BlockMaxMoveTime_ = 2500;
 			BlockNowMoveTime_ = 0;
@@ -175,5 +181,11 @@ namespace TetrisBlocks
 		TetrisGameType::Color DrawBlockColor_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 		int TurnBlock_[TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 		int SideSpeed_;
+		signed short int LeftArrowCheck_;
+		signed short int RightArrowCheck_;
+		int LeftArrowFrame_;
+		int RightArrowFrame_;
+		int LeftArrowMaxMoveTime_;
+		int RightArrowMaxMoveTime_;
 	};
 }

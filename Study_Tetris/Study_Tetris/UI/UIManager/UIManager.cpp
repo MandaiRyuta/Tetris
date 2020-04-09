@@ -8,8 +8,9 @@ TetrisUI::UIManager::UIManager()
 	//obj_.push_back(Create<TetrisUI::Menu>());
 	obj_.push_back(Create<TetrisUI::NextBlock>());
 	obj_.push_back(Create<TetrisUI::Hold>());
+	obj_.push_back(Create<TetrisUI::Time>());
 	//obj_.push_back(Create<TetrisUI::Particle>());
-	//obj_.push_back(Create<TetrisUI::Score>());
+	obj_.push_back(Create<TetrisUI::Score>());
 	//obj_.push_back(Create<TetrisUI::Time>());
 	//obj_.push_back(Create<TetrisUI::UI>());
 

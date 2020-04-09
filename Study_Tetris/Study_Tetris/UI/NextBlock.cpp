@@ -250,10 +250,10 @@ void TetrisUI::NextBlock::BlockInit()
 		0,255,255,255,9
 	};
 	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][1] = {
-		255,255,0,255,4
+		255,215,0,255,4
 	};
 	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][2] = {
-		255,255,0,255,4
+		255,215,0,255,4
 	};
 	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][1][3] = {
 		0,255,255,255,9
@@ -263,10 +263,10 @@ void TetrisUI::NextBlock::BlockInit()
 		0,255,255,255,9
 	};
 	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][1] = {
-		255,255,0,255,4
+		255,215,0,255,4
 	};
 	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][2] = {
-		255,255,0,255,4
+		255,215,0,255,4
 	};
 	Blocktype_[TetrisGameType::TetrisBlockType::TYPEO][2][3] = {
 		0,255,255,255,9
