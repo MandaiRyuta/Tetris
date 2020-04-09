@@ -198,6 +198,14 @@ void TetrisBlocks::BlockCollection::StageBlockLineClear()
 			remainline++;
 		}
 
+		for (int y = 0; y < TetrisGameType::StageHeight; y++)
+		{
+			for (int x = 0; x < TetrisGameType::StageWidth; x++)
+			{
+				Block_->SetBlockData(Board_[y][x], x, y);
+			}
+		}
+
 		ClearCheck_ = 0x000;
 		ClearCount_ = 1;
 	}

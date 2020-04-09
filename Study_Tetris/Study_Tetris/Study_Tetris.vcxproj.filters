@@ -55,6 +55,9 @@
     <ClCompile Include="TetrisBlock\TetrisBlock.cpp">
       <Filter>TetrisBlock</Filter>
     </ClCompile>
+    <ClCompile Include="Fps\FpsCounter.cpp">
+      <Filter>Fps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\ApplicationManager.h">
@@ -114,6 +117,9 @@
     <ClInclude Include="TetrisGameType\TetrisGameType.h">
       <Filter>TetrisGameType</Filter>
     </ClInclude>
+    <ClInclude Include="Fps\FpsCounter.h">
+      <Filter>Fps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -145,6 +151,9 @@
     </Filter>
     <Filter Include="TetrisBlock\BlockCollection">
       <UniqueIdentifier>{1703cb48-b9d6-4c7a-ac89-9f7c278c18b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fps">
+      <UniqueIdentifier>{7c4d0601-64f2-4ea9-a995-4ba696d98d6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
