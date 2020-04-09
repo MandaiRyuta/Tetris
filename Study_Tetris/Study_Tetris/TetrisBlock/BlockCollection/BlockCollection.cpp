@@ -37,11 +37,10 @@ void TetrisBlocks::BlockCollection::Update()
 	{
 		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
 	}
-	static bool s = false;
-	if (CheckHitKey(KEY_INPUT_H) == 1 && !s)
+
+	if (CheckHitKey(KEY_INPUT_H) == 1)
 	{
 		TetrisUI::Hold::GetHoldBlockType(Block_->GetHoldBlockType());
-		s = true;
 	}
 
 	if (Block_->GetBlockDone() == 0x001)

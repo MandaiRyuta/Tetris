@@ -17,37 +17,62 @@ int TetrisBlocks::TetrisBlock::GetHoldBlockType()
 	std::random_device rnd;
 	std::mt19937 mt(rnd());
 	std::uniform_int_distribution<> rndblocktype(0, 6);
-
-	SwapHoldBlockType_ = Blocknumber_;
-
-	for (int i = 0; i < TetrisGameType::StockBlockSize; i++)
+	
+	HoldStockCheck_;
+	if (HoldStockCheck_ == 1 && BreakStockCheck_ == 0x000)
 	{
-		if (i < 3)
+		HoldStockCheck_ = -1;
+		SwapHoldBlockType_ = Blocknumber_;
+
+		for (int i = 0; i < TetrisGameType::StockBlockSize; i++)
 		{
-			StockBlocks_[i] = StockBlocks_[i + 1];
+			if (i < 3)
+			{
+				StockBlocks_[i] = StockBlocks_[i + 1];
+			}
+			else if (i == 3)
+			{
+				StockBlocks_[i] = rndblocktype(rnd);
+			}
 		}
-		else if (i == 3)
+
+		Blocknumber_ = StockBlocks_[1];
+
+		for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 		{
-			StockBlocks_[i] = rndblocktype(rnd);
+			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
+			{
+				CopyBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+				DrawBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+				DrawBlockColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+				DrawBlockColor_[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+				DrawBlockColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+			}
 		}
+		Position_.x = 4;
+		Position_.y = 0;
 	}
-
-	Blocknumber_ = StockBlocks_[1];
-
-	for (int y = 0; y < TetrisGameType::BlockHeight; y++)
+	else if(HoldStockCheck_ == -1 && BreakStockCheck_ == 0x001)
 	{
-		for (int x = 0; x < TetrisGameType::BlockWidth; x++)
+		HoldStockCheck_ = 1;
+		int stock = Blocknumber_;
+		Blocknumber_ = SwapHoldBlockType_;
+		SwapHoldBlockType_ = stock;
+		for (int y = 0; y < TetrisGameType::BlockHeight; y++)
 		{
-			CopyBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
-			DrawBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
-			DrawBlockColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;
-			DrawBlockColor_[y][x].g = Blocktype_[Blocknumber_][y][x].g;
-			DrawBlockColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
+			{
+				CopyBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+				DrawBlock_[y][x] = Blocktype_[Blocknumber_][y][x].type;
+				DrawBlockColor_[y][x].r = Blocktype_[Blocknumber_][y][x].r;
+				DrawBlockColor_[y][x].g = Blocktype_[Blocknumber_][y][x].g;
+				DrawBlockColor_[y][x].b = Blocktype_[Blocknumber_][y][x].b;
+			}
 		}
-	}
 
-	Position_.x = 4;
-	Position_.y = 0;
+		Position_.x = 4;
+		Position_.y = 0;
+	}
 
 	return SwapHoldBlockType_;
 }
@@ -106,7 +131,14 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 			{
 				if (Blocknumber_ != 3)
 				{
-					Position_.x = 1;
+					if (Blocknumber_ == 0)
+					{
+						Position_.x = 2;
+					}
+					else
+					{
+						Position_.x = 1;
+					}
 				}
 			}
 			StageBlockCollisionCenter();
@@ -124,7 +156,14 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 			{
 				if (Blocknumber_ != 3)
 				{
-					Position_.x = 8;
+					if (Blocknumber_ == 0)
+					{
+						Position_.x = 7;
+					}
+					else
+					{
+						Position_.x = 8;
+					}
 				}
 			}
 			StageBlockCollisionCenter();
@@ -216,6 +255,14 @@ void TetrisBlocks::TetrisBlock::Update()
 
 	if (MakeBlock_ == 0x001)
 	{
+		if (HoldStockCheck_ == 1)
+		{
+			BreakStockCheck_ = 0x000;
+		}
+		if (HoldStockCheck_ == -1)
+		{
+			BreakStockCheck_ = 0x001;
+		}
 		BlockDownCheck_ = 0x000;
 		MakeBlock();
 		MakeBlock_ = 0x000;
@@ -404,7 +451,6 @@ void TetrisBlocks::TetrisBlock::Update()
 			}
 		}
 		BlockDoneCheck_ = 0x001;
-
 		CheckBlock_ = 0x000;
 	}
 	RotateNowTime_++;

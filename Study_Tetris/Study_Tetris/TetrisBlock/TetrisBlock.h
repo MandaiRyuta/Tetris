@@ -49,7 +49,9 @@ namespace TetrisBlocks
 			InputDownMoveMaxTime_(100),
 			InputDownMoveNowTime_(0),
 			SwapHoldBlockType_(9),
-			HoldCheck_(0x000)
+			HoldCheck_(0x000),
+			HoldStockCheck_(1),
+			BreakStockCheck_(0x000)
 		{
 			Position_.y = 0;
 			Position_.x = 4;
@@ -119,7 +121,8 @@ namespace TetrisBlocks
 	private:
 		int SwapHoldBlockType_;
 		signed short int HoldCheck_;
-
+		signed short int HoldStockCheck_;
+		signed short int BreakStockCheck_;
 		std::array<int, 4> StockBlocks_;
 		int YblockCount_;
 		signed short int SpaceDownCheck_;
