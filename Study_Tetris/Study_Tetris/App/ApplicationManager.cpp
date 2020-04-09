@@ -2,83 +2,54 @@
 
 ApplicationManager::ApplicationManager()
 {
-	Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
+	SceneManager_ = new SceneManager;
+	Loop_ = 0x000;
 }
 
 ApplicationManager::~ApplicationManager()
 {
+
 }
 
 void ApplicationManager::Init()
 {
-	Scene_.Init();
+	SceneManager_->Init();
 }
 
-void ApplicationManager::Update(bool* loop, int* scenenum, bool* changescene)
+void ApplicationManager::Update(bool* loop)
 {
-	(*loop) = Scene_.GetLoop();
-	switch (*scenenum)
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 0x001)
 	{
-	case SceneNumber::TitleSceneNumber:
-		if ((*changescene) == true)
-		{
-			(*changescene) = false;
-		}
-
-		Scene_.Update();
-		if (Scene_.GetSceneNumber() == SceneNumber::GameSceneNumber && (*changescene) == false)
-		{
-			Scene_.Release();
-			Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::GAME);
-			Scene_.Init();
-			(*scenenum) = SceneNumber::GameSceneNumber;
-			(*changescene) = true;
-		}
-		break;
-	case SceneNumber::GameSceneNumber:
-		if ((*changescene) == true)
-		{
-			(*changescene) = false;
-		}
-
-		Scene_.Update();
-
-		if (Scene_.GetSceneNumber() == SceneNumber::ResultSceneNumber && (*changescene) == false)
-		{
-			Scene_.Release();
-			Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::RESULT);
-			Scene_.Init();
-			(*scenenum) = SceneNumber::ResultSceneNumber;
-			(*changescene) = true;
-		}
-		break;
-	case SceneNumber::ResultSceneNumber:
-		if ((*changescene) == true)
-		{
-			(*changescene) = false;
-		}
-
-		Scene_.Update();
-
-		if (Scene_.GetSceneNumber() == SceneNumber::TitleSceneNumber && (*changescene) == false)
-		{
-			Scene_.Release();
-			Scene_ = SceneManager::GetInstance().GetScene(TetrisGameType::SCENETYPE::TITLE);
-			Scene_.Init();
-			(*scenenum) = SceneNumber::TitleSceneNumber;
-			(*changescene) = true;
-		}
-		break;
+		Loop_ = 0x001;
 	}
 
+	*loop = this->GetLoop();
+	
+	SceneManager_->Update();
 }
 
 void ApplicationManager::Draw()
 {
-	Scene_.Draw();
+	SceneManager_->Draw();
 }
 
 void ApplicationManager::Release()
 {
-	Scene_.Release();
+	if (SceneManager_ != nullptr)
+	{
+		SceneManager_->Release();
+		delete SceneManager_;
+	}
+}
+
+bool ApplicationManager::GetLoop()
+{
+	if (Loop_ == 0x001)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

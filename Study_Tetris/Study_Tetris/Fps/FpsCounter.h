@@ -21,9 +21,9 @@ namespace FPS
 		void Draw();
 		void WaitTime();
 	private:
-		int StartTime_;
-		int TimeCount_;
-		int Fps_;
+		unsigned int StartTime_;
+		unsigned int TimeCount_;
+		float Fps_;
 
 	};
 }

@@ -313,7 +313,7 @@ void TetrisBlocks::TetrisBlock::Update()
 			SideSpeed_ = 2;
 			//LeftMoveAcceleration_ = 0;
 		}
-		if (DownMoveAcceleration_ > 200)
+		if (DownMoveAcceleration_ > 5)
 		{
 			DownMoveNowTime_ += 2;
 		}

@@ -46,7 +46,7 @@ namespace TetrisBlocks
 			SpaceBarRefreshCheck_(0x000),
 			SideSpeed_(1),
 			InputDownMoveCheck_(0x000),
-			InputDownMoveMaxTime_(8),
+			InputDownMoveMaxTime_(1),
 			InputDownMoveNowTime_(0),
 			SwapHoldBlockType_(9),
 			HoldCheck_(0x000),

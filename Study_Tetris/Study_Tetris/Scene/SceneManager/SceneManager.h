@@ -2,23 +2,29 @@
 #include "../Scene.h"
 #include "../../TetrisGameType\TetrisGameType.h"
 
-const int SCENEINDEX = 3;
+constexpr int ArrowInputMaxTime = 30;
+constexpr int EnterInputMaxTime = 30;
 class SceneManager
 {
 public:
-	static SceneManager& GetInstance()
+	SceneManager() 
 	{
-		static SceneManager Inst;
-		return Inst;
+		CurrentScene_ = new Scene(0);
+		CurrentScene_->Init();
+		Arrow_Up_Down_ = 0x000;
+		ArrowInputNowTime_ = 30;
+		EnterInputNowTime_ = 30;
 	}
-
-	Scene& GetScene(TetrisGameType::SCENETYPE type)
-	{
-		const auto Index = static_cast<int>(type);
-		Scenes_[Index].SetSceneNumber(Index);
-		return Scenes_[Index];
-	}
-
+	~SceneManager() {}
+	void Init();
+	void Update();
+	void Draw();
+	void Release();
+	void ChangeScene(TetrisGameType::SCENETYPE Type);
 private:
-	Scene Scenes_[SCENEINDEX];
+	TetrisGameType::SCENETYPE type_;
+	Scene* CurrentScene_;
+	unsigned int EnterInputNowTime_;
+	unsigned int ArrowInputNowTime_;
+	signed short int Arrow_Up_Down_;
 };

@@ -3,6 +3,7 @@
 
 namespace TetrisUI
 {
+	constexpr int Minute = 3600;
 	class Time : public UI
 	{
 	public:
@@ -14,11 +15,10 @@ namespace TetrisUI
 		virtual void Draw() override;
 		virtual void Release() override;
 	private:
-		unsigned int nowtime_;
-		unsigned int endtime_;
-		std::vector<char> texture_name_;
+		int nowtime_;
+		int endtime_;
+
 		std::vector<TetrisGameType::Vector2> position_;
-		std::vector<TetrisGameType::Vector2> scale_;
 		std::vector<TetrisGameType::Color> color_;
 	};
 }

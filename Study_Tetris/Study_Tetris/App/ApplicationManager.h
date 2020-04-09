@@ -9,9 +9,11 @@ public:
 	~ApplicationManager();
 public:
 	void Init();
-	void Update(bool *loop, int* scenenum, bool *changescene);
+	void Update(bool *loop);
 	void Draw();
 	void Release();
+	bool GetLoop();
 private:
-	Scene Scene_;
+	SceneManager* SceneManager_;
+	signed short int Loop_;
 };
