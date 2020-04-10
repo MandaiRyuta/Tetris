@@ -9,6 +9,10 @@ namespace SceneNumber
 	constexpr int GameSceneNumber = 1;
 	constexpr int ResultSceneNumber = 2;
 }
+namespace ResourceTexture
+{
+	static int BackgroundTexture = 0;
+}
 namespace TetrisGameType
 {
 	namespace TetrisBlockTypeNum

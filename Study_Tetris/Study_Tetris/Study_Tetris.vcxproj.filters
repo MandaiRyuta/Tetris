@@ -58,6 +58,7 @@
     <ClCompile Include="Fps\FpsCounter.cpp">
       <Filter>Fps</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Number.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\ApplicationManager.h">
@@ -119,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="Fps\FpsCounter.h">
       <Filter>Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Number.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

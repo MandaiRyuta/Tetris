@@ -164,6 +164,7 @@
     <ClCompile Include="UI\InGameState.cpp" />
     <ClCompile Include="UI\Menu.cpp" />
     <ClCompile Include="UI\NextBlock.cpp" />
+    <ClCompile Include="UI\Number.cpp" />
     <ClCompile Include="UI\Particle.cpp" />
     <ClCompile Include="UI\Score.cpp" />
     <ClCompile Include="UI\Time.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="App\ApplicationManager.h" />
     <ClInclude Include="Fps\FpsCounter.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="UI\Number.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="TetrisBlock\BlockCollection\BlockCollection.h" />

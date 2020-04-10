@@ -1,5 +1,6 @@
 #include "NextBlock.h"
 #include <string>
+#include "Fade.h"
 
 std::array<int, 3> TetrisUI::NextBlock::BlockNumber_;
 void TetrisUI::NextBlock::Init()
@@ -13,7 +14,10 @@ void TetrisUI::NextBlock::Update()
 
 void TetrisUI::NextBlock::Draw()
 {
-	NextBlockPlaceDraw();
+	if (TetrisUI::Fade::GetFadeCheck() == 0x001)
+	{
+		NextBlockPlaceDraw();
+	}
 }
 
 void TetrisUI::NextBlock::Release()

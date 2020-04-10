@@ -1,5 +1,6 @@
 #include "main.h"
-
+#include "../TetrisGameType/TetrisGameType.h"
+#include "../UI/Background.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -8,7 +9,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	bool loopscene = false;
 	
 	FPS::FpsCounter fps;
-	
+	TetrisUI::Background bg;
 	ChangeWindowMode(TRUE);
 	
 	SetWaitVSyncFlag(FALSE);
@@ -17,13 +18,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		return -1;
 	}
-	SetGraphMode(640, 480, 32);
 
+	SetGraphMode(640, 480, 32);
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	app.Init();
-	int bg = 0;
-	bg = LoadGraph("Background.png");
+	bg.Init();
+
 	while (!loopscene)
 	{
 		
@@ -32,18 +33,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			break;
 		}
 
-		ClearDrawScreen();
+
 		fps.Update();
 		app.Update(&loopscene);
-		DrawGraph(0, 0, bg, true);
+
+		ClearDrawScreen();
+		bg.Draw();
 		app.Draw();
 		fps.Draw();
 		fps.WaitTime();
 		ScreenFlip();
 	}
 
+	bg.Release();
 	app.Release();
 
+	InitGraph();
 	DxLib_End();
 
 	return 0;

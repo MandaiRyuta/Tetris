@@ -130,6 +130,11 @@ void TetrisBlocks::BlockCollection::Draw()
 
 void TetrisBlocks::BlockCollection::Release()
 {
+	if (Block_ != nullptr)
+	{
+		Block_->Release();
+		delete Block_;
+	}
 }
 
 void TetrisBlocks::BlockCollection::StackBlockClearLineCheck()

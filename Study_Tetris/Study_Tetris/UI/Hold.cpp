@@ -1,5 +1,5 @@
 #include "Hold.h"
-
+#include "Fade.h"
 int TetrisUI::Hold::HoldBlockType_ = 0;
 
 TetrisUI::Hold::Hold()
@@ -22,35 +22,37 @@ void TetrisUI::Hold::Update()
 
 void TetrisUI::Hold::Draw()
 {
-
-	for (int y = 17; y < 23; y++)
+	if (TetrisUI::Fade::GetFadeCheck() == 0x001)
 	{
-		for (int x = TetrisGameType::StageWidth; x < TetrisGameType::StageWidth + 7; x++)
+		for (int y = 17; y < 23; y++)
 		{
-			DrawBox(x * TetrisGameType::DrawBlockWidth + 2, y * TetrisGameType::DrawBlockWidth + 2, x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-				y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-				GetColor(255, 255, 255), true);
-
-			if (y == 22 || x == TetrisGameType::StageWidth || x == TetrisGameType::StageWidth + 6 || y == 17)
+			for (int x = TetrisGameType::StageWidth; x < TetrisGameType::StageWidth + 7; x++)
 			{
 				DrawBox(x * TetrisGameType::DrawBlockWidth + 2, y * TetrisGameType::DrawBlockWidth + 2, x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
 					y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-					GetColor(155, 155, 255), true);
+					GetColor(255, 255, 255), true);
+
+				if (y == 22 || x == TetrisGameType::StageWidth || x == TetrisGameType::StageWidth + 6 || y == 17)
+				{
+					DrawBox(x * TetrisGameType::DrawBlockWidth + 2, y * TetrisGameType::DrawBlockWidth + 2, x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+						y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+						GetColor(155, 155, 255), true);
+				}
 			}
 		}
-	}
 
-	for (int y = 0; y < 4; y++)
-	{
-		for (int x = 0; x < 4; x++)
-		{	
-			if (HoldBlockType_!= 9 &&Blocktype_[HoldBlockType_][y][x].type != 9)
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 4; x++)
 			{
-				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 2,
-					18 * 20 + y * TetrisGameType::DrawBlockWidth + 2,
-					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-					18 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-					GetColor(Blocktype_[HoldBlockType_][y][x].r, Blocktype_[HoldBlockType_][y][x].g, Blocktype_[HoldBlockType_][y][x].b), true);
+				if (HoldBlockType_ != 9 && Blocktype_[HoldBlockType_][y][x].type != 9)
+				{
+					DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 2,
+						18 * 20 + y * TetrisGameType::DrawBlockWidth + 2,
+						15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+						18 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+						GetColor(Blocktype_[HoldBlockType_][y][x].r, Blocktype_[HoldBlockType_][y][x].g, Blocktype_[HoldBlockType_][y][x].b), true);
+				}
 			}
 		}
 	}

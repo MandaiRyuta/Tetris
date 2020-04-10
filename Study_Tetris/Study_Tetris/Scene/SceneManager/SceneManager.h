@@ -14,16 +14,24 @@ public:
 		Arrow_Up_Down_ = 0x000;
 		ArrowInputNowTime_ = 30;
 		EnterInputNowTime_ = 30;
+		Type_ = TetrisGameType::SCENETYPE::TITLE;
+		NowType_ = TetrisGameType::SCENETYPE::TITLE;
+
 	}
 	~SceneManager() {}
 	void Init();
 	void Update();
 	void Draw();
 	void Release();
-	void ChangeScene(TetrisGameType::SCENETYPE Type);
+	static void ChangeScene(TetrisGameType::SCENETYPE Type);
+	static void SetTotalScore(int score);
+	static int GetTotalScore();
+	static TetrisGameType::SCENETYPE GetNowScene();
 private:
-	TetrisGameType::SCENETYPE type_;
-	Scene* CurrentScene_;
+	static int TotalScore_;
+	static TetrisGameType::SCENETYPE NowType_;
+	static TetrisGameType::SCENETYPE Type_;
+	static Scene* CurrentScene_;
 	unsigned int EnterInputNowTime_;
 	unsigned int ArrowInputNowTime_;
 	signed short int Arrow_Up_Down_;

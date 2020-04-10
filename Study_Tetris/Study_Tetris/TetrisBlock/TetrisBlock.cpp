@@ -1,4 +1,5 @@
 #include "TetrisBlock.h"
+#include "../UI/InGameState.h"
 #include <random>
 
 constexpr int LEFTPADDING = 3;
@@ -235,6 +236,11 @@ void TetrisBlocks::TetrisBlock::Update()
 	if (Collision_ == 1)
 	{
 		Position_.y = Position_.y - 1;
+		if (Position_.y < 0)
+		{
+			//ゲームオーバー
+			TetrisUI::InGameState::SetGameState(2);
+		}
 	}
 
 	if (SpaceBarRefreshNowTime_ > SpaceBarRefreshMaxTime_)

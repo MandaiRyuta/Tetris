@@ -8,7 +8,7 @@ namespace TetrisUI
 	public:
 		Score()
 		{
-			Position_.x = 450;
+			Position_.x = 600;
 			Position_.y = 100;
 			Color_.r = 255;
 			Color_.g = 255;
