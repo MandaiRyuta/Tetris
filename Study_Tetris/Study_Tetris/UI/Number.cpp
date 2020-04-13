@@ -13,7 +13,7 @@ signed short int TetrisUI::Number::ResizeCheck_ = 0x000;
 TetrisUI::Number::Number()
 	: DefaultDrawNumberTexture_(0)
 {
-	DefaultDrawNumberTexture_ = LoadGraph("Number.png");
+	DefaultDrawNumberTexture_ = LoadGraph("Resource/Number.png");
 	for (int i = 0; i < 10; i++)
 	{
 		DrawNumberTexture_[i] = {};
@@ -28,7 +28,7 @@ TetrisUI::Number::~Number()
 void TetrisUI::Number::Init()
 {
     DefaultDrawNumberTexture_ = 0;
-    DefaultDrawNumberTexture_ = LoadGraph("Number.png");
+    DefaultDrawNumberTexture_ = LoadGraph("Resource/Number.png");
     for (int i = 0; i < 10; i++)
     {
         DrawNumberTexture_[i] = {};

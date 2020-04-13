@@ -2,7 +2,7 @@
 
 void TetrisUI::Background::Init()
 {
-	BackGroundTexture_ = LoadGraph("Background.png");
+	BackGroundTexture_ = LoadGraph("Resource/Background.png");
 }
 
 void TetrisUI::Background::Update()

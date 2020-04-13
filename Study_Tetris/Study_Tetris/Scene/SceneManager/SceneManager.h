@@ -11,9 +11,7 @@ public:
 	{
 		CurrentScene_ = new Scene(0);
 		CurrentScene_->Init();
-		Arrow_Up_Down_ = 0x000;
-		ArrowInputNowTime_ = 30;
-		EnterInputNowTime_ = 30;
+		EnterInputNowTime_ = 60;
 		Type_ = TetrisGameType::SCENETYPE::TITLE;
 		NowType_ = TetrisGameType::SCENETYPE::TITLE;
 
@@ -33,6 +31,4 @@ private:
 	static TetrisGameType::SCENETYPE Type_;
 	static Scene* CurrentScene_;
 	unsigned int EnterInputNowTime_;
-	unsigned int ArrowInputNowTime_;
-	signed short int Arrow_Up_Down_;
 };

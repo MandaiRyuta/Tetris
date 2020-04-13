@@ -25,6 +25,9 @@ namespace TetrisUI
 		static unsigned int GetScore();
 		static void AddScore(int addscore);
 	private:
+		int ScoreTexture_;
+		int DrawTime_;
+		int FontScoreTexture_;
 		static unsigned int Score_;
 		TetrisGameType::Vector2 Position_;
 		TetrisGameType::Color Color_;

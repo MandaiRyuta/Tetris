@@ -40,17 +40,20 @@ void TetrisUI::Fade::Draw()
 	switch (State_)
 	{
 	case 0:
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		SetDrawBright(255,255,255);
+		//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 	case 1:
-		SetDrawBlendMode(DX_BLENDMODE_ADD, Color_.a);
+		SetDrawBright(Color_.r, Color_.g, Color_.b);
+		//SetDrawBlendMode(DX_BLENDMODE_ADD, Color_.a);
 		//SetDrawBright(Color_.r, Color_.g, Color_.b);
-		DrawBox(0, 0, 640, 480, GetColor(Color_.r, Color_.g, Color_.b), true);
+		//DrawBox(0, 0, 640, 480, GetColor(Color_.r, Color_.g, Color_.b), true);
 		break;
 	case 2:
-		SetDrawBlendMode(DX_BLENDMODE_ADD, Color_.a);
+		SetDrawBright(Color_.r, Color_.g, Color_.b);
+		//SetDrawBlendMode(DX_BLENDMODE_ADD, Color_.a);
 		//SetDrawBright(Color_.r, Color_.g, Color_.b);
-		DrawBox(0, 0, 640, 480, GetColor(Color_.r, Color_.g, Color_.b), true);
+		//DrawBox(0, 0, 640, 480, GetColor(Color_.r, Color_.g, Color_.b), true);
 		break;
 	}
 }
@@ -64,9 +67,9 @@ signed short int TetrisUI::Fade::FadeIn()
 	if (Color_.a < 254)
 	{
 		Color_.a += 1;
-		Color_.r = 0;
-		Color_.g = 0;
-		Color_.b = 0;
+		Color_.r = (255 * Color_.a) / 255;
+		Color_.g = (255 * Color_.a) / 255;
+		Color_.b = (255 * Color_.a) / 255;
 	}
 	if (Color_.a >= 254)
 	{
@@ -83,9 +86,9 @@ signed short int TetrisUI::Fade::FadeOut()
 	if (Color_.a > 1)
 	{
 		Color_.a -= 1;
-		Color_.r = 0;
-		Color_.g = 0;
-		Color_.b = 0;
+		Color_.r = (255 * Color_.a) / 255;
+		Color_.g = (255 * Color_.a) / 255;
+		Color_.b = (255 * Color_.a) / 255;
 	}
 	if (Color_.a <= 1)
 	{

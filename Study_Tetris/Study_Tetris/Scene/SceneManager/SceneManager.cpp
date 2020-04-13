@@ -3,6 +3,7 @@ TetrisGameType::SCENETYPE SceneManager::NowType_ = TetrisGameType::SCENETYPE::TI
 TetrisGameType::SCENETYPE SceneManager::Type_ = TetrisGameType::SCENETYPE::TITLE;
 Scene* SceneManager::CurrentScene_ = nullptr;
 int SceneManager::TotalScore_ = 0;
+
 void SceneManager::Init()
 {
     TotalScore_ = 0;
@@ -10,46 +11,39 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
-    if (ArrowInputNowTime_ > ArrowInputMaxTime && Arrow_Up_Down_ == 0x000)
+    switch (Type_)
     {
-        if (CheckHitKey(KEY_INPUT_UP) == 0x001)
+    case TetrisGameType::SCENETYPE::TITLE:
+        if (EnterInputNowTime_ > EnterInputMaxTime&& CheckHitKey(KEY_INPUT_RETURN) == 0x001)
         {
-            Arrow_Up_Down_ = 0x001;
-            ArrowInputNowTime_ = 0;
-        }
-    }
-    else if (ArrowInputNowTime_ > ArrowInputMaxTime&& Arrow_Up_Down_ == 0x001)
-    {
-        if (CheckHitKey(KEY_INPUT_DOWN) == 0x001)
-        {
-            Arrow_Up_Down_ = 0x000;
-            ArrowInputNowTime_ = 0;
-        }
-    }
-    if (EnterInputNowTime_ > EnterInputMaxTime && Arrow_Up_Down_ == 0x001 && CheckHitKey(KEY_INPUT_RETURN) == 0x001)
-    {
-        switch (Type_)
-        {
-        case TetrisGameType::SCENETYPE::TITLE:
             Type_ = TetrisGameType::SCENETYPE::GAME;
             ChangeScene(TetrisGameType::SCENETYPE::GAME);
-            break;
-        case TetrisGameType::SCENETYPE::GAME:
+            EnterInputNowTime_ = 0;
+        }
+        break;
+    case TetrisGameType::SCENETYPE::GAME:
+        if (TetrisUI::InGameState::GetGameState() != 0)
+        {
             Type_ = TetrisGameType::SCENETYPE::RESULT;
             ChangeScene(TetrisGameType::SCENETYPE::RESULT);
-            break;
-        case TetrisGameType::SCENETYPE::RESULT:
+        }
+        break;
+    case TetrisGameType::SCENETYPE::RESULT:
+        if (EnterInputNowTime_ > EnterInputMaxTime&& CheckHitKey(KEY_INPUT_RETURN) == 0x001)
+        {
             Type_ = TetrisGameType::SCENETYPE::TITLE;
             ChangeScene(TetrisGameType::SCENETYPE::TITLE);
+            EnterInputNowTime_ = 0;
             break;
         }
-        EnterInputNowTime_ = 0;
     }
+ 
+
     if (this->CurrentScene_ == nullptr) return;
+
     this->CurrentScene_->Update();
 
     EnterInputNowTime_++;
-    ArrowInputNowTime_++;
 }
 
 void SceneManager::Draw()
@@ -92,7 +86,6 @@ void SceneManager::ChangeScene(TetrisGameType::SCENETYPE Type)
         else
             return new Scene(0);
     };
-    TetrisUI::Fade::SetStartFade(2);
 
     CurrentScene_ = CreateScene(Type);
     CurrentScene_->Init();
@@ -112,3 +105,5 @@ TetrisGameType::SCENETYPE SceneManager::GetNowScene()
 {
     return NowType_;
 }
+
+

@@ -1,5 +1,7 @@
 #include "ApplicationManager.h"
 
+signed short int ApplicationManager::Loop_ = 0x000;
+
 ApplicationManager::ApplicationManager()
 {
 	SceneManager_ = new SceneManager;
@@ -52,4 +54,8 @@ bool ApplicationManager::GetLoop()
 	{
 		return false;
 	}
+}
+void ApplicationManager::SetLoop(signed short int loopselect)
+{
+	Loop_ = loopselect;
 }

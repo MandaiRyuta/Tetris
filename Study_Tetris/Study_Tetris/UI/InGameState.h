@@ -19,7 +19,7 @@ namespace TetrisUI
 		virtual void Draw() override;
 		virtual void Release() override;
 
-		int GetGameState();
+		static int GetGameState();
 		static void SetGameState(int state);
 	private:
 		int GameClearTexture_;

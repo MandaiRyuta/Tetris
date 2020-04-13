@@ -13,7 +13,8 @@ public:
 	void Draw();
 	void Release();
 	bool GetLoop();
+	static void SetLoop(signed short int loopselect);
 private:
 	SceneManager* SceneManager_;
-	signed short int Loop_;
+	static signed short int Loop_;
 };

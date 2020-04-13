@@ -21,6 +21,8 @@ namespace TetrisUI
 				Positiony_[i] = 50;
 				Color_[i] = 255;
 			}
+			TimeFontDrawTime_ = 0;
+			TimeFontTexture_ = LoadGraph("Resource/Game_Timer.png");
 		}
 		~Time() {}
 	public:
@@ -29,6 +31,8 @@ namespace TetrisUI
 		virtual void Draw() override;
 		virtual void Release() override;
 	private:
+		int TimeFontTexture_;
+		int TimeFontDrawTime_;
 		int nowtime_;
 		int endtime_;
 		int Min_;

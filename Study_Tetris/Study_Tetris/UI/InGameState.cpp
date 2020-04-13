@@ -4,8 +4,8 @@ int TetrisUI::InGameState::GameState_ = 0;
 
 void TetrisUI::InGameState::Init()
 {
-	GameClearTexture_ = LoadGraph("GameClear.png");
-	GameOverTexture_ = LoadGraph("GameOver.png");
+	GameClearTexture_ = LoadGraph("Resource/GameClear.png");
+	GameOverTexture_ = LoadGraph("Resource/GameOver.png");
 	GameState_ = 0;
 }
 
@@ -27,6 +27,7 @@ void TetrisUI::InGameState::Draw()
 	switch (GameState_)
 	{
 	case 0:
+		//DrawString(450, 32, "Game Scene", GetColor(255, 255, 255));
 		break;
 	case GameState::GameClear:
 		DrawGraph(213, 240, GameClearTexture_, true);
