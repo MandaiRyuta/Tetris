@@ -55,6 +55,7 @@ void TetrisUI::Score::Draw()
 			if (DrawTime_ > 120)
 			{
 				DrawGraph(220, 240 - 32, ScoreTexture_, true);
+				DrawString(210, 300, "Enter ：タイトルへ戻る", GetColor(0,0,0));
 			}
 		}
 	}

@@ -69,16 +69,19 @@ void SceneManager::ChangeScene(TetrisGameType::SCENETYPE Type)
     {
         if (Type == TetrisGameType::SCENETYPE::TITLE)
         {
+            SetFontSize(20);
             NowType_ = TetrisGameType::SCENETYPE::TITLE;
             return new Scene(0);
         }
         else if (Type == TetrisGameType::SCENETYPE::GAME)
         {
+            SetFontSize(12);
             NowType_ = TetrisGameType::SCENETYPE::GAME;
             return new Scene(1);
         }
         else if (Type == TetrisGameType::SCENETYPE::RESULT)
         {
+            SetFontSize(20);
             NowType_ = TetrisGameType::SCENETYPE::RESULT;
             SceneManager::SetTotalScore(TetrisUI::Score::GetScore());
             return new Scene(2);

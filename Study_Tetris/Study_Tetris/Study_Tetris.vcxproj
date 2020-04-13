@@ -162,10 +162,8 @@
     <ClCompile Include="UI\Fade.cpp" />
     <ClCompile Include="UI\Hold.cpp" />
     <ClCompile Include="UI\InGameState.cpp" />
-    <ClCompile Include="UI\Menu.cpp" />
     <ClCompile Include="UI\NextBlock.cpp" />
     <ClCompile Include="UI\Number.cpp" />
-    <ClCompile Include="UI\Particle.cpp" />
     <ClCompile Include="UI\Score.cpp" />
     <ClCompile Include="UI\Time.cpp" />
     <ClCompile Include="UI\UI.cpp" />
@@ -186,9 +184,7 @@
     <ClInclude Include="UI\Fade.h" />
     <ClInclude Include="UI\Hold.h" />
     <ClInclude Include="UI\InGameState.h" />
-    <ClInclude Include="UI\Menu.h" />
     <ClInclude Include="UI\NextBlock.h" />
-    <ClInclude Include="UI\Particle.h" />
     <ClInclude Include="UI\Score.h" />
     <ClInclude Include="UI\Time.h" />
     <ClInclude Include="UI\UI.h" />

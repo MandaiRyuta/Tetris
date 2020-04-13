@@ -25,13 +25,7 @@
     <ClCompile Include="Window\main.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Menu.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="UI\NextBlock.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Particle.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
@@ -85,13 +79,7 @@
     <ClInclude Include="Window\main.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Menu.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="UI\NextBlock.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\Particle.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Scene.h">

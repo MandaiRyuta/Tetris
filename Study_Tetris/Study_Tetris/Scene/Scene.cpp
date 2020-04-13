@@ -131,13 +131,21 @@ void Scene::Draw()
 		Ui_->DrawAll();
 		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
 		{
+			DrawString(410, 250, "[↑] : ゲームプレイ中（回転）", GetColor(0, 0, 0));
+			DrawString(410, 275, "[←] : ゲームプレイ中（左移動）", GetColor(0, 0, 0));
+			DrawString(410, 300, "[→] : ゲームプレイ中（右移動）", GetColor(0, 0, 0));
+			DrawString(410, 325, "[↓] : ゲームプレイ中（下移動）", GetColor(0, 0, 0));
+			DrawString(410, 350, "[SPACE] : 落下", GetColor(0, 0, 0));
+			DrawString(410, 375, "[P] : ポーズ画面", GetColor(0, 0, 0));
+			DrawString(410, 400, "[↑] : ポーズ時（上移動）", GetColor(0, 0, 0));
+			DrawString(410, 425, "[↓] : ポーズ時（下移動）", GetColor(0, 0, 0));
+			DrawString(410, 450, "[Enter] : ポーズ時（決定）", GetColor(0, 0, 0));
 			Collection_->Draw();
 		}
 		if (Pause_ == -1)
 		{
 			PauseDraw();
 		}
-		//DrawString(450, 32, "Game Scene", GetColor(255, 255, 255));
 		break;
 	case SceneNumber::ResultSceneNumber:
 		Ui_->DrawAll();
@@ -192,7 +200,7 @@ void Scene::PauseSelect()
 	switch (MenuSelectNumber_)
 	{
 	case 0:
-		if (CheckHitKey(KEY_INPUT_RETURN) == 0x001)
+		if (Pause_ == -1 && CheckHitKey(KEY_INPUT_RETURN) == 0x001)
 		{
 			if (EnterKeyNowTime_ > EnterKeyMaxTime_)
 			{
@@ -202,7 +210,7 @@ void Scene::PauseSelect()
 		}
 		break;
 	case 1:
-		if (CheckHitKey(KEY_INPUT_RETURN) == 0x001)
+		if (Pause_ == -1 && CheckHitKey(KEY_INPUT_RETURN) == 0x001)
 		{
 			if (EnterKeyNowTime_ > EnterKeyMaxTime_)
 			{
@@ -212,7 +220,7 @@ void Scene::PauseSelect()
 		}
 		break;
 	case 2:
-		if (CheckHitKey(KEY_INPUT_RETURN) == 0x001)
+		if (Pause_ == -1 && CheckHitKey(KEY_INPUT_RETURN) == 0x001)
 		{
 			if (EnterKeyNowTime_ > EnterKeyMaxTime_)
 			{

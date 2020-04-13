@@ -19,7 +19,7 @@ void FPS::FpsCounter::Update()
 
 void FPS::FpsCounter::Draw()
 {
-	DrawFormatString(0, 0, GetColor(0, 0, 0), "%.1f", Fps_);
+	//DrawFormatString(0, 0, GetColor(0, 0, 0), "%.1f", Fps_);
 }
 
 void FPS::FpsCounter::WaitTime()
