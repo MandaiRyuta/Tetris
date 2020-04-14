@@ -1,7 +1,10 @@
+#include "main.h"
 #include "../App/ApplicationManager.h"
 #include "../Fps/FpsCounter.h"
 #include "../TetrisGameType/TetrisGameType.h"
 #include "../UI/Background.h"
+
+TextureDataBase::TextureData SceneTextureData;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -22,6 +25,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetGraphMode(640, 480, 32);
 	SetDrawScreen(DX_SCREEN_BACK);
+
+	//最終的にためしたところです。
+	int scenetype = 0;
+	SceneTextureData.Init();
+	SceneTextureData.CreateTextureData(scenetype);
+	//データを読み込んだ後に、Ui/Background.cpp側のInitで呼び出します。
 
 	app.Init();
 	bg.Init();

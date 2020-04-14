@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="App\ApplicationManager.cpp" />
     <ClCompile Include="Fps\FpsCounter.cpp" />
+    <ClCompile Include="Resource\Block.cpp" />
     <ClCompile Include="Resource\TextureData.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager\SceneManager.cpp" />

@@ -8,7 +8,7 @@ public:
 	~Block();
 public:
 	void Init();
-	TetrisGameType::TetrisBlockType GetBlockPosition(int type, int x, int y);
+	TetrisGameType::Block GetBlockPosition(int type, int x, int y);
 private:
-
+	TetrisGameType::Block Block_[TetrisGameType::TetrisBlockTypeNum::MaxNumber][TetrisGameType::BlockHeight][TetrisGameType::BlockHeight];
 };

@@ -1,8 +1,9 @@
 #include "Background.h"
+#include "../Window/main.h"
 
 void TetrisUI::Background::Init()
 {
-	BackGroundTexture_ = LoadGraph("Resource/Background.png");
+	BackGroundTexture_ = SceneTextureData.GetGameTextureData(0);
 }
 
 void TetrisUI::Background::Update()

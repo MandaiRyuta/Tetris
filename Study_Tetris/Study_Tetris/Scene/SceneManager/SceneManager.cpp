@@ -91,6 +91,10 @@ void SceneManager::ChangeScene(TetrisGameType::SCENETYPE Type)
             SceneManager::SetTotalScore(TetrisUI::Score::GetScore());
             return new Scene(2);
         }
+        else
+        {
+            return new Scene(0);
+        }
     };
 
     CurrentScene_ = CreateScene(Type);
