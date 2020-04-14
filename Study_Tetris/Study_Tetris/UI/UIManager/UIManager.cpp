@@ -34,6 +34,10 @@ TetrisUI::UIManager::UIManager(int scenetype)
 
 TetrisUI::UIManager::~UIManager()
 {
+	for (auto itr = Obj_.begin(); itr != Obj_.end(); itr++)
+	{
+		delete *itr;
+	}
 }
 
 void TetrisUI::UIManager::InitAll()
@@ -62,7 +66,7 @@ void TetrisUI::UIManager::DrawAll()
 
 void TetrisUI::UIManager::ReleaseAll()
 {
-	for (auto itr = Obj_.begin(); itr != Obj_.end(); ++itr)
+	for (auto itr = Obj_.begin(); itr != Obj_.end(); itr++)
 	{
 		(*itr)->Release();
 	}

@@ -26,7 +26,6 @@ private:
 	int PauseKeyMaxTime_;
 	int PauseKeyNowTime_;
 	int Pause_;
-	std::vector<int> Obj_;
 	int Scenenumber_;
 	int TitleDrawTime_;
 	TetrisUI::UIManager* Ui_;

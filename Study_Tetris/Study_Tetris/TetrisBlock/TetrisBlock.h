@@ -31,6 +31,7 @@ namespace TetrisBlocks
 			Blockdown_(0x000),
 			LeftCollision_(false),
 			RightCollision_(false),
+			BottomCollision_(false),
 			SpaceBarRefreshNowTime_(0),
 			SpaceBarRefreshMaxTime_(15),
 			SpaceBarRefreshCheck_(0x000),
@@ -43,7 +44,8 @@ namespace TetrisBlocks
 			HoldStockCheck_(1),
 			BreakStockCheck_(0x000),
 			GameBlockLevelFrame_(0),
-			ChangeKeyStateCount_(0)
+			ChangeKeyStateCount_(0),
+			WaitMakeBlcokTime_(0)
 		{
 			Position_.y = 0;
 			Position_.x = 5;
@@ -84,8 +86,6 @@ namespace TetrisBlocks
 		void GameBlockDownFirst(int* frame);
 		void GameBlockDownSecond(int* frame);
 		void GameBlockDownThird(int* frame);
-		static void SetGameBlockLevel(int level);
-		static int GetGameBlockLevel();
 	private:
 		int SwapHoldBlockType_;
 		signed short int HoldCheck_;
@@ -106,6 +106,7 @@ namespace TetrisBlocks
 		signed short int Blockdown_;
 		bool LeftCollision_;
 		bool RightCollision_;
+		bool BottomCollision_;
 
 		int SpaceBarRefreshNowTime_;
 		int SpaceBarRefreshMaxTime_;
@@ -143,6 +144,7 @@ namespace TetrisBlocks
 		int InputState_;
 		int BlockMoveSpeed_;
 		int GameBlockLevelFrame_;
-		static int GameBlockState_;
+		int GameBlockState_;
+		int WaitMakeBlcokTime_;
 	};
 }

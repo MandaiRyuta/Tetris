@@ -18,14 +18,14 @@ void ApplicationManager::Init()
 	SceneManager_->Init();
 }
 
-void ApplicationManager::Update(bool* loop)
+void ApplicationManager::Update(bool& loop)
 {
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 0x001)
 	{
 		Loop_ = 0x001;
 	}
 
-	*loop = this->GetLoop();
+	loop = this->GetLoop();
 	
 	SceneManager_->Update();
 }

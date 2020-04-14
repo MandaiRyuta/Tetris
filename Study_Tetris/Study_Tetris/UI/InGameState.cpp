@@ -40,6 +40,8 @@ void TetrisUI::InGameState::Draw()
 
 void TetrisUI::InGameState::Release()
 {
+	DeleteGraph(GameClearTexture_);
+	DeleteGraph(GameOverTexture_);
 }
 
 int TetrisUI::InGameState::GetGameState()

@@ -153,7 +153,7 @@
   <ItemGroup>
     <ClCompile Include="App\ApplicationManager.cpp" />
     <ClCompile Include="Fps\FpsCounter.cpp" />
-    <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Resource\TextureData.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="TetrisBlock\BlockCollection\BlockCollection.cpp" />
@@ -173,7 +173,8 @@
   <ItemGroup>
     <ClInclude Include="App\ApplicationManager.h" />
     <ClInclude Include="Fps\FpsCounter.h" />
-    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Window\main.h" />
+    <ClInclude Include="Resource\TextureData.h" />
     <ClInclude Include="UI\Number.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager\SceneManager.h" />
@@ -189,7 +190,6 @@
     <ClInclude Include="UI\Time.h" />
     <ClInclude Include="UI\UI.h" />
     <ClInclude Include="UI\UIManager\UIManager.h" />
-    <ClInclude Include="Window\main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

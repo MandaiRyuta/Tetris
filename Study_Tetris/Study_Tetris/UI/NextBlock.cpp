@@ -49,26 +49,26 @@ void TetrisUI::NextBlock::NextBlockPlaceDraw()
 		{
 			if (Blocktype_[BlockNumber_[0]][y][x].type != 9)
 			{
-				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 2,
-					1 * 20 + y * TetrisGameType::DrawBlockWidth + 2,
-					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-					1 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 3,
+					1 * 20 + y * TetrisGameType::DrawBlockWidth + 3,
+					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
+					1 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
 					GetColor(Blocktype_[BlockNumber_[0]][y][x].r, Blocktype_[BlockNumber_[0]][y][x].g, Blocktype_[BlockNumber_[0]][y][x].b), true);
 			}
 			if (Blocktype_[BlockNumber_[1]][y][x].type != 9)
 			{
-				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 2,
-					6 * 20 + y * TetrisGameType::DrawBlockWidth + 2,
-					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-					6 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 3,
+					6 * 20 + y * TetrisGameType::DrawBlockWidth + 3,
+					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
+					6 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
 					GetColor(Blocktype_[BlockNumber_[1]][y][x].r, Blocktype_[BlockNumber_[1]][y][x].g, Blocktype_[BlockNumber_[1]][y][x].b), true);
 			}
 			if (Blocktype_[BlockNumber_[2]][y][x].type != 9)
 			{
-				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 2,
-					11 * 20 + y * TetrisGameType::DrawBlockWidth + 2,
-					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-					11 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+				DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 3,
+					11 * 20 + y * TetrisGameType::DrawBlockWidth + 3,
+					15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
+					11 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
 					GetColor(Blocktype_[BlockNumber_[2]][y][x].r, Blocktype_[BlockNumber_[2]][y][x].g, Blocktype_[BlockNumber_[2]][y][x].b), true);
 			}
 		}

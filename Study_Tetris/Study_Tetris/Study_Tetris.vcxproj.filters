@@ -19,9 +19,6 @@
     <ClCompile Include="UI\InGameState.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="Input\Input.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
     <ClCompile Include="Window\main.cpp">
       <Filter>Window</Filter>
     </ClCompile>
@@ -53,6 +50,9 @@
       <Filter>Fps</Filter>
     </ClCompile>
     <ClCompile Include="UI\Number.cpp" />
+    <ClCompile Include="Resource\TextureData.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\ApplicationManager.h">
@@ -72,12 +72,6 @@
     </ClInclude>
     <ClInclude Include="UI\InGameState.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Input\Input.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Window\main.h">
-      <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="UI\NextBlock.h">
       <Filter>UI</Filter>
@@ -111,6 +105,12 @@
     </ClInclude>
     <ClInclude Include="UI\Number.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\TextureData.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\main.h">
+      <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +146,9 @@
     </Filter>
     <Filter Include="Fps">
       <UniqueIdentifier>{7c4d0601-64f2-4ea9-a995-4ba696d98d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{db1d5c30-9468-482f-bc42-f3c60292555d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

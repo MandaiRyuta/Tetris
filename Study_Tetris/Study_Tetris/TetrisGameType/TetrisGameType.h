@@ -8,6 +8,9 @@ namespace SceneNumber
 	constexpr int TitleSceneNumber = 0;
 	constexpr int GameSceneNumber = 1;
 	constexpr int ResultSceneNumber = 2;
+	constexpr int TitleLoadingScene = 3;
+	constexpr int GameLoadingScene = 4;
+	constexpr int ResultLoadingScene = 5;
 }
 namespace ResourceTexture
 {
@@ -39,12 +42,6 @@ namespace TetrisGameType
 	constexpr int BlockSpeed = 5;
 	constexpr int KeyFrame = 1;
 
-	template<typename T>
-	struct ObjectPool
-	{
-		std::vector<T> obj_;
-	};
-
 	enum class ObjectType
 	{
 		BACKGROUND,
@@ -64,8 +61,11 @@ namespace TetrisGameType
 
 	enum class SCENETYPE
 	{
+		TITLELOADING,
 		TITLE,
+		GAMELOADING,
 		GAME,
+		RESULTLOADING,
 		RESULT,
 		NONE,
 	};

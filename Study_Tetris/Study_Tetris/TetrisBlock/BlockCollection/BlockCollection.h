@@ -13,11 +13,21 @@ namespace TetrisBlocks
 			Block_ = new TetrisBlocks::TetrisBlock();
 			Block_->Init();
 			Board_ = {};
-			*ClearLine_ = {};
+			
+			for (int i = 0; i < 23; i++)
+			{
+				ClearLine_[i] = {};
+			}
 			ClearCheck_ = 0x000;
 			ClearCount_ = 1;
 		}
-		~BlockCollection(){}
+		~BlockCollection()
+		{
+			for (int i = 0; i < 23; i++)
+			{
+				ClearLine_[i] = {};
+			}
+		}
 	public:
 		void Init();
 		void Update();
@@ -35,7 +45,6 @@ namespace TetrisBlocks
 		void NowBlockReset() {}
 		void ValidArea() {}
 		int GetBoardInfo(int x, int y);
-		TetrisBlock* GetBlock();
 	private:
 		int ClearLine_[23];
 		signed short int ClearCheck_;

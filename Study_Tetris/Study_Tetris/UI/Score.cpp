@@ -33,14 +33,7 @@ void TetrisUI::Score::Draw()
 	{
 		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
 		{
-			if (DrawTime_ > 255)
-			{
-				DrawTime_ = 0;
-			}
-			else if (DrawTime_ < 120)
-			{
-				DrawGraph(400, 100, FontScoreTexture_, true);
-			}
+			DrawGraph(400, 100, FontScoreTexture_, true);
 		}
 	}
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
@@ -63,7 +56,8 @@ void TetrisUI::Score::Draw()
 
 void TetrisUI::Score::Release()
 {
-
+	DeleteGraph(ScoreTexture_);
+	DeleteGraph(FontScoreTexture_);
 }
 
 void TetrisUI::Score::SetScore(int score)

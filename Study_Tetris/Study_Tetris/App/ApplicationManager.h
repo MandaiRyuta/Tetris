@@ -9,7 +9,7 @@ public:
 	~ApplicationManager();
 public:
 	void Init();
-	void Update(bool *loop);
+	void Update(bool &loop);
 	void Draw();
 	void Release();
 	bool GetLoop();

@@ -8,7 +8,6 @@
 #include "../Score.h"
 #include "../Number.h"
 #include "../InGameState.h"
-
 //#include "Particle.h"
 //#include "NextBlock.h"
 //#include "Menu.h"
@@ -26,7 +25,10 @@ namespace TetrisUI
 		~UIManager();
 	public:
 		template<class T>
-		T* Create();
+		UI* Create() {
+			T* obj = new T;
+			return obj;
+		}
 		void InitAll();
 		void UpdateAll();
 		void DrawAll();
@@ -34,10 +36,4 @@ namespace TetrisUI
 	private:
 		std::vector<UI*> Obj_;
 	};
-	template<class T>
-	inline T* UIManager::Create()
-	{
-		T* obj = new T;
-		return obj;
-	}
 }

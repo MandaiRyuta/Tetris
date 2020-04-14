@@ -47,10 +47,10 @@ void TetrisUI::Hold::Draw()
 			{
 				if (HoldBlockType_ != 9 && Blocktype_[HoldBlockType_][y][x].type != 9)
 				{
-					DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 2,
-						18 * 20 + y * TetrisGameType::DrawBlockWidth + 2,
-						15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
-						18 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 2,
+					DrawBox(15 * 20 + x * TetrisGameType::DrawBlockWidth + 3,
+						18 * 20 + y * TetrisGameType::DrawBlockWidth + 3,
+						15 * 20 + x * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
+						18 * 20 + y * TetrisGameType::DrawBlockWidth + TetrisGameType::DrawBlockWidth - 3,
 						GetColor(Blocktype_[HoldBlockType_][y][x].r, Blocktype_[HoldBlockType_][y][x].g, Blocktype_[HoldBlockType_][y][x].b), true);
 				}
 			}

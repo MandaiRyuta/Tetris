@@ -28,22 +28,46 @@ void Scene::Init()
 	{
 	case SceneNumber::TitleSceneNumber:
 		TitleDrawTime_ = 0;
-		Ui_ = new TetrisUI::UIManager(0);
-		Ui_->InitAll();
+		if (Ui_ != nullptr)
+		{
+			Ui_->ReleaseAll();
+			delete Ui_;
+		}
+		if (Ui_ == nullptr)
+		{
+			Ui_ = new TetrisUI::UIManager(0);
+			Ui_->InitAll();
+		}
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::TitleSceneNumber;
 		break;
 	case SceneNumber::GameSceneNumber:
-		Ui_ = new TetrisUI::UIManager(1);
-		Ui_->InitAll();
+		if (Ui_ != nullptr)
+		{
+			Ui_->ReleaseAll();
+			delete Ui_;
+		}
+		if (Ui_ == nullptr)
+		{
+			Ui_ = new TetrisUI::UIManager(1);
+			Ui_->InitAll();
+		}
 		TetrisUI::Fade::SetStartFade(1);
 		Collection_ = new TetrisBlocks::BlockCollection();
 		Collection_->Init();
 		Scenenumber_ = SceneNumber::GameSceneNumber;
 		break;
 	case SceneNumber::ResultSceneNumber:
-		Ui_ = new TetrisUI::UIManager(2);
-		Ui_->InitAll();
+		if (Ui_ != nullptr)
+		{
+			Ui_->ReleaseAll();
+			delete Ui_;
+		}
+		if (Ui_ == nullptr)
+		{
+			Ui_ = new TetrisUI::UIManager(2);
+			Ui_->InitAll();
+		}
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::ResultSceneNumber;
 		break;
@@ -131,6 +155,7 @@ void Scene::Draw()
 		Ui_->DrawAll();
 		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
 		{
+			DrawString(410, 225, "[H] : ゲームプレイ中（ホールド）", GetColor(0, 0, 0));
 			DrawString(410, 250, "[↑] : ゲームプレイ中（回転）", GetColor(0, 0, 0));
 			DrawString(410, 275, "[←] : ゲームプレイ中（左移動）", GetColor(0, 0, 0));
 			DrawString(410, 300, "[→] : ゲームプレイ中（右移動）", GetColor(0, 0, 0));
