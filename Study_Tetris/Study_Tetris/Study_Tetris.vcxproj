@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="App\ApplicationManager.h" />
     <ClInclude Include="Fps\FpsCounter.h" />
+    <ClInclude Include="Resource\Block.h" />
     <ClInclude Include="Window\main.h" />
     <ClInclude Include="Resource\TextureData.h" />
     <ClInclude Include="UI\Number.h" />

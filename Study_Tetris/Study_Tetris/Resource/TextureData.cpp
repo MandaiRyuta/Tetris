@@ -44,19 +44,19 @@ void TextureDataBase::TextureData::Release(int& scenetype)
 	switch (scenetype)
 	{
 	case 0:
-		for (auto itr = TitleTextureData_.begin(); itr != TitleTextureData_.end(); itr++)
+		for (auto itr = TitleTextureData_.begin(); itr != TitleTextureData_.end() - 1; itr++)
 		{
 			DeleteGraph(*itr);
 		}
 		break;
 	case 1:
-		for (auto itr = GameTextureData_.begin(); itr != GameTextureData_.end(); itr++)
+		for (auto itr = GameTextureData_.begin(); itr != GameTextureData_.end() - 1; itr++)
 		{
 			DeleteGraph(*itr);
 		}
 		break;
 	case 2:
-		for (auto itr = ResultTextureData_.begin(); itr != ResultTextureData_.end(); itr++)
+		for (auto itr = ResultTextureData_.begin(); itr != ResultTextureData_.end() - 1; itr++)
 		{
 			DeleteGraph(*itr);
 		}
@@ -72,7 +72,7 @@ void TextureDataBase::TextureData::Loading(int& scenetype)
 	case 0:
 		for (auto itr = TitleTextureDataFile_.begin(); itr != TitleTextureDataFile_.end(); itr++)
 		{
-			TitleTextureData_.push_back(LoadGraph(TitleTextureDataFile_[0].c_str()));
+			TitleTextureData_.push_back(LoadGraph(itr->c_str()));
 		}
 		LoadingCheck_ = true;
 		break;
