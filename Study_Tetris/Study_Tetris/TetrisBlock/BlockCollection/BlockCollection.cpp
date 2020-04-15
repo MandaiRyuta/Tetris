@@ -5,6 +5,17 @@
 
 void TetrisBlocks::BlockCollection::Init()
 {
+	Block_ = new TetrisBlocks::TetrisBlock();
+	Block_->Init();
+	Board_ = {};
+
+	for (int i = 0; i < 23; i++)
+	{
+		ClearLine_[i] = {};
+	}
+	ClearCheck_ = 0x000;
+	ClearCount_ = 1;
+
 	for (int i = 0; i < TetrisGameType::StageHeight; i++)
 	{
 		for (int j = 0; j < TetrisGameType::StageWidth; j++)
@@ -133,8 +144,8 @@ void TetrisBlocks::BlockCollection::Release()
 	if (Block_ != nullptr)
 	{
 		Block_->Release();
-		delete Block_;
 	}
+	delete Block_;
 }
 
 void TetrisBlocks::BlockCollection::StackBlockClearLineCheck()

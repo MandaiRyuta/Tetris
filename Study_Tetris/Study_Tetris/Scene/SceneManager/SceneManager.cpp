@@ -6,6 +6,13 @@ int SceneManager::TotalScore_ = 0;
 
 void SceneManager::Init()
 {
+    CurrentScene_ = new Scene(0);
+    CurrentScene_->Init();
+    EnterInputNowTime_[0] = 0;
+    EnterInputNowTime_[1] = 0;
+    EnterInputNowTime_[2] = 0;
+    Type_ = TetrisGameType::SCENETYPE::TITLE;
+    NowType_ = TetrisGameType::SCENETYPE::TITLE;
     TotalScore_ = 0;
 }
 
@@ -60,7 +67,7 @@ void SceneManager::Release()
 {
     if (this->CurrentScene_ != nullptr)
     {
-        this->CurrentScene_->Release();
+        CurrentScene_->Release();
         delete CurrentScene_;
     }
 }

@@ -1,8 +1,20 @@
 #include "Background.h"
+#include "../Scene/SceneManager/SceneManager.h"
 #include "../Window/main.h"
 void TetrisUI::Background::Init()
 {
-	BackGroundTexture_ = SceneTextureData.GetBackgroundData();
+	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::TITLE)
+	{
+		BackGroundTexture_ = Scene::GetTextureData(0, 0);
+	}
+	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
+	{
+		BackGroundTexture_ = Scene::GetTextureData(1, 5);
+	}
+	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
+	{
+		BackGroundTexture_ = Scene::GetTextureData(2, 2);
+	}
 	//BackGroundTexture_ = LoadGraph("Resource/Background.png");
 }
 

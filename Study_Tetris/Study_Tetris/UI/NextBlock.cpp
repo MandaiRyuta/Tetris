@@ -1,8 +1,8 @@
 #include "NextBlock.h"
 #include <string>
 #include "Fade.h"
-#include "../Window/main.h"
-
+#include "../Scene/Scene.h"
+#include "../Resource/Block.h"
 std::array<int, 3> TetrisUI::NextBlock::BlockNumber_;
 void TetrisUI::NextBlock::Init()
 {
@@ -81,7 +81,7 @@ void TetrisUI::NextBlock::BlockInit()
 		{
 			for (int x = 0; x < 4; x++)
 			{
-				Blocktype_[type][y][x] = BlcoksData.GetBlockPosition(type, x, y);
+				Blocktype_[type][y][x] = Scene::GetBlockTypeColor(type, x, y);
 			}
 		}
 	}

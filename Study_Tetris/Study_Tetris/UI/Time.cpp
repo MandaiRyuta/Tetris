@@ -3,12 +3,13 @@
 #include "InGameState.h"
 #include "Fade.h"
 #include "../TetrisBlock/TetrisBlock.h"
-#include "../Window/main.h"
+#include "../Scene/Scene.h"
+
 int TetrisUI::Time::nowtime_ = 0;
 
 void TetrisUI::Time::Init()
 {
-	TimeFontTexture_ = SceneTextureData.GetGameTextureData(2);
+	TimeFontTexture_ = Scene::GetTextureData(1, 2);
 }
 
 void TetrisUI::Time::Update()
@@ -20,6 +21,7 @@ void TetrisUI::Time::Update()
 		MinSec_ = nowtime_ % 60;
 		nowtime_--;
 	}
+	
 
 	Number::SetDrawNumber(Positionx_[0], Positiony_[0], Min_, 0, 0x000);
 	Number::SetDrawNumber(Positionx_[1], Positiony_[1], Sec_ / 10, 1, 0x000);
@@ -35,6 +37,7 @@ void TetrisUI::Time::Draw()
 
 void TetrisUI::Time::Release()
 {
+	DeleteGraph(TimeFontTexture_);
 }
 
 int TetrisUI::Time::GetNowTime()

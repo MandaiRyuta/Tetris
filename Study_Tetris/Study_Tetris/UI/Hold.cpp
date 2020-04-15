@@ -1,6 +1,6 @@
 #include "Hold.h"
 #include "Fade.h"
-#include "../Window/main.h"
+#include "../Scene/Scene.h"
 int TetrisUI::Hold::HoldBlockType_ = 0;
 
 TetrisUI::Hold::Hold()
@@ -68,7 +68,7 @@ void TetrisUI::Hold::BlockInit()
 		{
 			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 			{
-				Blocktype_[type][y][x] = BlcoksData.GetBlockPosition(type, x, y);
+				Blocktype_[type][y][x] = Scene::GetBlockTypeColor(type, x, y);
 			}
 		}
 	}

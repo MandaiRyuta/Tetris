@@ -3,16 +3,16 @@
 
 namespace TetrisUI
 {
-	class Background
+	class Background : public UI
 	{
 	public:
 		Background(){}
 		~Background() {}
 	public:
-		void Init();
-		void Update();
-		void Draw();
-		void Release();
+		virtual void Init() override;
+		virtual void Update() override;
+		virtual void Draw() override;
+		virtual void Release() override;
 
 	private:
 		int BackGroundTexture_;

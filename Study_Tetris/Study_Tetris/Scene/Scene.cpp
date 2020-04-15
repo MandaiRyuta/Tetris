@@ -2,8 +2,9 @@
 #include "../App/ApplicationManager.h"
 #include "SceneManager/SceneManager.h"
 #include "../UI/Fade.h"
-#include "../Window/main.h"
 
+TextureDataBase::TextureData* Scene::SceneTextureData = nullptr;
+BlockData* Scene::BlocksData = nullptr;
 Scene::Scene(int type):
 	Scenenumber_(type)
 {
@@ -21,6 +22,7 @@ Scene::Scene(int type):
 
 Scene::~Scene()
 {
+
 }
 
 void Scene::Init()
@@ -28,9 +30,15 @@ void Scene::Init()
 	switch (Scenenumber_)
 	{
 	case SceneNumber::TitleSceneNumber:
-		SceneTextureData.CreateTextureData(Scenenumber_);
-		SceneTextureData.Loading(Scenenumber_);
+
+		BlocksData = new BlockData;
+		BlocksData->Init();
+
+		SceneTextureData = new TextureDataBase::TextureData;
+		SceneTextureData->Init();
 		
+		SceneTextureData->CreateTextureData(Scenenumber_);
+		SceneTextureData->Loading(Scenenumber_);
 		TitleDrawTime_ = 0;
 		if (Ui_ != nullptr)
 		{
@@ -44,10 +52,18 @@ void Scene::Init()
 		}
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::TitleSceneNumber;
+		
 		break;
 	case SceneNumber::GameSceneNumber:
-		SceneTextureData.CreateTextureData(Scenenumber_);
-		SceneTextureData.Loading(Scenenumber_);
+
+		BlocksData = new BlockData;
+		BlocksData->Init();
+
+		SceneTextureData = new TextureDataBase::TextureData;
+		SceneTextureData->Init();
+		SceneTextureData->CreateTextureData(Scenenumber_);
+		SceneTextureData->Loading(Scenenumber_);
+		/////////////////////////////////////////////////
 		if (Ui_ != nullptr)
 		{
 			Ui_->ReleaseAll();
@@ -64,8 +80,15 @@ void Scene::Init()
 		Scenenumber_ = SceneNumber::GameSceneNumber;
 		break;
 	case SceneNumber::ResultSceneNumber:
-		SceneTextureData.CreateTextureData(Scenenumber_);
-		SceneTextureData.Loading(Scenenumber_);
+
+		BlocksData = new BlockData;
+		BlocksData->Init();
+
+		SceneTextureData = new TextureDataBase::TextureData;
+		SceneTextureData->Init();
+		SceneTextureData->CreateTextureData(Scenenumber_);
+		SceneTextureData->Loading(Scenenumber_);
+		////////////////////////////////////////////
 		if (Ui_ != nullptr)
 		{
 			Ui_->ReleaseAll();
@@ -188,8 +211,16 @@ void Scene::Draw()
 void Scene::Release()
 {
 	Scenenumber_ = 0;
-	SceneTextureData.Release(Scenenumber_);
 
+	if (BlocksData != nullptr)
+	{
+		delete BlocksData;
+	}
+	if (SceneTextureData != nullptr)
+	{
+		SceneTextureData->Release();
+		delete SceneTextureData;
+	}
 	if (Ui_ != nullptr)
 	{
 		Ui_->ReleaseAll();
@@ -272,4 +303,28 @@ void Scene::PauseSelect()
 	}
 
 	EnterKeyNowTime_++;
+}
+
+const TetrisGameType::Block& Scene::GetBlockTypeColor(int type, int x, int y)
+{
+	return BlocksData->GetBlockPosition(type, x, y);
+}
+
+const int& Scene::GetTextureData(int type, int number)
+{
+	switch (type)
+	{
+	case 0:
+		return SceneTextureData->GetTitleTextureData(number);
+		break;
+	case 1:
+		return SceneTextureData->GetGameTextureData(number);
+		break;
+	case 2:
+		return SceneTextureData->GetResultTextureData(number);
+		break;
+	default :
+		return 0;
+	}
+
 }

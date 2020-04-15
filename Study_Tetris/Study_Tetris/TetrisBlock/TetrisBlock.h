@@ -82,9 +82,9 @@ namespace TetrisBlocks
 		void GameInputRight();
 		void GameInputLeft();
 		void GameBlockDownState();
-		void GameBlockDownFirst(int* frame);
-		void GameBlockDownSecond(int* frame);
-		void GameBlockDownThird(int* frame);
+		void GameBlockDownFirst(int& frame);
+		void GameBlockDownSecond(int& frame);
+		void GameBlockDownThird(int& frame);
 	private:
 		int SwapHoldBlockType_;
 		signed short int HoldCheck_;

@@ -8,6 +8,7 @@
 #include "../Number.h"
 #include "../InGameState.h"
 #include "../Fade.h"
+#include "../Background.h"
 
 #include "../UI.h"
 
@@ -19,16 +20,14 @@ namespace TetrisUI
 		UIManager(int scenetype);
 		~UIManager();
 	public:
-		template<class T>
-		UI* Create() {
-			T* obj = new T;
-			return obj;
-		}
 		void InitAll();
 		void UpdateAll();
 		void DrawAll();
 		void ReleaseAll();
 	private:
-		std::array<UI*, 7> Obj_;
+		int SceneType_;
+		std::array<UI*, 2> TitleObj_;
+		std::array<UI*, 8> GameObj_;
+		std::array<UI*, 4> ResultObj_;
 	};
 }

@@ -9,13 +9,6 @@ class SceneManager
 public:
 	SceneManager() 
 	{
-		CurrentScene_ = new Scene(0);
-		CurrentScene_->Init();
-		EnterInputNowTime_[0] = 0;
-		EnterInputNowTime_[1] = 0;
-		EnterInputNowTime_[2] = 0;
-		Type_ = TetrisGameType::SCENETYPE::TITLE;
-		NowType_ = TetrisGameType::SCENETYPE::TITLE;
 
 	}
 	~SceneManager() {}

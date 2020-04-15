@@ -1,6 +1,6 @@
 #include "Number.h"
 #include "../Scene/SceneManager/SceneManager.h"
-#include "../Window/main.h"
+#include "../Scene/Scene.h"
 int TetrisUI::Number::Number_[] = {};
 int TetrisUI::Number::PositionX_[] = {};
 int TetrisUI::Number::PositionY_[] = {};
@@ -23,6 +23,7 @@ TetrisUI::Number::Number()
 
 TetrisUI::Number::~Number()
 {
+
 }
 
 void TetrisUI::Number::Init()
@@ -30,30 +31,26 @@ void TetrisUI::Number::Init()
     if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
     {
         DefaultDrawNumberTexture_ = 0;
-        DefaultDrawNumberTexture_ = SceneTextureData.GetGameTextureData(0);
-
-        for (int i = 0; i < 10; i++)
-        {
-            DrawNumberTexture_[i] = {};
-            DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
-        }
+        DefaultDrawNumberTexture_ = Scene::GetTextureData(1, 0);
+        
+        LoadDivGraph("Resource/Number.png",10, 10, 1, 29, 28, DrawNumberTexture_);
+        
     }
     if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
     {
         DefaultDrawNumberTexture_ = 0;
-        DefaultDrawNumberTexture_ = SceneTextureData.GetResultTextureData(0);
+        DefaultDrawNumberTexture_ = Scene::GetTextureData(2, 0);
 
         for (int i = 0; i < 10; i++)
         {
             DrawNumberTexture_[i] = {};
-            DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
+            DrawNumberTexture_[i] = DerivationGraphF(i * 30, 0, 28, 29, DefaultDrawNumberTexture_);
         }
     }
 }
 
 void TetrisUI::Number::Update()
 {
-
 }
 
 void TetrisUI::Number::Draw()

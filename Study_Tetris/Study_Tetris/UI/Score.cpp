@@ -2,7 +2,8 @@
 #include "Number.h"
 #include "../Scene/SceneManager/SceneManager.h"
 #include "Fade.h"
-#include "../Window/main.h"
+#include "../Scene/Scene.h"
+
 unsigned int TetrisUI::Score::Score_ = 0;
 
 void TetrisUI::Score::Init()
@@ -10,12 +11,12 @@ void TetrisUI::Score::Init()
 	Score_ = 0;
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
 	{
-		ScoreTexture_ = SceneTextureData.GetResultTextureData(1);
+		ScoreTexture_ = Scene::GetTextureData(2, 1);
 	}
 	DrawTime_ = 0;
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
 	{
-		FontScoreTexture_ = SceneTextureData.GetGameTextureData(1);
+		FontScoreTexture_ = Scene::GetTextureData(1, 1);
 	}
 }
 

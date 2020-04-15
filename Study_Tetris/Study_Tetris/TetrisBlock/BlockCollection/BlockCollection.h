@@ -10,16 +10,7 @@ namespace TetrisBlocks
 	public:
 		BlockCollection()
 		{
-			Block_ = new TetrisBlocks::TetrisBlock();
-			Block_->Init();
-			Board_ = {};
-			
-			for (int i = 0; i < 23; i++)
-			{
-				ClearLine_[i] = {};
-			}
-			ClearCheck_ = 0x000;
-			ClearCount_ = 1;
+
 		}
 		~BlockCollection()
 		{

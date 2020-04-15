@@ -2,7 +2,7 @@
 #include "../UI/InGameState.h"
 #include "../UI/Time.h"
 #include <random>
-#include "../Window/main.h"
+#include "../Scene/Scene.h"
 constexpr int LEFTPADDING = 3;
 constexpr int UPPADDING = 3;
 constexpr int RIGHTPADDING = 17;
@@ -384,8 +384,6 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 
 void TetrisBlocks::TetrisBlock::Init()
 {
-	//Input_ = new Input(1);
-	
 	StockBlock();
 
 	KeyFrame_ = 0;
@@ -417,7 +415,7 @@ void TetrisBlocks::TetrisBlock::Init()
 		{
 			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 			{
-				Blocktype_[type][y][x] = BlcoksData.GetBlockPosition(type,x,y);
+				Blocktype_[type][y][x] = Scene::GetBlockTypeColor(type, x, y);
 			}
 		}
 	}
@@ -1338,46 +1336,46 @@ void TetrisBlocks::TetrisBlock::GameBlockDownState()
 	switch (GameBlockState_)
 	{
 	case 0:
-		GameBlockDownFirst(&GameBlockLevelFrame_);
+		GameBlockDownFirst(GameBlockLevelFrame_);
 		break;
 	case 1:
-		GameBlockDownSecond(&GameBlockLevelFrame_);
+		GameBlockDownSecond(GameBlockLevelFrame_);
 		break;
 	case 2:
-		GameBlockDownThird(&GameBlockLevelFrame_);
+		GameBlockDownThird(GameBlockLevelFrame_);
 		break;
 	}
 }
 
-void TetrisBlocks::TetrisBlock::GameBlockDownFirst(int* frame)
+void TetrisBlocks::TetrisBlock::GameBlockDownFirst(int& frame)
 {
 	StageBlockCollisionBottom();
-	if(*frame > 20 && Collision_  == 0)
+	if(frame > 20 && Collision_  == 0)
 	{
 		YblockCount_ += TetrisGameType::BlockSpeed;
 		Position_.y = YblockCount_ / TetrisGameType::DrawBlockWidth;
-		*frame = 0;
+		frame = 0;
 	}
 }
 
-void TetrisBlocks::TetrisBlock::GameBlockDownSecond(int* frame)
+void TetrisBlocks::TetrisBlock::GameBlockDownSecond(int& frame)
 {
 	StageBlockCollisionBottom();
-	if (*frame > 10 && Collision_ == 0)
+	if (frame > 10 && Collision_ == 0)
 	{
 		YblockCount_ += TetrisGameType::BlockSpeed;
 		Position_.y = YblockCount_ / TetrisGameType::DrawBlockWidth;
-		*frame = 0;
+		frame = 0;
 	}
 }
 
-void TetrisBlocks::TetrisBlock::GameBlockDownThird(int* frame)
+void TetrisBlocks::TetrisBlock::GameBlockDownThird(int& frame)
 {
 	StageBlockCollisionBottom();
-	if (*frame > 5 && Collision_ == 0)
+	if (frame > 5 && Collision_ == 0)
 	{
 		YblockCount_ += TetrisGameType::BlockSpeed;
 		Position_.y = YblockCount_ / TetrisGameType::DrawBlockWidth;
-		*frame = 0;
+		frame = 0;
 	}
 }
