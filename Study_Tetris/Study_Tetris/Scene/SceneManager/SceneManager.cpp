@@ -14,36 +14,40 @@ void SceneManager::Update()
     switch (Type_)
     {
     case TetrisGameType::SCENETYPE::TITLE:
-        if (EnterInputNowTime_ > EnterInputMaxTime&& CheckHitKey(KEY_INPUT_RETURN) == 0x001)
+        if (EnterInputNowTime_[0] > EnterInputMaxTime&& CheckHitKey(KEY_INPUT_RETURN) == 0x001)
         {
             Type_ = TetrisGameType::SCENETYPE::GAME;
+            EnterInputNowTime_[0] = 0;
             ChangeScene(TetrisGameType::SCENETYPE::GAME);
-            EnterInputNowTime_ = 0;
         }
+
+        EnterInputNowTime_[0]++;
         break;
     case TetrisGameType::SCENETYPE::GAME:
         if (TetrisUI::InGameState::GetGameState() != 0)
         {
+            EnterInputNowTime_[1] = 0;
             Type_ = TetrisGameType::SCENETYPE::RESULT;
             ChangeScene(TetrisGameType::SCENETYPE::RESULT);
         }
+
+        EnterInputNowTime_[1]++;
         break;
     case TetrisGameType::SCENETYPE::RESULT:
-        if (EnterInputNowTime_ > EnterInputMaxTime&& CheckHitKey(KEY_INPUT_RETURN) == 0x001)
+        if (EnterInputNowTime_[2] > EnterInputMaxTime&& CheckHitKey(KEY_INPUT_RETURN) == 0x001)
         {
+            EnterInputNowTime_[2] = 0;
             Type_ = TetrisGameType::SCENETYPE::TITLE;
             ChangeScene(TetrisGameType::SCENETYPE::TITLE);
-            EnterInputNowTime_ = 0;
-            break;
-        }
+        }        
+        EnterInputNowTime_[2]++;
+        break;
     }
  
 
     if (this->CurrentScene_ == nullptr) return;
 
     this->CurrentScene_->Update();
-
-    EnterInputNowTime_++;
 }
 
 void SceneManager::Draw()
@@ -78,13 +82,13 @@ void SceneManager::ChangeScene(TetrisGameType::SCENETYPE Type)
             NowType_ = TetrisGameType::SCENETYPE::TITLE;
             return new Scene(0);
         }
-        else if (Type == TetrisGameType::SCENETYPE::GAME)
+        if (Type == TetrisGameType::SCENETYPE::GAME)
         {
             SetFontSize(12);
             NowType_ = TetrisGameType::SCENETYPE::GAME;
             return new Scene(1);
         }
-        else if (Type == TetrisGameType::SCENETYPE::RESULT)
+        if (Type == TetrisGameType::SCENETYPE::RESULT)
         {
             SetFontSize(20);
             NowType_ = TetrisGameType::SCENETYPE::RESULT;

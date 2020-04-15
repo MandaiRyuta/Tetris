@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <array>
 #include <string>
 
 namespace TextureDataBase
@@ -41,12 +41,16 @@ namespace TextureDataBase
 		int GetGameTextureData(int gametexturenumber);
 		int GetResultTextureData(int resulttexturenumber);
 		bool GetNowLoadingCheckFlag();
-		std::vector<std::string> TitleTextureDataFile_;
-		std::vector<std::string> GameTextureDataFile_;
-		std::vector<std::string> ResultTextureDataFile_;
-		std::vector<int> TitleTextureData_;
-		std::vector<int> GameTextureData_;
-		std::vector<int> ResultTextureData_;
+		int GetBackgroundData();
+	private:;
+		std::array<std::string,1> TitleTextureDataFile_;
+		std::array<std::string,5> GameTextureDataFile_;
+		std::array<std::string,2> ResultTextureDataFile_;
+		std::string BackgroundTextureFile_;
+		std::array<int,1> TitleTextureData_;
+		std::array<int,5> GameTextureData_;
+		std::array<int,2> ResultTextureData_;
+		int BackgroundTextureData_;
 		bool LoadingCheck_;
 	};
 }

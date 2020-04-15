@@ -1,11 +1,12 @@
 #include "InGameState.h"
 #include "../Scene/SceneManager/SceneManager.h"
+#include "../Window/main.h"
 int TetrisUI::InGameState::GameState_ = 0;
 
 void TetrisUI::InGameState::Init()
 {
-	GameClearTexture_ = LoadGraph("Resource/GameClear.png");
-	GameOverTexture_ = LoadGraph("Resource/GameOver.png");
+	GameClearTexture_ = SceneTextureData.GetGameTextureData(3);
+	GameOverTexture_ = SceneTextureData.GetGameTextureData(4);
 	GameState_ = 0;
 }
 

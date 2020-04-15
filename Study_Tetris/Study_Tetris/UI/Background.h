@@ -6,10 +6,7 @@ namespace TetrisUI
 	class Background
 	{
 	public:
-		Background()
-		{
-
-		}
+		Background(){}
 		~Background() {}
 	public:
 		void Init();

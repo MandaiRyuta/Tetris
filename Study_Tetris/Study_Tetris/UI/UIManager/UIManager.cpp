@@ -5,27 +5,29 @@ TetrisUI::UIManager::UIManager(int scenetype)
 	switch (scenetype)
 	{
 	case 0:
-		Obj_.push_back(Create<TetrisUI::Fade>());
+		Obj_[0] = (Create<TetrisUI::Fade>());
+		for (int i = 1; i < 7; i++)
+		{
+			Obj_[i] = nullptr;
+		}
 		break;
-	case 1:		
-		//Obj_.push_back(Create<TetrisUI::Fade>());
-		//Obj_.push_back(Create<TetrisUI::Menu>());
-		Obj_.push_back(Create<TetrisUI::Score>());
-		Obj_.push_back(Create<TetrisUI::Number>());
-		Obj_.push_back(Create<TetrisUI::NextBlock>());
-		Obj_.push_back(Create<TetrisUI::Hold>());
-		Obj_.push_back(Create<TetrisUI::Time>());
-		//Obj_.push_back(Create<TetrisUI::Particle>());
-
-		Obj_.push_back(Create<TetrisUI::InGameState>());
-		//Obj_.push_back(Create<TetrisUI::Time>());
-		//Obj_.push_back(Create<TetrisUI::UI>());
-		Obj_.push_back(Create<TetrisUI::Fade>());
+	case 1:
+		Obj_[0] = (Create<TetrisUI::Score>());
+		Obj_[1] = (Create<TetrisUI::Number>());
+		Obj_[2] = (Create<TetrisUI::NextBlock>());
+		Obj_[3] = (Create<TetrisUI::Hold>());
+		Obj_[4] = (Create<TetrisUI::Time>());
+		Obj_[5] = (Create<TetrisUI::InGameState>());
+		Obj_[6] = (Create<TetrisUI::Fade>());
 		break;
 	case 2:
-		Obj_.push_back(Create<TetrisUI::Score>());
-		Obj_.push_back(Create<TetrisUI::Number>());
-		Obj_.push_back(Create<TetrisUI::Fade>());
+		Obj_[0] = (Create<TetrisUI::Score>());
+		Obj_[1] = (Create<TetrisUI::Number>());
+		Obj_[2] = (Create<TetrisUI::Fade>());
+		for (int i = 3; i < 7; i++)
+		{
+			Obj_[i] = nullptr;
+		}
 		break;
 	default:
 		break;
@@ -34,40 +36,53 @@ TetrisUI::UIManager::UIManager(int scenetype)
 
 TetrisUI::UIManager::~UIManager()
 {
-	for (auto itr = Obj_.begin(); itr != Obj_.end(); itr++)
+	for (int i = 0; i < 7; i++)
 	{
-		delete *itr;
+		if (Obj_[i] != nullptr)
+		{
+			delete Obj_[i];
+		}
 	}
 }
 
 void TetrisUI::UIManager::InitAll()
 {
-	for (auto itr = Obj_.begin(); itr != Obj_.end(); ++itr)
+	for (int i = 0; i < 7; i++)
 	{
-		(*itr)->Init();
+		if(Obj_[i] != nullptr)
+		Obj_[i]->Init();
 	}
 }
 
 void TetrisUI::UIManager::UpdateAll()
 {
-	for (auto itr = Obj_.begin(); itr != Obj_.end(); ++itr)
+	for (int i = 0; i < 7; i++)
 	{
-		(*itr)->Update();
+		if (Obj_[i] != nullptr)
+		{
+			Obj_[i]->Update();
+		}
 	}
 }
 
 void TetrisUI::UIManager::DrawAll()
 {
-	for (auto itr = Obj_.begin(); itr != Obj_.end(); ++itr)
+	for (int i = 0; i < 7; i++)
 	{
-		(*itr)->Draw();
+		if (Obj_[i] != nullptr)
+		{
+			Obj_[i]->Draw();
+		}
 	}
 }
 
 void TetrisUI::UIManager::ReleaseAll()
 {
-	for (auto itr = Obj_.begin(); itr != Obj_.end(); itr++)
+	for (int i = 0; i < 7; i++)
 	{
-		(*itr)->Release();
+		if (Obj_[i] != nullptr)
+		{
+			Obj_[i]->Release();
+		}
 	}
 }

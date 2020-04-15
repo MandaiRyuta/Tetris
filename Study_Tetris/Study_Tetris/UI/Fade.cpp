@@ -4,9 +4,9 @@ int TetrisUI::Fade::State_ = 0;
 signed short int TetrisUI::Fade::FadeCheck_ = 0x000;
 void TetrisUI::Fade::Init()
 {
-	Color_.r = 255;
-	Color_.g = 255;
-	Color_.b = 255;
+	Color_.r = 0;
+	Color_.g = 0;
+	Color_.b = 0;
 	Color_.a = 0;
 	State_ = 0;
 	FadeCheck_ = 0x000;
@@ -64,14 +64,14 @@ void TetrisUI::Fade::Release()
 
 signed short int TetrisUI::Fade::FadeIn()
 {
-	if (Color_.a < 254)
+	if (Color_.a < 255)
 	{
+		Color_.r += 1;
+		Color_.g += 1;
+		Color_.b += 1;
 		Color_.a += 1;
-		Color_.r = (255 * Color_.a) / 255;
-		Color_.g = (255 * Color_.a) / 255;
-		Color_.b = (255 * Color_.a) / 255;
 	}
-	if (Color_.a >= 254)
+	if (Color_.a >= 255)
 	{
 		return 0x001;
 	}
@@ -83,14 +83,14 @@ signed short int TetrisUI::Fade::FadeIn()
 
 signed short int TetrisUI::Fade::FadeOut()
 {
-	if (Color_.a > 1)
+	if (Color_.a > 0)
 	{
 		Color_.a -= 1;
 		Color_.r = (255 * Color_.a) / 255;
 		Color_.g = (255 * Color_.a) / 255;
 		Color_.b = (255 * Color_.a) / 255;
 	}
-	if (Color_.a <= 1)
+	if (Color_.a <= 0)
 	{
 		return 0x001;
 	}

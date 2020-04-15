@@ -1,6 +1,5 @@
 #pragma once
 #include <DxLib.h>
-#include <vector>
 #include "../TetrisGameType/TetrisGameType.h"
 
 namespace TetrisUI

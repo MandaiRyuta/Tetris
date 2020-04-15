@@ -2,14 +2,21 @@
 #include "Number.h"
 #include "../Scene/SceneManager/SceneManager.h"
 #include "Fade.h"
+#include "../Window/main.h"
 unsigned int TetrisUI::Score::Score_ = 0;
 
 void TetrisUI::Score::Init()
 {
 	Score_ = 0;
-	ScoreTexture_ = LoadGraph("Resource/TotalScore.png");
+	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
+	{
+		ScoreTexture_ = SceneTextureData.GetResultTextureData(1);
+	}
 	DrawTime_ = 0;
-	FontScoreTexture_ = LoadGraph("Resource/Game_Score.png");
+	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
+	{
+		FontScoreTexture_ = SceneTextureData.GetGameTextureData(1);
+	}
 }
 
 void TetrisUI::Score::Update()
@@ -31,25 +38,20 @@ void TetrisUI::Score::Draw()
 {
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
 	{
-		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
-		{
-			DrawGraph(400, 100, FontScoreTexture_, true);
-		}
+		DrawGraph(400, 100, FontScoreTexture_, true);
 	}
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
 	{
-		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
-		{
-			if (DrawTime_ > 255)
-			{
-				DrawTime_ = 0;
-			}
+		DrawGraph(220, 240 - 32, ScoreTexture_, true);
 
-			if (DrawTime_ > 120)
-			{
-				DrawGraph(220, 240 - 32, ScoreTexture_, true);
-				DrawString(210, 300, "Enter ：タイトルへ戻る", GetColor(0,0,0));
-			}
+		if (DrawTime_ > 255)
+		{
+			DrawTime_ = 0;
+		}
+
+		if (DrawTime_ > 120)
+		{
+			DrawString(210, 300, "Enter ：タイトルへ戻る", GetColor(0,0,0));
 		}
 	}
 }

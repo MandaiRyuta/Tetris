@@ -2,6 +2,7 @@
 #include "../App/ApplicationManager.h"
 #include "SceneManager/SceneManager.h"
 #include "../UI/Fade.h"
+#include "../Window/main.h"
 
 Scene::Scene(int type):
 	Scenenumber_(type)
@@ -14,7 +15,7 @@ Scene::Scene(int type):
 	DownArrowKeyMaxTime_ = 60;
 	UpArrowKeyMaxTime_ = 60;
 	MenuSelectNumber_ = 0;
-	EnterKeyMaxTime_ = 60;
+	EnterKeyMaxTime_ = 120;
 	EnterKeyNowTime_ = 0;
 }
 
@@ -27,6 +28,9 @@ void Scene::Init()
 	switch (Scenenumber_)
 	{
 	case SceneNumber::TitleSceneNumber:
+		SceneTextureData.CreateTextureData(Scenenumber_);
+		SceneTextureData.Loading(Scenenumber_);
+		
 		TitleDrawTime_ = 0;
 		if (Ui_ != nullptr)
 		{
@@ -42,6 +46,8 @@ void Scene::Init()
 		Scenenumber_ = SceneNumber::TitleSceneNumber;
 		break;
 	case SceneNumber::GameSceneNumber:
+		SceneTextureData.CreateTextureData(Scenenumber_);
+		SceneTextureData.Loading(Scenenumber_);
 		if (Ui_ != nullptr)
 		{
 			Ui_->ReleaseAll();
@@ -58,6 +64,8 @@ void Scene::Init()
 		Scenenumber_ = SceneNumber::GameSceneNumber;
 		break;
 	case SceneNumber::ResultSceneNumber:
+		SceneTextureData.CreateTextureData(Scenenumber_);
+		SceneTextureData.Loading(Scenenumber_);
 		if (Ui_ != nullptr)
 		{
 			Ui_->ReleaseAll();
@@ -94,7 +102,10 @@ void Scene::Update()
 		if (Pause_ == 1)
 		{
 			Ui_->UpdateAll();
-			Collection_->Update();
+			if (TetrisUI::Fade::GetFadeCheck() == 0x001)
+			{
+				Collection_->Update();
+			}
 		}
 		else
 		{
@@ -138,35 +149,31 @@ void Scene::Draw()
 	{
 	case SceneNumber::TitleSceneNumber:
 		Ui_->DrawAll();
-		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
+
+		if (TitleDrawTime_ > 255)
 		{
-			if (TitleDrawTime_ > 255)
-			{
-				TitleDrawTime_ = 0;
-			}
-			else if (TitleDrawTime_ < 120)
-			{
-				DrawString(235, 300, "E n t e r 押してね", GetColor(0, 0, 0));
-			}
-			DrawString(250, 240 - 32, "て　と　り　す", GetColor(0, 0, 0));
+			TitleDrawTime_ = 0;
 		}
+		else if (TitleDrawTime_ < 120)
+		{
+			DrawString(235, 300, "E n t e r 押してね", GetColor(0, 0, 0));
+		}
+		DrawString(250, 240 - 32, "て　と　り　す", GetColor(0, 0, 0));
 		break;
 	case SceneNumber::GameSceneNumber:
 		Ui_->DrawAll();
-		if (TetrisUI::Fade::GetFadeCheck() == 0x001)
-		{
-			DrawString(410, 225, "[H] : ゲームプレイ中（ホールド）", GetColor(0, 0, 0));
-			DrawString(410, 250, "[↑] : ゲームプレイ中（回転）", GetColor(0, 0, 0));
-			DrawString(410, 275, "[←] : ゲームプレイ中（左移動）", GetColor(0, 0, 0));
-			DrawString(410, 300, "[→] : ゲームプレイ中（右移動）", GetColor(0, 0, 0));
-			DrawString(410, 325, "[↓] : ゲームプレイ中（下移動）", GetColor(0, 0, 0));
-			DrawString(410, 350, "[SPACE] : 落下", GetColor(0, 0, 0));
-			DrawString(410, 375, "[P] : ポーズ画面", GetColor(0, 0, 0));
-			DrawString(410, 400, "[↑] : ポーズ時（上移動）", GetColor(0, 0, 0));
-			DrawString(410, 425, "[↓] : ポーズ時（下移動）", GetColor(0, 0, 0));
-			DrawString(410, 450, "[Enter] : ポーズ時（決定）", GetColor(0, 0, 0));
-			Collection_->Draw();
-		}
+		Collection_->Draw();
+		DrawString(410, 225, "[H] : ゲームプレイ中（ホールド）", GetColor(0, 0, 0));
+		DrawString(410, 250, "[↑] : ゲームプレイ中（回転）", GetColor(0, 0, 0));
+		DrawString(410, 275, "[←] : ゲームプレイ中（左移動）", GetColor(0, 0, 0));
+		DrawString(410, 300, "[→] : ゲームプレイ中（右移動）", GetColor(0, 0, 0));
+		DrawString(410, 325, "[↓] : ゲームプレイ中（下移動）", GetColor(0, 0, 0));
+		DrawString(410, 350, "[SPACE] : 落下", GetColor(0, 0, 0));
+		DrawString(410, 375, "[P] : ポーズ画面", GetColor(0, 0, 0));
+		DrawString(410, 400, "[↑] : ポーズ時（上移動）", GetColor(0, 0, 0));
+		DrawString(410, 425, "[↓] : ポーズ時（下移動）", GetColor(0, 0, 0));
+		DrawString(410, 450, "[Enter] : ポーズ時（決定）", GetColor(0, 0, 0));
+
 		if (Pause_ == -1)
 		{
 			PauseDraw();
@@ -180,6 +187,9 @@ void Scene::Draw()
 
 void Scene::Release()
 {
+	Scenenumber_ = 0;
+	SceneTextureData.Release(Scenenumber_);
+
 	if (Ui_ != nullptr)
 	{
 		Ui_->ReleaseAll();
@@ -229,8 +239,10 @@ void Scene::PauseSelect()
 		{
 			if (EnterKeyNowTime_ > EnterKeyMaxTime_)
 			{
+				Scenenumber_ = 1;
 				SceneManager::ChangeScene(TetrisGameType::SCENETYPE::GAME);
 				EnterKeyNowTime_ = 0;
+				break;
 			}
 		}
 		break;
@@ -239,8 +251,10 @@ void Scene::PauseSelect()
 		{
 			if (EnterKeyNowTime_ > EnterKeyMaxTime_)
 			{
-				SceneManager::ChangeScene(TetrisGameType::SCENETYPE::TITLE);
 				EnterKeyNowTime_ = 0;
+				Scenenumber_ = 0;
+				SceneManager::ChangeScene(TetrisGameType::SCENETYPE::TITLE);
+				break;
 			}
 		}
 		break;
@@ -251,6 +265,7 @@ void Scene::PauseSelect()
 			{
 				ApplicationManager::SetLoop(0x001);
 				EnterKeyNowTime_ = 0;
+				break;
 			}
 		}
 		break;

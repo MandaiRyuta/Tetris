@@ -1,6 +1,6 @@
 #include "Number.h"
 #include "../Scene/SceneManager/SceneManager.h"
-
+#include "../Window/main.h"
 int TetrisUI::Number::Number_[] = {};
 int TetrisUI::Number::PositionX_[] = {};
 int TetrisUI::Number::PositionY_[] = {};
@@ -13,12 +13,12 @@ signed short int TetrisUI::Number::ResizeCheck_ = 0x000;
 TetrisUI::Number::Number()
 	: DefaultDrawNumberTexture_(0)
 {
-	DefaultDrawNumberTexture_ = LoadGraph("Resource/Number.png");
-	for (int i = 0; i < 10; i++)
-	{
-		DrawNumberTexture_[i] = {};
-		DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
-	}
+	//DefaultDrawNumberTexture_ = SceneTextureData.GetGameTextureData(7);
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	DrawNumberTexture_[i] = {};
+	//	DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
+	//}
 }
 
 TetrisUI::Number::~Number()
@@ -27,12 +27,27 @@ TetrisUI::Number::~Number()
 
 void TetrisUI::Number::Init()
 {
-    DefaultDrawNumberTexture_ = 0;
-    DefaultDrawNumberTexture_ = LoadGraph("Resource/Number.png");
-    for (int i = 0; i < 10; i++)
+    if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
     {
-        DrawNumberTexture_[i] = {};
-        DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
+        DefaultDrawNumberTexture_ = 0;
+        DefaultDrawNumberTexture_ = SceneTextureData.GetGameTextureData(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DrawNumberTexture_[i] = {};
+            DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
+        }
+    }
+    if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
+    {
+        DefaultDrawNumberTexture_ = 0;
+        DefaultDrawNumberTexture_ = SceneTextureData.GetResultTextureData(0);
+
+        for (int i = 0; i < 10; i++)
+        {
+            DrawNumberTexture_[i] = {};
+            DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
+        }
     }
 }
 
@@ -43,32 +58,29 @@ void TetrisUI::Number::Update()
 
 void TetrisUI::Number::Draw()
 {
-    if (TetrisUI::Fade::GetFadeCheck() == 0x001)
+    TetrisGameType::SCENETYPE s = SceneManager::GetNowScene();
+    if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
     {
-        TetrisGameType::SCENETYPE s = SceneManager::GetNowScene();
-        if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
+        for (int i = 0; i < NumberDrawSize; i++)
         {
-            for (int i = 0; i < NumberDrawSize; i++)
-            {
-                DrawNumber(PositionX_[i], PositionY_[i], Number_[i]);
-            }
+            DrawNumber(PositionX_[i], PositionY_[i], Number_[i]);
+        }
 
-            if (ResizeCheck_ == 0x001)
+        if (ResizeCheck_ == 0x001)
+        {
+            for (int t = 0; t < ReSizeDrawSize; t++)
             {
-                for (int t = 0; t < ReSizeDrawSize; t++)
-                {
-                    NumDraw(ReSizePositionX_[t], ReSizePositionY_[t], ResizeNumber_[t]);
-                }
+                NumDraw(ReSizePositionX_[t], ReSizePositionY_[t], ResizeNumber_[t]);
             }
         }
-        if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
+    }
+    if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
+    {
+        if (ResizeCheck_ == 0x001)
         {
-            if (ResizeCheck_ == 0x001)
+            for (int t = 0; t < ReSizeDrawSize; t++)
             {
-                for (int t = 0; t < ReSizeDrawSize; t++)
-                {
-                    NumDraw(ReSizePositionX_[t], ReSizePositionY_[t], ResizeNumber_[t]);
-                }
+                NumDraw(ReSizePositionX_[t], ReSizePositionY_[t], ResizeNumber_[t]);
             }
         }
     }

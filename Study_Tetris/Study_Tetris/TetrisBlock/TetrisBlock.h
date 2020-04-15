@@ -2,7 +2,6 @@
 #include "../TetrisGameType/TetrisGameType.h"
 //constexpr int BLOCKTYPE = 7;
 //constexpr int BLOCKSIZE = 4;
-
 namespace TetrisBlocks
 {
 	class TetrisBlock
@@ -48,7 +47,7 @@ namespace TetrisBlocks
 			WaitMakeBlcokTime_(0)
 		{
 			Position_.y = 0;
-			Position_.x = 5;
+			Position_.x = 4;
 			GameBlockState_ = 0;
 		}
 		~TetrisBlock(){}
@@ -76,7 +75,7 @@ namespace TetrisBlocks
 		int GetStockBlock(int num);
 		signed short int GetBlockDone();
 		void SetBlockDone(signed short int blockdonecheck);
-		void InitBlocks();
+		//void InitBlocks();
 		void GameInputState();
 		void InputStateFirst(int& keyframe);
 		void InputStateSecond(int& keyframe);

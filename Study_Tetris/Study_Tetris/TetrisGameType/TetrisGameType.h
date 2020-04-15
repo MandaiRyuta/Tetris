@@ -1,6 +1,5 @@
 #pragma once
 #include <DxLib.h>
-#include <vector>
 #include <array>
 
 namespace SceneNumber
@@ -34,8 +33,8 @@ namespace TetrisGameType
 	}
 
 	constexpr int StockBlockSize = 4;
-	constexpr int BlockHeight = 4;
-	constexpr int BlockWidth = 4;
+	constexpr int BlockHeight = 5;
+	constexpr int BlockWidth = 5;
 	constexpr int StageHeight = 23;
 	constexpr int StageWidth = 13;
 	constexpr int DrawBlockWidth = 20;
@@ -61,11 +60,8 @@ namespace TetrisGameType
 
 	enum class SCENETYPE
 	{
-		TITLELOADING,
 		TITLE,
-		GAMELOADING,
 		GAME,
-		RESULTLOADING,
 		RESULT,
 		NONE,
 	};

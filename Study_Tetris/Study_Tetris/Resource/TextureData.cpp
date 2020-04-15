@@ -11,6 +11,11 @@ TextureDataBase::TextureData::~TextureData()
 
 void TextureDataBase::TextureData::Init()
 {
+	BackgroundTextureData_ = 0;
+	BackgroundTextureFile_ = ("Resource/Background.png");
+
+	BackgroundTextureData_ = LoadGraph(BackgroundTextureFile_.c_str());
+	
 	LoadingCheck_ = false;
 }
 
@@ -19,22 +24,17 @@ void TextureDataBase::TextureData::CreateTextureData(int& scenetype)
 	switch (scenetype)
 	{
 	case 0:
-		TitleTextureDataFile_.push_back("Resource/Background.png");
 		break;
 	case 1:
-		GameTextureDataFile_.push_back("Resource/Background.png");
-		GameTextureDataFile_.push_back("Resource/Game_Score.png");
-		GameTextureDataFile_.push_back("Resource/Game_Timer.png");
-		GameTextureDataFile_.push_back("Resource/GameClear.png");
-		GameTextureDataFile_.push_back("Resource/GameOver.png");
-		GameTextureDataFile_.push_back("Resource/Menu_GameEnd.png");
-		GameTextureDataFile_.push_back("Resource/Menu_Restart.png");
-		GameTextureDataFile_.push_back("Resource/Menu_Title.png");
-		GameTextureDataFile_.push_back("Resource/Number.png");
-		GameTextureDataFile_.push_back("Resource/Pause.png");
+		GameTextureDataFile_[0] = ("Resource/Number.png");
+		GameTextureDataFile_[1] = ("Resource/Game_Score.png");
+		GameTextureDataFile_[2] = ("Resource/Game_Timer.png");
+		GameTextureDataFile_[3] = ("Resource/GameClear.png");
+		GameTextureDataFile_[4] = ("Resource/GameOver.png");
 		break;
 	case 2:
-		ResultTextureDataFile_.push_back("Resource/Background.png");
+		ResultTextureDataFile_[0] = ("Resource/Number.png");
+		ResultTextureDataFile_[1] = ("Resource/TotalScore.png");
 		break;
 	}
 }
@@ -44,52 +44,45 @@ void TextureDataBase::TextureData::Release(int& scenetype)
 	switch (scenetype)
 	{
 	case 0:
-		for (auto itr = TitleTextureData_.begin(); itr != TitleTextureData_.end() - 1; itr++)
-		{
-			DeleteGraph(*itr);
-		}
+
 		break;
 	case 1:
-		for (auto itr = GameTextureData_.begin(); itr != GameTextureData_.end() - 1; itr++)
-		{
-			DeleteGraph(*itr);
-		}
+		DeleteGraph(GameTextureData_[0]);
+		DeleteGraph(GameTextureData_[1]);
+		DeleteGraph(GameTextureData_[2]);
+		DeleteGraph(GameTextureData_[3]);
+		DeleteGraph(GameTextureData_[4]);
 		break;
 	case 2:
-		for (auto itr = ResultTextureData_.begin(); itr != ResultTextureData_.end() - 1; itr++)
-		{
-			DeleteGraph(*itr);
-		}
+		DeleteGraph(ResultTextureData_[0]);
+		DeleteGraph(ResultTextureData_[1]);
 		break;
 	}
 }
 
 void TextureDataBase::TextureData::Loading(int& scenetype)
 {
-   
 	switch (scenetype)
 	{
 	case 0:
-		for (auto itr = TitleTextureDataFile_.begin(); itr != TitleTextureDataFile_.end(); itr++)
-		{
-			TitleTextureData_.push_back(LoadGraph(itr->c_str()));
-		}
+		DrawString(250, 240 - 32, "Loading..", GetColor(255, 255, 255));
 		LoadingCheck_ = true;
 		break;
 	case 1:
-		for (auto itr = GameTextureDataFile_.begin(); itr != GameTextureDataFile_.end(); itr++)
-		{
-			GameTextureData_.push_back(LoadGraph(itr->c_str()));
-		}
+		GameTextureData_[0] = LoadGraph(GameTextureDataFile_[0].c_str());
+		GameTextureData_[1] = LoadGraph(GameTextureDataFile_[1].c_str());
+		GameTextureData_[2] = LoadGraph(GameTextureDataFile_[2].c_str());
+		GameTextureData_[3] = LoadGraph(GameTextureDataFile_[3].c_str());
+		GameTextureData_[4] = LoadGraph(GameTextureDataFile_[4].c_str());
 		DrawString(250, 240 - 32, "Loading..", GetColor(255, 255, 255));
 		
 		LoadingCheck_ = true;
 		break;
 	case 2:
-		for (auto itr = ResultTextureDataFile_.begin(); itr != ResultTextureDataFile_.end(); itr++)
-		{
-			ResultTextureData_.push_back(LoadGraph(itr->c_str()));
-		}
+		ResultTextureData_[0] = LoadGraph(ResultTextureDataFile_[0].c_str());
+		ResultTextureData_[1] = LoadGraph(ResultTextureDataFile_[1].c_str());
+		
+		DrawString(250, 240 - 32, "Loading..", GetColor(255, 255, 255));
 		LoadingCheck_ = true;
 		break;
 	}
@@ -113,4 +106,9 @@ int TextureDataBase::TextureData::GetResultTextureData(int resulttexturenumber)
 bool TextureDataBase::TextureData::GetNowLoadingCheckFlag()
 {
 	return LoadingCheck_;
+}
+
+int TextureDataBase::TextureData::GetBackgroundData()
+{
+	return BackgroundTextureData_;
 }

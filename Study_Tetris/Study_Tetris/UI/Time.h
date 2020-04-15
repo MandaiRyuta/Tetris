@@ -21,7 +21,6 @@ namespace TetrisUI
 				Positiony_[i] = 50;
 				Color_[i] = 255;
 			}
-			TimeFontTexture_ = LoadGraph("Resource/Game_Timer.png");
 		}
 		~Time() {}
 	public:

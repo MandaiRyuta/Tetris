@@ -5,11 +5,11 @@
 #include "../UI/Background.h"
 
 TextureDataBase::TextureData SceneTextureData;
-
+BlockData BlcoksData;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	ApplicationManager app;
-
+	
 	bool loopscene = false;
 
 	FPS::FpsCounter fps;
@@ -17,7 +17,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(TRUE);
 	
 	SetWaitVSyncFlag(FALSE);
-	SetUseASyncLoadFlag(TRUE);
+	SetUseASyncLoadFlag(FALSE);
 	if (DxLib_Init() == -1)
 	{
 		return -1;
@@ -29,9 +29,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//最終的にためしたところです。
 	int scenetype = 0;
 	SceneTextureData.Init();
-	SceneTextureData.CreateTextureData(scenetype);
 	//データを読み込んだ後に、Ui/Background.cpp側のInitで呼び出します。
 
+	BlcoksData.Init();
 	app.Init();
 	bg.Init();
 
