@@ -386,7 +386,8 @@ void TetrisBlocks::TetrisBlock::Init()
 {
 	StockBlock();
 	BlocksData_.Init();
-	KeyFrame_ = 0;
+	LeftKeyFrame_ = 0;
+	RightKeyFrame_ = 0;
 	InputState_ = 0;
 	InputSideCheck_ = 0;
 
@@ -840,17 +841,17 @@ void TetrisBlocks::TetrisBlock::GameInputState()
 	switch (InputState_)
 	{
 	case 0:
-		InputStateFirst(KeyFrame_);
+		InputStateFirst(LeftKeyFrame_,RightKeyFrame_);
 		break;
 	case 1:
-		InputStateSecond(KeyFrame_);
+		InputStateSecond(LeftKeyFrame_,RightKeyFrame_);
 		break;
 	}
 }
 
-void TetrisBlocks::TetrisBlock::InputStateFirst(int& keyframe)
+void TetrisBlocks::TetrisBlock::InputStateFirst(int& leftkeyframe, int& rightkeyframe)
 {
-	if (keyframe > 5)
+	if (rightkeyframe > 5)
 	{
 		if (ChangeKeyStateCount_ > 1)
 		{
@@ -869,7 +870,11 @@ void TetrisBlocks::TetrisBlock::InputStateFirst(int& keyframe)
 				InputState_ = 0;
 			}
 		}
-		else if (InputSideCheck_ == 1)
+		rightkeyframe = 0;
+	}
+	if(leftkeyframe > 5)
+	{
+		if (InputSideCheck_ == 1)
 		{
 			StageBlockCollisionLeft();
 			if (Collision_ == 0)
@@ -885,16 +890,31 @@ void TetrisBlocks::TetrisBlock::InputStateFirst(int& keyframe)
 		{
 			ChangeKeyStateCount_++;
 		}
-		keyframe = 0;
+		leftkeyframe = 0;
 	}
 }
 
-void TetrisBlocks::TetrisBlock::InputStateSecond(int& keyframe)
+void TetrisBlocks::TetrisBlock::InputStateSecond(int& leftkeyframe, int& rightkeyframe)
 {
 
-	if (keyframe > 3)
+	if (leftkeyframe > 3)
 	{
-		//InputState_ = 1;
+		if (InputSideCheck_ == 1)
+		{
+			StageBlockCollisionLeft();
+			if (Collision_ == 0)
+			{
+				Position_.x -= 1;
+			}
+			else
+			{
+				InputState_ = 0;
+			}
+		}
+		leftkeyframe = 0;
+	}
+	if (rightkeyframe > 3)
+	{
 		if (InputSideCheck_ == 0)
 		{
 			StageBlockCollisionRight();
@@ -907,19 +927,7 @@ void TetrisBlocks::TetrisBlock::InputStateSecond(int& keyframe)
 				InputState_ = 0;
 			}
 		}
-		else if (InputSideCheck_ == 1)
-		{
-			StageBlockCollisionLeft();
-			if (Collision_ == 0)
-			{
-				Position_.x -= 1;
-			}
-			else
-			{
-				InputState_ = 0;
-			}
-		}
-		keyframe = 0;
+		rightkeyframe = 0;
 	}
 }
 
@@ -927,7 +935,7 @@ void TetrisBlocks::TetrisBlock::GameInputRight()
 {
 	if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
 	{
-		KeyFrame_++;
+		RightKeyFrame_++;
 		StageBlockCollisionCenter();
 		InputSideCheck_ = 0;
 	}
@@ -937,7 +945,7 @@ void TetrisBlocks::TetrisBlock::GameInputLeft()
 {
 	if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 	{
-		KeyFrame_++;
+		LeftKeyFrame_++;
 		StageBlockCollisionCenter();
 	
 		InputSideCheck_ = 1;

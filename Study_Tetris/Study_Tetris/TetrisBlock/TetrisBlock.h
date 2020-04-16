@@ -75,8 +75,8 @@ namespace TetrisBlocks
 		const signed short int& GetBlockDone();
 		void SetBlockDone(signed short int blockdonecheck);
 		void GameInputState();
-		void InputStateFirst(int& keyframe);
-		void InputStateSecond(int& keyframe);
+		void InputStateFirst(int& leftkeyframe,int& rightkeyframe);
+		void InputStateSecond(int& leftkeyframe, int& rightkeyframe);
 		void GameInputRight();
 		void GameInputLeft();
 		void GameBlockDownState();
@@ -137,7 +137,8 @@ namespace TetrisBlocks
 
 		int InputSideCheck_;
 		int ChangeKeyStateCount_;
-		int KeyFrame_;
+		int LeftKeyFrame_;
+		int RightKeyFrame_;
 		int InputState_;
 		int BlockMoveSpeed_;
 		int GameBlockLevelFrame_;
