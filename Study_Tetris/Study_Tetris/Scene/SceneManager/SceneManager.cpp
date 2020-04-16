@@ -7,7 +7,7 @@ int SceneManager::TotalScore_ = 0;
 void SceneManager::Init()
 {
     CurrentScene_ = new Scene(0);
-    CurrentScene_->AddObject<TetrisUI::UIManager>(0);
+    CurrentScene_->AddUIObject<TetrisUI::UIManager>(0);
     CurrentScene_->Init();
     EnterInputNowTime_[0] = 0;
     EnterInputNowTime_[1] = 0;
@@ -115,13 +115,14 @@ void SceneManager::ChangeScene(TetrisGameType::SCENETYPE Type)
     switch (scenenumber)
     {
     case 0:
-        CurrentScene_->AddObject<TetrisUI::UIManager>(scenenumber);
+        CurrentScene_->AddUIObject<TetrisUI::UIManager>(scenenumber);
         break;
     case 1:
-        CurrentScene_->AddObject<TetrisUI::UIManager>(scenenumber);
+        CurrentScene_->AddUIObject<TetrisUI::UIManager>(scenenumber);
+        CurrentScene_->AddBlockObject<TetrisBlocks::BlockCollection>();
         break;
     case 2:
-        CurrentScene_->AddObject<TetrisUI::UIManager>(scenenumber);
+        CurrentScene_->AddUIObject<TetrisUI::UIManager>(scenenumber);
         break;
     }
     CurrentScene_->Init();

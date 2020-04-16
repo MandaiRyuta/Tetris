@@ -1,10 +1,12 @@
 #pragma once
+#include <algorithm>
 #include <vector>
+#include <iterator>
+#include <deque>
+#include <list>
 #include "../TetrisGameType\TetrisGameType.h"
 #include "../TetrisBlock\BlockCollection\BlockCollection.h"
 #include "../UI/UIManager/UIManager.h"
-#include "../Resource/TextureData.h"
-#include "../Resource/Block.h"
 #include "../Actor/Actor.h"
 
 class Scene
@@ -18,9 +20,10 @@ public:
 	void Release();
 	void PauseDraw();
 	void PauseSelect();
-	static const TetrisGameType::Block& GetBlockTypeColor(int type, int x, int y);
 	template<class T>
-	void AddObject(int type);
+	void AddUIObject(int scenetype);
+	template<class T>
+	void AddBlockObject();
 	template<class T>
 	void ObjectReleaseMemory(std::vector<T*>& vector);
 private:
@@ -38,16 +41,20 @@ private:
 	int TitleDrawTime_;
 
 	std::vector<Actor*> Actor_;
-	static BlockData* BlocksData;
-	TetrisUI::UIManager* Ui_;
-	TetrisBlocks::BlockCollection* Collection_;
 };
 
 template<class T>
-inline void Scene::AddObject(int type)
+inline void Scene::AddUIObject(int scenetype)
 {
 	TetrisUI::UIManager* obj = new T;
-	obj->SetType(type);
+	obj->SetType(scenetype);
+	Actor_.push_back(obj);
+}
+
+template<class T>
+inline void Scene::AddBlockObject()
+{
+	TetrisBlocks::BlockCollection* obj = new T;
 	Actor_.push_back(obj);
 }
 

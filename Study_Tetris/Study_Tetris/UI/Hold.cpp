@@ -13,6 +13,7 @@ TetrisUI::Hold::~Hold()
 
 void TetrisUI::Hold::Init()
 {
+	BlocksData_.Init();
 	HoldBlockType_ = 9;
 	BlockInit();
 }
@@ -72,7 +73,7 @@ void TetrisUI::Hold::BlockInit()
 		{
 			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 			{
-				Blocktype_[type][y][x] = Scene::GetBlockTypeColor(type, x, y);
+				Blocktype_[type][y][x] = BlocksData_.GetBlockPosition(type, x, y);
 			}
 		}
 	}

@@ -120,9 +120,6 @@
     <ClInclude Include="Resource\Block.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Factory\GameObjectFactory.h">
-      <Filter>Factory</Filter>
-    </ClInclude>
     <ClInclude Include="Actor\Actor.h">
       <Filter>Actor</Filter>
     </ClInclude>
@@ -160,9 +157,6 @@
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{db1d5c30-9468-482f-bc42-f3c60292555d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Factory">
-      <UniqueIdentifier>{0f6d3944-6ae5-46d7-8b8d-3f13207cd0d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor">
       <UniqueIdentifier>{a72d9bd8-9759-447e-966e-d525ac61fdb8}</UniqueIdentifier>

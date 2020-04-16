@@ -6,6 +6,7 @@
 std::array<int, 3> TetrisUI::NextBlock::BlockNumber_;
 void TetrisUI::NextBlock::Init()
 {
+	BlocksData_.Init();
 	BlockInit();
 }
 
@@ -85,7 +86,7 @@ void TetrisUI::NextBlock::BlockInit()
 		{
 			for (int x = 0; x < 4; x++)
 			{
-				Blocktype_[type][y][x] = Scene::GetBlockTypeColor(type, x, y);
+				Blocktype_[type][y][x] = BlocksData_.GetBlockPosition(type, x, y);
 			}
 		}
 	}

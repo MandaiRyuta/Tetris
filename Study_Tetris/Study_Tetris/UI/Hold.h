@@ -1,5 +1,6 @@
 #pragma once
 #include "UI.h"
+#include "../Resource/Block.h"
 
 namespace TetrisUI
 {
@@ -20,6 +21,7 @@ namespace TetrisUI
 			HoldBlockType_ = type;
 		}
 	private:
+		BlockData BlocksData_;
 		TetrisGameType::Block Blocktype_[TetrisGameType::TetrisBlockTypeNum::MaxNumber][TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 		static int HoldBlockType_;
 	};

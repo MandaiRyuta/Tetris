@@ -1,6 +1,6 @@
 #pragma once
 #include "../TetrisGameType/TetrisGameType.h"
-
+#include "../Resource/Block.h"
 namespace TetrisBlocks
 {
 	class TetrisBlock
@@ -118,7 +118,7 @@ namespace TetrisBlocks
 		int InputDownMoveMaxTime_;
 		int DownMoveAcceleration_;
 		int Blocknumber_;
-
+		BlockData BlocksData_;
 		TetrisGameType::Vector2 Position_;
 		TetrisGameType::BlockType Type_;
 		TetrisGameType::Block Blocktype_[TetrisGameType::TetrisBlockTypeNum::MaxNumber][TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];

@@ -1,5 +1,6 @@
 #pragma once
 #include "UI.h"
+#include "../Resource/Block.h"
 
 namespace TetrisUI
 {
@@ -22,6 +23,7 @@ namespace TetrisUI
 			BlockNumber_[num] = type;
 		}
 	private:	
+		BlockData BlocksData_;
 		static std::array<int, 3> BlockNumber_;
 		TetrisGameType::Block Blocktype_[TetrisGameType::TetrisBlockTypeNum::MaxNumber][TetrisGameType::BlockHeight][TetrisGameType::BlockWidth];
 	};

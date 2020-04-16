@@ -2,12 +2,10 @@
 #include "../../UI/NextBlock.h"
 #include "../../UI/Hold.h"
 #include "../../UI/Score.h"
-#include "../../Factory/GameObjectFactory.h"
 
 void TetrisBlocks::BlockCollection::Init()
 {
-	Block_ = GameObjectFactory::CreateTetorisBlock<TetrisBlock>();
-	Block_->Init();
+	Block_.Init();
 	Board_ = {};
 
 	for (int i = 0; i < 23; i++)
@@ -35,34 +33,34 @@ void TetrisBlocks::BlockCollection::Init()
 
 	for (int i = 0; i < 3; i++)
 	{
-		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
+		TetrisUI::NextBlock::GetNextBlockType(i, Block_.GetStockBlock(i));
 	}
 }
 
 void TetrisBlocks::BlockCollection::Update()
 {
-	Block_->Update();
+	Block_.Update();
 
 	for (int i = 0; i < 3; i++)
 	{
-		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
+		TetrisUI::NextBlock::GetNextBlockType(i, Block_.GetStockBlock(i));
 	}
 
 	if (CheckHitKey(KEY_INPUT_H) == 1)
 	{
-		TetrisUI::Hold::GetHoldBlockType(Block_->GetHoldBlockType());
+		TetrisUI::Hold::GetHoldBlockType(Block_.GetHoldBlockType());
 	}
 
-	if (Block_->GetBlockDone() == 0x001)
+	if (Block_.GetBlockDone() == 0x001)
 	{
 		for (int y = 0; y < TetrisGameType::StageHeight; y++)
 		{
 			for (int x = 0; x < TetrisGameType::StageWidth; x++)
 			{
-				Board_[y][x] = Block_->GetBlockData(x, y);
+				Board_[y][x] = Block_.GetBlockData(x, y);
 			}
 		}
-		Block_->SetBlockDone(0x000);
+		Block_.SetBlockDone(0x000);
 	}
 
 	StackBlockClearLineCheck();
@@ -134,7 +132,7 @@ void TetrisBlocks::BlockCollection::Draw()
 		}
 	}
 
-	Block_->Draw();
+	Block_.Draw();
 }
 
 void TetrisBlocks::BlockCollection::Release()
@@ -144,11 +142,7 @@ void TetrisBlocks::BlockCollection::Release()
 		ClearLine_[i] = {};
 	}
 
-	if (Block_ != nullptr)
-	{
-		Block_->Release();
-	}
-	delete Block_;
+	Block_.Release();
 }
 
 void TetrisBlocks::BlockCollection::StackBlockClearLineCheck()
@@ -226,25 +220,13 @@ void TetrisBlocks::BlockCollection::StageBlockLineClear()
 		{
 			for (int x = 0; x < TetrisGameType::StageWidth; x++)
 			{
-				Block_->SetBlockData(Board_[y][x], x, y);
+				Block_.SetBlockData(Board_[y][x], x, y);
 			}
 		}
 
 		ClearCheck_ = 0x000;
 		ClearCount_ = 1;
 	}
-}
-
-void TetrisBlocks::BlockCollection::StackBlock(TetrisBlock* block)
-{
-}
-
-void TetrisBlocks::BlockCollection::NowBlock()
-{
-}
-
-void TetrisBlocks::BlockCollection::SetHold(TetrisBlock* block)
-{
 }
 
 void TetrisBlocks::BlockCollection::CopyBlock(TetrisGameType::Block src, TetrisGameType::Block dst)

@@ -385,7 +385,7 @@ void TetrisBlocks::TetrisBlock::ChangeRotate()
 void TetrisBlocks::TetrisBlock::Init()
 {
 	StockBlock();
-
+	BlocksData_.Init();
 	KeyFrame_ = 0;
 	InputState_ = 0;
 	InputSideCheck_ = 0;
@@ -415,7 +415,7 @@ void TetrisBlocks::TetrisBlock::Init()
 		{
 			for (int x = 0; x < TetrisGameType::BlockWidth; x++)
 			{
-				Blocktype_[type][y][x] = Scene::GetBlockTypeColor(type, x, y);
+				Blocktype_[type][y][x] = BlocksData_.GetBlockPosition(type, x, y);
 			}
 		}
 	}

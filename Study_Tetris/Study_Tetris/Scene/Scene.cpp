@@ -2,9 +2,7 @@
 #include "../App/ApplicationManager.h"
 #include "SceneManager/SceneManager.h"
 #include "../UI/Fade.h"
-#include "../Factory/GameObjectFactory.h"
 
-BlockData* Scene::BlocksData = nullptr;
 Scene::Scene(int type) :
 	Scenenumber_(type)
 {
@@ -36,9 +34,6 @@ void Scene::Init()
 			Obj->Init();
 		}
 
-		BlocksData = GameObjectFactory::CreateBlockData<BlockData>();
-		BlocksData->Init();
-
 		TitleDrawTime_ = 0;
 
 		TetrisUI::Fade::SetStartFade(1);
@@ -47,16 +42,10 @@ void Scene::Init()
 		break;
 	case SceneNumber::GameSceneNumber:
 
-		BlocksData = GameObjectFactory::CreateBlockData<BlockData>();
-		BlocksData->Init();
-
 		for (const auto Obj : Actor_)
 		{
 			Obj->Init();
 		}
-		/////////////////////////////////////////////////
-		Collection_ = GameObjectFactory::CreateBlock<TetrisBlocks::BlockCollection>();
-		Collection_->Init();
 
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::GameSceneNumber;
@@ -67,7 +56,6 @@ void Scene::Init()
 		{
 			Obj->Init();
 		}
-
 
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::ResultSceneNumber;
@@ -101,10 +89,6 @@ void Scene::Update()
 			{
 				Obj->Update();
 			}
-			if (TetrisUI::Fade::GetFadeCheck() == 0x001)
-			{
-				Collection_->Update();
-			}
 		}
 		else
 		{
@@ -137,7 +121,10 @@ void Scene::Update()
 		PauseKeyNowTime_++;
 		break;
 	case SceneNumber::ResultSceneNumber:
-		Ui_->UpdateAll();
+		for (const auto Obj : Actor_)
+		{
+			Obj->Update();
+		}
 		break;
 	}
 }
@@ -166,7 +153,6 @@ void Scene::Draw()
 		{
 			Obj->Draw();
 		}
-		Collection_->Draw();
 		DrawString(410, 225, "[H] : ゲームプレイ中（ホールド）", GetColor(0, 0, 0));
 		DrawString(410, 250, "[↑] : ゲームプレイ中（回転）", GetColor(0, 0, 0));
 		DrawString(410, 275, "[←] : ゲームプレイ中（左移動）", GetColor(0, 0, 0));
@@ -194,20 +180,11 @@ void Scene::Draw()
 
 void Scene::Release()
 {
-	if (BlocksData != nullptr && Scenenumber_ != 2)
-	{
-		delete BlocksData;
-	}
 	for (auto obj : Actor_)
 	{
 		obj->Release();
 	}
 	ObjectReleaseMemory(Actor_);
-	if (Collection_ != nullptr)
-	{
-		Collection_->Release();
-		delete Collection_;
-	}
 }
 
 void Scene::PauseDraw()
@@ -277,9 +254,4 @@ void Scene::PauseSelect()
 	}
 
 	EnterKeyNowTime_++;
-}
-
-const TetrisGameType::Block& Scene::GetBlockTypeColor(int type, int x, int y)
-{
-	return BlocksData->GetBlockPosition(type, x, y);
 }

@@ -175,7 +175,6 @@
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="App\ApplicationManager.h" />
-    <ClInclude Include="Factory\GameObjectFactory.h" />
     <ClInclude Include="Fps\FpsCounter.h" />
     <ClInclude Include="Resource\Block.h" />
     <ClInclude Include="Resource\TextureData.h" />
