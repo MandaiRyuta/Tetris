@@ -29,14 +29,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	app->Init();
 	//bg.Init();
 	
-	while (!loopscene && ProcessMessage() == 0 /*&& CheckHandleASyncLoad(SceneTextureData->GetTitleTextureHandle(0))
+	while (ProcessMessage() == 0 && Scene::GetTextureData(0, 0) || Scene::GetTextureData(1, 5) || Scene::GetTextureData(2, 2)/*&& CheckHandleASyncLoad(SceneTextureData->GetTitleTextureHandle(0))
 		|| CheckHandleASyncLoad(SceneTextureData->GetGameTextureHandle(5))
 		|| CheckHandleASyncLoad(SceneTextureData->GetResultTextureHandle(2))*/)
 	{
-		//if (loopscene)
-		//{
-		//	break;
-		//}
+		if (loopscene)
+		{
+			break;
+		}
 		if (ProcessMessage() == -1)
 		{
 			break;
@@ -50,7 +50,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//bg.Draw();
 		app->Draw();
 		fps.Draw();
-		DrawFormatString(0, 0, GetColor(0, 0, 0), "%d", GetGraphNum());
+
 		fps.WaitTime();
 
 		ScreenFlip();

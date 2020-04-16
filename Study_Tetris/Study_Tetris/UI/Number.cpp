@@ -11,14 +11,7 @@ int TetrisUI::Number::ReSizePositionY_[] = {};
 int TetrisUI::Number::ReSize_ = ReSizeDrawSize;
 signed short int TetrisUI::Number::ResizeCheck_ = 0x000;
 TetrisUI::Number::Number()
-	: DefaultDrawNumberTexture_(0)
 {
-	//DefaultDrawNumberTexture_ = SceneTextureData.GetGameTextureData(7);
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	DrawNumberTexture_[i] = {};
-	//	DrawNumberTexture_[i] = DerivationGraph(i * 28, 0, 28, 29, DefaultDrawNumberTexture_);
-	//}
 }
 
 TetrisUI::Number::~Number()
@@ -29,22 +22,17 @@ TetrisUI::Number::~Number()
 void TetrisUI::Number::Init()
 {
     if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
-    {
-        DefaultDrawNumberTexture_ = 0;
-        DefaultDrawNumberTexture_ = Scene::GetTextureData(1, 0);
-        
-        LoadDivGraph("Resource/Number.png",10, 10, 1, 29, 28, DrawNumberTexture_);
-        
+    { 
+        for (int i = 0; i < 10; i++)
+        {
+            DrawNumberTexture_[i] = Scene::GetNumberTextureData(i);
+        }
     }
     if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
     {
-        DefaultDrawNumberTexture_ = 0;
-        DefaultDrawNumberTexture_ = Scene::GetTextureData(2, 0);
-
         for (int i = 0; i < 10; i++)
         {
-            DrawNumberTexture_[i] = {};
-            DrawNumberTexture_[i] = DerivationGraphF(i * 30, 0, 28, 29, DefaultDrawNumberTexture_);
+            DrawNumberTexture_[i] = Scene::GetNumberTextureData(i);
         }
     }
 }
@@ -85,7 +73,6 @@ void TetrisUI::Number::Draw()
 
 void TetrisUI::Number::Release()
 {
-    DeleteGraph(DefaultDrawNumberTexture_);
     for (int i = 0; i < 10; i++)
     {
         DeleteGraph(DrawNumberTexture_[i]);

@@ -1,5 +1,5 @@
 #include "Fade.h"
-
+#include "../Scene/Scene.h"
 int TetrisUI::Fade::State_ = 0;
 signed short int TetrisUI::Fade::FadeCheck_ = 0x000;
 void TetrisUI::Fade::Init()
@@ -14,24 +14,27 @@ void TetrisUI::Fade::Init()
 
 void TetrisUI::Fade::Update()
 {
-	switch (State_)
+	if (Scene::GetTextureData(0, 0) || Scene::GetTextureData(1, 5) || Scene::GetTextureData(2, 2))
 	{
-	case 0:
-		break;
-	case 1:
-		FadeCheck_ = FadeIn();
-		if (FadeCheck_ == 0x001)
+		switch (State_)
 		{
-			State_ = 0;
+		case 0:
+			break;
+		case 1:
+			FadeCheck_ = FadeIn();
+			if (FadeCheck_ == 0x001)
+			{
+				State_ = 0;
+			}
+			break;
+		case 2:
+			FadeCheck_ = FadeOut();
+			if (FadeCheck_ == 0x001)
+			{
+				State_ = 0;
+			}
+			break;
 		}
-		break;
-	case 2:
-		FadeCheck_ = FadeOut();
-		if (FadeCheck_ == 0x001)
-		{
-			State_ = 0;
-		}
-		break;
 	}
 }
 

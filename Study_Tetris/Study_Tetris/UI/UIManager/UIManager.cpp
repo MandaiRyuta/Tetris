@@ -16,9 +16,9 @@ TetrisUI::UIManager::UIManager(int scenetype)
 		GameObj_[2] = new TetrisUI::Number;
 		GameObj_[3] = new TetrisUI::NextBlock;
 		GameObj_[4] = new TetrisUI::Hold;
-		GameObj_[5] = new TetrisUI::Time;
-		GameObj_[6] = new TetrisUI::InGameState;
-		GameObj_[7] = new TetrisUI::Fade;
+		GameObj_[5] = new TetrisUI::InGameState;
+		GameObj_[6] = new TetrisUI::Fade;
+		GameObj_[7] = new TetrisUI::Time;
 		break;
 	case 2:
 		ResultObj_[0] = new TetrisUI::Background;

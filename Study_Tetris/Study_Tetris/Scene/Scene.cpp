@@ -39,17 +39,10 @@ void Scene::Init()
 		
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
+		Ui_ = new TetrisUI::UIManager(0);
+		Ui_->InitAll();
 		TitleDrawTime_ = 0;
-		if (Ui_ != nullptr)
-		{
-			Ui_->ReleaseAll();
-			delete Ui_;
-		}
-		if (Ui_ == nullptr)
-		{
-			Ui_ = new TetrisUI::UIManager(0);
-			Ui_->InitAll();
-		}
+
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::TitleSceneNumber;
 		
@@ -63,17 +56,10 @@ void Scene::Init()
 		SceneTextureData->Init();
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
+		Ui_ = new TetrisUI::UIManager(1);
+		Ui_->InitAll();
 		/////////////////////////////////////////////////
-		if (Ui_ != nullptr)
-		{
-			Ui_->ReleaseAll();
-			delete Ui_;
-		}
-		if (Ui_ == nullptr)
-		{
-			Ui_ = new TetrisUI::UIManager(1);
-			Ui_->InitAll();
-		}
+		
 		TetrisUI::Fade::SetStartFade(1);
 		Collection_ = new TetrisBlocks::BlockCollection();
 		Collection_->Init();
@@ -89,16 +75,10 @@ void Scene::Init()
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
 		////////////////////////////////////////////
-		if (Ui_ != nullptr)
-		{
-			Ui_->ReleaseAll();
-			delete Ui_;
-		}
-		if (Ui_ == nullptr)
-		{
-			Ui_ = new TetrisUI::UIManager(2);
-			Ui_->InitAll();
-		}
+
+		Ui_ = new TetrisUI::UIManager(2);
+		Ui_->InitAll();
+
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::ResultSceneNumber;
 		break;
@@ -273,7 +253,6 @@ void Scene::PauseSelect()
 				Scenenumber_ = 1;
 				SceneManager::ChangeScene(TetrisGameType::SCENETYPE::GAME);
 				EnterKeyNowTime_ = 0;
-				break;
 			}
 		}
 		break;
@@ -285,7 +264,6 @@ void Scene::PauseSelect()
 				EnterKeyNowTime_ = 0;
 				Scenenumber_ = 0;
 				SceneManager::ChangeScene(TetrisGameType::SCENETYPE::TITLE);
-				break;
 			}
 		}
 		break;
@@ -296,7 +274,6 @@ void Scene::PauseSelect()
 			{
 				ApplicationManager::SetLoop(0x001);
 				EnterKeyNowTime_ = 0;
-				break;
 			}
 		}
 		break;
@@ -312,19 +289,21 @@ const TetrisGameType::Block& Scene::GetBlockTypeColor(int type, int x, int y)
 
 const int& Scene::GetTextureData(int type, int number)
 {
-	switch (type)
+	if (type == 0)
 	{
-	case 0:
 		return SceneTextureData->GetTitleTextureData(number);
-		break;
-	case 1:
-		return SceneTextureData->GetGameTextureData(number);
-		break;
-	case 2:
-		return SceneTextureData->GetResultTextureData(number);
-		break;
-	default :
-		return 0;
 	}
+	else if(type == 1)
+	{
+		return SceneTextureData->GetGameTextureData(number);
+	}
+	else
+	{
+		return SceneTextureData->GetResultTextureData(number);
+	}
+}
 
+const int& Scene::GetNumberTextureData(int number)
+{
+	return SceneTextureData->GetNumberTexture(number);
 }

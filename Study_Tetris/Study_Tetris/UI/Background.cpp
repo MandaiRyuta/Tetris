@@ -9,7 +9,7 @@ void TetrisUI::Background::Init()
 	}
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
 	{
-		BackGroundTexture_ = Scene::GetTextureData(1, 5);
+		BackGroundTexture_ = Scene::GetTextureData(1, 4);
 	}
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
 	{

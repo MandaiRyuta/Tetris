@@ -11,12 +11,12 @@ void TetrisUI::Score::Init()
 	Score_ = 0;
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
 	{
-		ScoreTexture_ = Scene::GetTextureData(2, 1);
+		ScoreTexture_ = Scene::GetTextureData(2, 0);
 	}
 	DrawTime_ = 0;
 	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
 	{
-		FontScoreTexture_ = Scene::GetTextureData(1, 1);
+		FontScoreTexture_ = Scene::GetTextureData(1, 0);
 	}
 }
 

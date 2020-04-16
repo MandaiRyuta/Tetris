@@ -14,10 +14,7 @@ namespace TetrisBlocks
 		}
 		~BlockCollection()
 		{
-			for (int i = 0; i < 23; i++)
-			{
-				ClearLine_[i] = {};
-			}
+
 		}
 	public:
 		void Init();

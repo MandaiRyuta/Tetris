@@ -28,7 +28,6 @@ namespace TetrisUI
 		static int ResizeNumber_[ReSizeDrawSize];
 		static int ReSize_;
 		static signed short int ResizeCheck_;
-		int DefaultDrawNumberTexture_;
 		int DrawNumberTexture_[10];
 	};
 }

@@ -18,6 +18,7 @@ public:
 	void PauseSelect();
 	static const TetrisGameType::Block& GetBlockTypeColor(int type, int x, int y);
 	static const int& GetTextureData(int type, int number);
+	static const int& GetNumberTextureData(int number);
 private:
 	int EnterKeyMaxTime_;
 	int EnterKeyNowTime_;

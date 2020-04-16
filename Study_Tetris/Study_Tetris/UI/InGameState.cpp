@@ -5,8 +5,8 @@ int TetrisUI::InGameState::GameState_ = 0;
 
 void TetrisUI::InGameState::Init()
 {
-	GameClearTexture_ = Scene::GetTextureData(1, 3);
-	GameOverTexture_ = Scene::GetTextureData(1, 4);
+	GameClearTexture_ = Scene::GetTextureData(1, 2);
+	GameOverTexture_ = Scene::GetTextureData(1, 3);
 	GameState_ = 0;
 }
 

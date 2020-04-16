@@ -14,13 +14,7 @@ namespace TetrisUI
 			Sec_(0),
 			MinSec_(0)
 		{
-			nowtime_ = 9000;
-			for (int i = 0; i < 3; i++)
-			{
-				Positionx_[i] = 450 + (50 * i);
-				Positiony_[i] = 50;
-				Color_[i] = 255;
-			}
+
 		}
 		~Time() {}
 	public:

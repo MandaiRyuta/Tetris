@@ -16,6 +16,16 @@ BlockData::BlockData()
 
 BlockData::~BlockData()
 {
+	for (int type = 0; type < TetrisGameType::TetrisBlockTypeNum::MaxNumber; type++)
+	{
+		for (int y = 0; y < TetrisGameType::BlockHeight; y++)
+		{
+			for (int x = 0; x < TetrisGameType::BlockHeight; x++)
+			{
+				Block_[type][y][x] = {};
+			}
+		}
+	}
 }
 
 void BlockData::Init()
@@ -590,7 +600,7 @@ void BlockData::Init()
 	};
 }
 
-TetrisGameType::Block& BlockData::GetBlockPosition( int type, int x, int y)
+const TetrisGameType::Block& BlockData::GetBlockPosition( int type, int x, int y)
 {
 	return Block_[type][y][x];
 }

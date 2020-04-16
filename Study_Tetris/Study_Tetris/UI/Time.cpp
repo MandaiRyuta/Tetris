@@ -10,6 +10,13 @@ int TetrisUI::Time::nowtime_ = 0;
 void TetrisUI::Time::Init()
 {
 	TimeFontTexture_ = Scene::GetTextureData(1, 2);
+	nowtime_ = 9000;
+	for (int i = 0; i < 3; i++)
+	{
+		Positionx_[i] = 450 + (50 * i);
+		Positiony_[i] = 50;
+		Color_[i] = 255;
+	}
 }
 
 void TetrisUI::Time::Update()

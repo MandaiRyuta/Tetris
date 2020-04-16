@@ -141,6 +141,11 @@ void TetrisBlocks::BlockCollection::Draw()
 
 void TetrisBlocks::BlockCollection::Release()
 {
+	for (int i = 0; i < 23; i++)
+	{
+		ClearLine_[i] = {};
+	}
+
 	if (Block_ != nullptr)
 	{
 		Block_->Release();
