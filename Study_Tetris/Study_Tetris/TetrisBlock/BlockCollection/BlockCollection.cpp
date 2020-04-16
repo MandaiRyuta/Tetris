@@ -2,10 +2,11 @@
 #include "../../UI/NextBlock.h"
 #include "../../UI/Hold.h"
 #include "../../UI/Score.h"
+#include "../../Factory/GameObjectFactory.h"
 
 void TetrisBlocks::BlockCollection::Init()
 {
-	Block_ = new TetrisBlocks::TetrisBlock();
+	Block_ = GameObjectFactory::CreateTetorisBlock<TetrisBlock>();
 	Block_->Init();
 	Board_ = {};
 
@@ -36,14 +37,6 @@ void TetrisBlocks::BlockCollection::Init()
 	{
 		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
 	}
-
-	//for (int y = 0; y < TetrisGameType::kStageHeight; y++)
-	//{
-	//	for (int x = 0; x < TetrisGameType::kStageWidth; x++)
-	//	{
-	//		Block_->SetBoardInfo(Board_[y][x], x, y);
-	//	}
-	//}
 }
 
 void TetrisBlocks::BlockCollection::Update()

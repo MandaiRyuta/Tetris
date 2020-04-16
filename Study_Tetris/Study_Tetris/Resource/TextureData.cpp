@@ -28,15 +28,22 @@ void TextureDataBase::TextureData::Init()
 void TextureDataBase::TextureData::Release()
 {
 	DeleteGraph(TitleTextureDataHandle_[0]);
-
+	TitleTextureDataFile_[0] = {};
 	for (int i = 0; i < 6; i++)
 	{
+		GameTextureDataFile_[i] = {};
 		DeleteGraph(GameTextureDataHandle_[i]);
 	}
 
 	for (int i = 0; i < 3; i++)
 	{
+		ResultTextureDataFile_[i] = {};
 		DeleteGraph(ResultTextureDataHandle_[i]);
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		DeleteGraph(NumberTexture_[i]);
 	}
 }
 
@@ -75,8 +82,6 @@ void TextureDataBase::TextureData::Loading(int& scenetype)
 
 const int& TextureDataBase::TextureData::GetTitleTextureData(int titletexturenumber)
 {
-
-	//FileRead_fullyLoad_delete(TitleTextureDataHandle_[titletexturenumber]);
 	return TitleTextureDataHandle_[titletexturenumber];
 }
 

@@ -28,7 +28,6 @@ void TetrisUI::InGameState::Draw()
 	switch (GameState_)
 	{
 	case 0:
-		//DrawString(450, 32, "Game Scene", GetColor(255, 255, 255));
 		break;
 	case GameState::GameClear:		
 		DrawGraph(213, 240, GameClearTexture_, true);

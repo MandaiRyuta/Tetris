@@ -2,10 +2,11 @@
 #include "../App/ApplicationManager.h"
 #include "SceneManager/SceneManager.h"
 #include "../UI/Fade.h"
+#include "../Factory/GameObjectFactory.h"
 
 TextureDataBase::TextureData* Scene::SceneTextureData = nullptr;
 BlockData* Scene::BlocksData = nullptr;
-Scene::Scene(int type):
+Scene::Scene(int type) :
 	Scenenumber_(type)
 {
 	Pause_ = 1;
@@ -31,48 +32,48 @@ void Scene::Init()
 	{
 	case SceneNumber::TitleSceneNumber:
 
-		BlocksData = new BlockData;
+		BlocksData = GameObjectFactory::CreateBlockData<BlockData>();
 		BlocksData->Init();
 
-		SceneTextureData = new TextureDataBase::TextureData;
+		SceneTextureData =   GameObjectFactory::CreateTexture<TextureDataBase::TextureData>();
 		SceneTextureData->Init();
-		
+
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
-		Ui_ = new TetrisUI::UIManager(0);
+		Ui_ = GameObjectFactory::CreateUI<TetrisUI::UIManager>(0);
 		Ui_->InitAll();
 		TitleDrawTime_ = 0;
 
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::TitleSceneNumber;
-		
+
 		break;
 	case SceneNumber::GameSceneNumber:
 
-		BlocksData = new BlockData;
+		BlocksData = GameObjectFactory::CreateBlockData<BlockData>();
 		BlocksData->Init();
 
-		SceneTextureData = new TextureDataBase::TextureData;
+		SceneTextureData = GameObjectFactory::CreateTexture<TextureDataBase::TextureData>();
 		SceneTextureData->Init();
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
 		/////////////////////////////////////////////////
-		Collection_ = new TetrisBlocks::BlockCollection();
+		Collection_ = GameObjectFactory::CreateBlock<TetrisBlocks::BlockCollection>();
 		Collection_->Init();
-		Ui_ = new TetrisUI::UIManager(1);
+		Ui_ = GameObjectFactory::CreateUI<TetrisUI::UIManager>(1);
 		Ui_->InitAll();
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::GameSceneNumber;
 		break;
 	case SceneNumber::ResultSceneNumber:
 
-		SceneTextureData = new TextureDataBase::TextureData;
+		SceneTextureData = GameObjectFactory::CreateTexture<TextureDataBase::TextureData>();
 		SceneTextureData->Init();
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
 		////////////////////////////////////////////
 
-		Ui_ = new TetrisUI::UIManager(2);
+		Ui_ = GameObjectFactory::CreateUI<TetrisUI::UIManager>(2);
 		Ui_->InitAll();
 
 		TetrisUI::Fade::SetStartFade(1);
@@ -125,7 +126,7 @@ void Scene::Update()
 				{
 					if (MenuSelectNumber_ < 3)
 					{
-						MenuSelectNumber_ ++;
+						MenuSelectNumber_++;
 					}
 					DownArrowKeyNowTime_ = 0;
 				}
@@ -287,7 +288,7 @@ const int& Scene::GetTextureData(int type, int number)
 	{
 		return SceneTextureData->GetTitleTextureData(number);
 	}
-	else if(type == 1)
+	else if (type == 1)
 	{
 		return SceneTextureData->GetGameTextureData(number);
 	}

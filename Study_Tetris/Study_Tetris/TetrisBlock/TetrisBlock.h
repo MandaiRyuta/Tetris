@@ -1,7 +1,6 @@
 #pragma once
 #include "../TetrisGameType/TetrisGameType.h"
-//constexpr int BLOCKTYPE = 7;
-//constexpr int BLOCKSIZE = 4;
+
 namespace TetrisBlocks
 {
 	class TetrisBlock
@@ -75,7 +74,6 @@ namespace TetrisBlocks
 		const int& GetStockBlock(int num);
 		const signed short int& GetBlockDone();
 		void SetBlockDone(signed short int blockdonecheck);
-		//void InitBlocks();
 		void GameInputState();
 		void InputStateFirst(int& keyframe);
 		void InputStateSecond(int& keyframe);

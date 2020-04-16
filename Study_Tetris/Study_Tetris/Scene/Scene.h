@@ -19,6 +19,7 @@ public:
 	static const TetrisGameType::Block& GetBlockTypeColor(int type, int x, int y);
 	static const int& GetTextureData(int type, int number);
 	static const int& GetNumberTextureData(int number);
+
 private:
 	int EnterKeyMaxTime_;
 	int EnterKeyNowTime_;
@@ -32,6 +33,7 @@ private:
 	int Pause_;
 	int Scenenumber_;
 	int TitleDrawTime_;
+	
 	static TextureDataBase::TextureData* SceneTextureData;
 	static BlockData* BlocksData;
 	TetrisUI::UIManager* Ui_;

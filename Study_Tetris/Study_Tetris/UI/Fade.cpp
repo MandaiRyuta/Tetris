@@ -44,19 +44,12 @@ void TetrisUI::Fade::Draw()
 	{
 	case 0:
 		SetDrawBright(255,255,255);
-		//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 	case 1:
 		SetDrawBright(Color_.r, Color_.g, Color_.b);
-		//SetDrawBlendMode(DX_BLENDMODE_ADD, Color_.a);
-		//SetDrawBright(Color_.r, Color_.g, Color_.b);
-		//DrawBox(0, 0, 640, 480, GetColor(Color_.r, Color_.g, Color_.b), true);
 		break;
 	case 2:
 		SetDrawBright(Color_.r, Color_.g, Color_.b);
-		//SetDrawBlendMode(DX_BLENDMODE_ADD, Color_.a);
-		//SetDrawBright(Color_.r, Color_.g, Color_.b);
-		//DrawBox(0, 0, 640, 480, GetColor(Color_.r, Color_.g, Color_.b), true);
 		break;
 	}
 }

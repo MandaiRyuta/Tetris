@@ -49,11 +49,15 @@
     <ClCompile Include="Fps\FpsCounter.cpp">
       <Filter>Fps</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Number.cpp" />
     <ClCompile Include="Resource\TextureData.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Block.cpp" />
+    <ClCompile Include="Resource\Block.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Number.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\ApplicationManager.h">
@@ -110,7 +114,12 @@
     <ClInclude Include="Resource\TextureData.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Block.h" />
+    <ClInclude Include="Resource\Block.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\GameObjectFactory.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -131,9 +140,6 @@
     <Filter Include="UI\UIManager">
       <UniqueIdentifier>{39b25e76-e8d2-46fc-8344-b777b99f6995}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{79a2d256-0375-4268-91a6-c41a72390ef4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TetrisGameType">
       <UniqueIdentifier>{b1042caf-e71f-4e17-aab2-a501f94e7510}</UniqueIdentifier>
     </Filter>
@@ -148,6 +154,9 @@
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{db1d5c30-9468-482f-bc42-f3c60292555d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factory">
+      <UniqueIdentifier>{0f6d3944-6ae5-46d7-8b8d-3f13207cd0d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

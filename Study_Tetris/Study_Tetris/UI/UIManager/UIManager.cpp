@@ -6,25 +6,25 @@ TetrisUI::UIManager::UIManager(int scenetype)
 	switch (scenetype)
 	{
 	case 0:
-		TitleObj_[0] = new TetrisUI::Fade;
-		TitleObj_[1] = new TetrisUI::Background;
+		TitleObj_[0] = Create<TetrisUI::Fade>();
+		TitleObj_[1] = Create<TetrisUI::Background>();
 
 		break;
 	case 1:
-		GameObj_[0] = new TetrisUI::Background;
-		GameObj_[1] = new TetrisUI::Score;
-		GameObj_[2] = new TetrisUI::Number;
-		GameObj_[3] = new TetrisUI::NextBlock;
-		GameObj_[4] = new TetrisUI::Hold;
-		GameObj_[5] = new TetrisUI::InGameState;
-		GameObj_[6] = new TetrisUI::Fade;
-		GameObj_[7] = new TetrisUI::Time;
+		GameObj_[0] = Create<TetrisUI::Background>();
+		GameObj_[1] = Create<TetrisUI::Score>();
+		GameObj_[2] = Create<TetrisUI::Number>();
+		GameObj_[3] = Create<TetrisUI::NextBlock>();
+		GameObj_[4] = Create<TetrisUI::Hold>();
+		GameObj_[5] = Create<TetrisUI::InGameState>();
+		GameObj_[6] = Create<TetrisUI::Fade>();
+		GameObj_[7] = Create<TetrisUI::Time>();
 		break;
 	case 2:
-		ResultObj_[0] = new TetrisUI::Background;
-		ResultObj_[1] = new TetrisUI::Score;
-		ResultObj_[2] = new TetrisUI::Number;
-		ResultObj_[3] = new TetrisUI::Fade;
+		ResultObj_[0] = Create<TetrisUI::Background>();
+		ResultObj_[1] = Create<TetrisUI::Score>();
+		ResultObj_[2] = Create<TetrisUI::Number>();
+		ResultObj_[3] = Create<TetrisUI::Fade>();
 		break;
 	default:
 		break;
@@ -37,6 +37,7 @@ TetrisUI::UIManager::~UIManager()
 
 void TetrisUI::UIManager::InitAll()
 {
+
 	switch (SceneType_)
 	{
 	case 0:

@@ -24,6 +24,12 @@ namespace TetrisUI
 		void UpdateAll();
 		void DrawAll();
 		void ReleaseAll();
+		template <class T>
+		UI* Create()
+		{
+			UI* obj = new T;
+			return  obj;
+		}
 	private:
 		int SceneType_;
 		std::array<UI*, 2> TitleObj_;
