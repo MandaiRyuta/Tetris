@@ -1,0 +1,20 @@
+﻿  ApplicationManager.cpp
+  TextureData.cpp
+  Scene.cpp
+  SceneManager.cpp
+  TetrisBlock.cpp
+  Background.cpp
+  Fade.cpp
+  Hold.cpp
+  InGameState.cpp
+  NextBlock.cpp
+  Number.cpp
+  Score.cpp
+  Time.cpp
+  main.cpp
+  コードを生成中...
+C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\TetrisBlock\TetrisBlock.cpp(685): warning C4172: ローカル変数またはテンポラリのアドレスを返します
+C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\TetrisBlock\TetrisBlock.cpp(824): warning C4172: ローカル変数またはテンポラリのアドレスを返します
+C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\App\ApplicationManager.cpp(51): warning C4172: ローカル変数またはテンポラリのアドレスを返します
+C:\Users\tjddy\source\repos\Tetris\Study_Tetris\Study_Tetris\App\ApplicationManager.cpp(55): warning C4172: ローカル変数またはテンポラリのアドレスを返します
+  Study_Tetris.vcxproj -> C:\Users\tjddy\source\repos\Tetris\Study_Tetris\x64\Debug\Study_Tetris.exe

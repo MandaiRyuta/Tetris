@@ -56,19 +56,15 @@ void Scene::Init()
 		SceneTextureData->Init();
 		SceneTextureData->CreateTextureData(Scenenumber_);
 		SceneTextureData->Loading(Scenenumber_);
-		Ui_ = new TetrisUI::UIManager(1);
-		Ui_->InitAll();
 		/////////////////////////////////////////////////
-		
-		TetrisUI::Fade::SetStartFade(1);
 		Collection_ = new TetrisBlocks::BlockCollection();
 		Collection_->Init();
+		Ui_ = new TetrisUI::UIManager(1);
+		Ui_->InitAll();
+		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::GameSceneNumber;
 		break;
 	case SceneNumber::ResultSceneNumber:
-
-		BlocksData = new BlockData;
-		BlocksData->Init();
 
 		SceneTextureData = new TextureDataBase::TextureData;
 		SceneTextureData->Init();
@@ -190,9 +186,7 @@ void Scene::Draw()
 
 void Scene::Release()
 {
-	Scenenumber_ = 0;
-
-	if (BlocksData != nullptr)
+	if (BlocksData != nullptr && Scenenumber_ != 2)
 	{
 		delete BlocksData;
 	}

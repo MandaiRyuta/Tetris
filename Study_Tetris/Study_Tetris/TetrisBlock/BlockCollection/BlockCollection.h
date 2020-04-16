@@ -32,7 +32,7 @@ namespace TetrisBlocks
 		void Stack() {}
 		void NowBlockReset() {}
 		void ValidArea() {}
-		int GetBoardInfo(int x, int y);
+		const int& GetBoardInfo(int x, int y);
 	private:
 		int ClearLine_[23];
 		signed short int ClearCheck_;

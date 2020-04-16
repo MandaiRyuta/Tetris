@@ -14,7 +14,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	bool loopscene = false;
 
 	FPS::FpsCounter fps;
-	//TetrisUI::Background bg;
+	
 	ChangeWindowMode(TRUE);
 	SetUse3DFlag(FALSE);
 	SetWaitVSyncFlag(FALSE);
@@ -27,11 +27,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetDrawScreen(DX_SCREEN_BACK);
 	app = new ApplicationManager;
 	app->Init();
-	//bg.Init();
 	
-	while (ProcessMessage() == 0 && Scene::GetTextureData(0, 0) || Scene::GetTextureData(1, 5) || Scene::GetTextureData(2, 2)/*&& CheckHandleASyncLoad(SceneTextureData->GetTitleTextureHandle(0))
-		|| CheckHandleASyncLoad(SceneTextureData->GetGameTextureHandle(5))
-		|| CheckHandleASyncLoad(SceneTextureData->GetResultTextureHandle(2))*/)
+	while (ProcessMessage() == 0 && Scene::GetTextureData(0, 0) || Scene::GetTextureData(1, 5) || Scene::GetTextureData(2, 2))
 	{
 		if (loopscene)
 		{
@@ -47,7 +44,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		ClearDrawScreen();
 
-		//bg.Draw();
 		app->Draw();
 		fps.Draw();
 
@@ -56,7 +52,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ScreenFlip();
 	}
 
-	//bg.Release();
 	app->Release();
 	delete app;
 	DxLib_End();

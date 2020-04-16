@@ -22,9 +22,7 @@ void TextureDataBase::TextureData::Init()
 
 	ResultTextureDataFile_[0] = ("Resource/TotalScore.png");
 	ResultTextureDataFile_[1] = ("Resource/Background.png");
-	ResultTextureDataFile_[2] = ("Resource/Number.bmp");
-
-	LoadingCheck_ = false;
+	ResultTextureDataFile_[2] = ("Resource/Number.png");
 }
 
 void TextureDataBase::TextureData::Release()
@@ -56,7 +54,6 @@ void TextureDataBase::TextureData::Loading(int& scenetype)
 	{
 	case 0:
 		TitleTextureDataHandle_[0] = LoadGraph(TitleTextureDataFile_[0].c_str());
-		LoadingCheck_ = true;
 		break;
 	case 1:
 		GameTextureDataHandle_[0] = LoadGraph(GameTextureDataFile_[0].c_str());
@@ -65,14 +62,12 @@ void TextureDataBase::TextureData::Loading(int& scenetype)
 		GameTextureDataHandle_[3] = LoadGraph(GameTextureDataFile_[3].c_str());
 		GameTextureDataHandle_[4] = LoadGraph(GameTextureDataFile_[4].c_str());
 		LoadDivGraph(GameTextureDataFile_[5].c_str(), 10, 10, 1, 29, 28, NumberTexture_);
-		LoadingCheck_ = true;
 		break;
 	case 2:
 		ResultTextureDataHandle_[0] = LoadGraph(ResultTextureDataFile_[0].c_str());
 		ResultTextureDataHandle_[1] = LoadGraph(ResultTextureDataFile_[1].c_str());
 		
 		LoadDivGraph(ResultTextureDataFile_[2].c_str(), 10, 10, 1, 29, 28, NumberTexture_);
-		LoadingCheck_ = true;
 		break;
 	}
 	SetUseASyncLoadFlag(FALSE);
@@ -99,9 +94,4 @@ const int& TextureDataBase::TextureData::GetResultTextureData(int resulttexturen
 const int& TextureDataBase::TextureData::GetNumberTexture(int number)
 {
 	return NumberTexture_[number];
-}
-
-bool TextureDataBase::TextureData::GetNowLoadingCheckFlag()
-{
-	return LoadingCheck_;
 }

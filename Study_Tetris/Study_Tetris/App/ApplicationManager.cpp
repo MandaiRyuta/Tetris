@@ -44,7 +44,7 @@ void ApplicationManager::Release()
 	}
 }
 
-bool ApplicationManager::GetLoop()
+const bool& ApplicationManager::GetLoop()
 {
 	if (Loop_ == 0x001)
 	{

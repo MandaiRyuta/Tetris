@@ -18,8 +18,8 @@ public:
 	void Release();
 	static void ChangeScene(TetrisGameType::SCENETYPE Type);
 	static void SetTotalScore(int score);
-	static int GetTotalScore();
-	static TetrisGameType::SCENETYPE GetNowScene();
+	static const int& GetTotalScore();
+	static const TetrisGameType::SCENETYPE& GetNowScene();
 private:
 	static int TotalScore_;
 	static TetrisGameType::SCENETYPE NowType_;

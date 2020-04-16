@@ -12,7 +12,7 @@ public:
 	void Update(bool &loop);
 	void Draw();
 	void Release();
-	bool GetLoop();
+	const bool& GetLoop();
 	static void SetLoop(signed short int loopselect);
 private:
 	SceneManager* SceneManager_;

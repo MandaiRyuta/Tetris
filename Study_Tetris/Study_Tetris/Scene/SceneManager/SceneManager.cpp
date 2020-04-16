@@ -117,12 +117,12 @@ void SceneManager::SetTotalScore(int score)
     TotalScore_ = score;
 }
 
-int SceneManager::GetTotalScore()
+const int& SceneManager::GetTotalScore()
 {
     return TotalScore_;
 }
 
-TetrisGameType::SCENETYPE SceneManager::GetNowScene()
+const TetrisGameType::SCENETYPE& SceneManager::GetNowScene()
 {
     return NowType_;
 }

@@ -8,7 +8,7 @@ constexpr int UPPADDING = 3;
 constexpr int RIGHTPADDING = 17;
 constexpr int DOWNPADDING = 17;
 
-int TetrisBlocks::TetrisBlock::GetHoldBlockType()
+const int& TetrisBlocks::TetrisBlock::GetHoldBlockType()
 {
 	std::random_device rnd;
 	std::mt19937 mt(rnd());
@@ -664,17 +664,17 @@ void TetrisBlocks::TetrisBlock::SwapBlock()
 	}
 }
 
-int TetrisBlocks::TetrisBlock::GetXBlockPosition()
+const int& TetrisBlocks::TetrisBlock::GetXBlockPosition()
 {
 	return Position_.x;
 }
 
-int TetrisBlocks::TetrisBlock::GetYblockPosition()
+const int& TetrisBlocks::TetrisBlock::GetYblockPosition()
 {
 	return Position_.y;
 }
 
-int TetrisBlocks::TetrisBlock::GetBlockType()
+const int& TetrisBlocks::TetrisBlock::GetBlockType()
 {
 	if (Blocknumber_ < TetrisGameType::TetrisBlockTypeNum::MaxNumber)
 	{
@@ -691,7 +691,7 @@ void TetrisBlocks::TetrisBlock::SetBlockData(int data, int x, int y)
 	Board_[y][x] = data;
 }
 
-int TetrisBlocks::TetrisBlock::GetBlockData(int x, int y)
+const int& TetrisBlocks::TetrisBlock::GetBlockData(int x, int y)
 {
 	return Board_[y][x];
 }
@@ -813,7 +813,7 @@ void TetrisBlocks::TetrisBlock::MakeBlock()
 	YblockCount_ = 0;
 }
 
-int TetrisBlocks::TetrisBlock::GetStockBlock(int num)
+const int& TetrisBlocks::TetrisBlock::GetStockBlock(int num)
 {
 	if (num < TetrisGameType::StockBlockSize)
 	{
@@ -825,7 +825,7 @@ int TetrisBlocks::TetrisBlock::GetStockBlock(int num)
 	}
 }
 
-signed short int TetrisBlocks::TetrisBlock::GetBlockDone()
+const signed short int& TetrisBlocks::TetrisBlock::GetBlockDone()
 {
 	return BlockDoneCheck_;
 }

@@ -52,7 +52,7 @@ namespace TetrisBlocks
 		}
 		~TetrisBlock(){}
 	public:
-		int GetHoldBlockType();
+		const int& GetHoldBlockType();
 		void DrawBlock(int type, int vertical, int side, int positionX, int positionY);
 		void ChangeRotate();
 		void Init();
@@ -61,19 +61,19 @@ namespace TetrisBlocks
 		void Release();
 		void StockBlock();
 		void SwapBlock();
-		int GetXBlockPosition();
-		int GetYblockPosition();
-		int GetBlockType();
+		const int& GetXBlockPosition();
+		const int& GetYblockPosition();
+		const int& GetBlockType();
 		void SetBlockData(int data, int x, int y);
-		int GetBlockData(int x, int y);
+		const int& GetBlockData(int x, int y);
 		void StageBlockCollisionLeft();
 		void StageBlockCollisionRight();
 		void StageBlockCollisionBottom();
 		void StageBlockCollisionCenter();
 		void BlockCollisionTurn();
 		void MakeBlock();
-		int GetStockBlock(int num);
-		signed short int GetBlockDone();
+		const int& GetStockBlock(int num);
+		const signed short int& GetBlockDone();
 		void SetBlockDone(signed short int blockdonecheck);
 		//void InitBlocks();
 		void GameInputState();

@@ -32,6 +32,11 @@ void TetrisBlocks::BlockCollection::Init()
 		}
 	}
 
+	for (int i = 0; i < 3; i++)
+	{
+		TetrisUI::NextBlock::GetNextBlockType(i, Block_->GetStockBlock(i));
+	}
+
 	//for (int y = 0; y < TetrisGameType::kStageHeight; y++)
 	//{
 	//	for (int x = 0; x < TetrisGameType::kStageWidth; x++)
@@ -271,7 +276,7 @@ void TetrisBlocks::BlockCollection::Clear(TetrisGameType::Block block)
 	}
 }
 
-int TetrisBlocks::BlockCollection::GetBoardInfo(int x, int y)
+const int& TetrisBlocks::BlockCollection::GetBoardInfo(int x, int y)
 {
 	return Board_[x][y];
 }

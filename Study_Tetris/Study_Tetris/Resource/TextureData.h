@@ -41,7 +41,6 @@ namespace TextureDataBase
 		const int& GetGameTextureData(int gametexturenumber);
 		const int& GetResultTextureData(int resulttexturenumber);
 		const int& GetNumberTexture(int number);
-		bool GetNowLoadingCheckFlag();
 	private:;
 		std::array<std::string,1> TitleTextureDataFile_;
 		std::array<std::string,6> GameTextureDataFile_;
@@ -54,6 +53,5 @@ namespace TextureDataBase
 		std::array<int,6> GameTexture_;
 		std::array<int,3> ResultTexture_;
 		int NumberTexture_[10];
-		bool LoadingCheck_;
 	};
 }
