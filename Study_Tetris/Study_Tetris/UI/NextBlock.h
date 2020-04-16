@@ -14,6 +14,7 @@ namespace TetrisUI
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void Release() override;
+		virtual void LoadTexture(int handle, int texturenumber = 0) override;
 		void NextBlockPlaceDraw();
 		void BlockInit();
 		static void GetNextBlockType(int num, int type)

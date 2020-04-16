@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Actor.cpp" />
     <ClCompile Include="App\ApplicationManager.cpp" />
     <ClCompile Include="Fps\FpsCounter.cpp" />
     <ClCompile Include="Resource\Block.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Window\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="App\ApplicationManager.h" />
     <ClInclude Include="Factory\GameObjectFactory.h" />
     <ClInclude Include="Fps\FpsCounter.h" />

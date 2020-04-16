@@ -9,7 +9,6 @@ int TetrisUI::Time::nowtime_ = 0;
 
 void TetrisUI::Time::Init()
 {
-	TimeFontTexture_ = Scene::GetTextureData(1, 2);
 	nowtime_ = 9000;
 	for (int i = 0; i < 3; i++)
 	{
@@ -45,6 +44,11 @@ void TetrisUI::Time::Draw()
 void TetrisUI::Time::Release()
 {
 	DeleteGraph(TimeFontTexture_);
+}
+
+void TetrisUI::Time::LoadTexture(int handle, int texturenumber)
+{
+	TimeFontTexture_ = handle;
 }
 
 int TetrisUI::Time::GetNowTime()

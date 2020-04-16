@@ -60,6 +60,10 @@ void TetrisUI::Hold::Release()
 {
 }
 
+void TetrisUI::Hold::LoadTexture(int handle, int texturenumber)
+{
+}
+
 void TetrisUI::Hold::BlockInit()
 {
 	for (int type = 0; type < 7; type++)

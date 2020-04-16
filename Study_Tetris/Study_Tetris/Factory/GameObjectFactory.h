@@ -9,12 +9,12 @@ class GameObjectFactory
 {
 public:
 
-	template<class T>
-	static TextureDataBase::TextureData* CreateTexture()
-	{
-		TextureDataBase::TextureData* obj = new T;
-		return obj;
-	}
+	//template<class T>
+	//static TextureDataBase::TextureData* CreateTexture()
+	//{
+	//	TextureDataBase::TextureData* obj = new T;
+	//	return obj;
+	//}
 
 	template<class T>
 	static TetrisUI::UIManager* CreateUI(int number)

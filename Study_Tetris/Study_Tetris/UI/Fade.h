@@ -13,13 +13,13 @@ namespace TetrisUI
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void Release() override;
+		virtual void LoadTexture(int handle, int texturenumber = 0) override;
 		signed short int FadeIn();
 		signed short int FadeOut();
 		static void SetStartFade(int type);
 		static signed short int GetFadeCheck();
 	private:
 		static signed short int FadeCheck_;
-		int Texture_;
 		static int State_;
 		TetrisGameType::Color Color_;
 	};

@@ -5,8 +5,6 @@ int TetrisUI::InGameState::GameState_ = 0;
 
 void TetrisUI::InGameState::Init()
 {
-	GameClearTexture_ = Scene::GetTextureData(1, 2);
-	GameOverTexture_ = Scene::GetTextureData(1, 3);
 	GameState_ = 0;
 }
 
@@ -42,6 +40,18 @@ void TetrisUI::InGameState::Release()
 {
 	DeleteGraph(GameClearTexture_);
 	DeleteGraph(GameOverTexture_);
+}
+
+void TetrisUI::InGameState::LoadTexture(int handle, int texturenumber)
+{
+	if (texturenumber == 0)
+	{
+		GameClearTexture_ = handle;
+	}
+	else if (texturenumber == 1)
+	{
+		GameOverTexture_ = handle;
+	}
 }
 
 int TetrisUI::InGameState::GetGameState()

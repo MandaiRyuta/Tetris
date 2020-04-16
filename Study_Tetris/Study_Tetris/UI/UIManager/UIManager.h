@@ -11,15 +11,23 @@
 #include "../Background.h"
 
 #include "../UI.h"
+#include "../../Actor/Actor.h"
+#include "../../Resource/TextureData.h"
 
 namespace TetrisUI
 {
-	class UIManager
+	class UIManager : public Actor
 	{
 	public:
-		UIManager(int scenetype);
+		UIManager();
 		~UIManager();
 	public:
+		virtual void Init() override;
+		virtual void Update() override;
+		virtual void Draw() override;
+		virtual void Release() override;
+		static const int& GetTextureHandle(int type, int number);
+		void SetType(int type);
 		void InitAll();
 		void UpdateAll();
 		void DrawAll();
@@ -32,6 +40,7 @@ namespace TetrisUI
 		}
 	private:
 		int SceneType_;
+		static TextureDataBase::TextureData texture_;
 		std::array<UI*, 2> TitleObj_;
 		std::array<UI*, 8> GameObj_;
 		std::array<UI*, 4> ResultObj_;

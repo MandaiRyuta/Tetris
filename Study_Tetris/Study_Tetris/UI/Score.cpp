@@ -9,15 +9,7 @@ unsigned int TetrisUI::Score::Score_ = 0;
 void TetrisUI::Score::Init()
 {
 	Score_ = 0;
-	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
-	{
-		ScoreTexture_ = Scene::GetTextureData(2, 0);
-	}
-	DrawTime_ = 0;
-	if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
-	{
-		FontScoreTexture_ = Scene::GetTextureData(1, 0);
-	}
+
 }
 
 void TetrisUI::Score::Update()
@@ -61,6 +53,18 @@ void TetrisUI::Score::Release()
 {
 	DeleteGraph(ScoreTexture_);
 	DeleteGraph(FontScoreTexture_);
+}
+
+void TetrisUI::Score::LoadTexture(int handle, int texturenumber)
+{
+	if (texturenumber == 0)
+	{
+		ScoreTexture_ = handle;
+	}
+	else if (texturenumber == 1)
+	{
+		FontScoreTexture_ = handle;
+	}
 }
 
 void TetrisUI::Score::SetScore(int score)

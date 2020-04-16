@@ -22,6 +22,10 @@ void TetrisUI::NextBlock::Release()
 {
 }
 
+void TetrisUI::NextBlock::LoadTexture(int handle, int texturenumber)
+{
+}
+
 void TetrisUI::NextBlock::NextBlockPlaceDraw()
 {
 	for (int y = 0; y < 16; y++)

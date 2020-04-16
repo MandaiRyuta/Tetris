@@ -4,7 +4,6 @@
 #include "../UI/Fade.h"
 #include "../Factory/GameObjectFactory.h"
 
-TextureDataBase::TextureData* Scene::SceneTextureData = nullptr;
 BlockData* Scene::BlocksData = nullptr;
 Scene::Scene(int type) :
 	Scenenumber_(type)
@@ -32,16 +31,14 @@ void Scene::Init()
 	{
 	case SceneNumber::TitleSceneNumber:
 
+		for (const auto Obj : Actor_)
+		{
+			Obj->Init();
+		}
+
 		BlocksData = GameObjectFactory::CreateBlockData<BlockData>();
 		BlocksData->Init();
 
-		SceneTextureData =   GameObjectFactory::CreateTexture<TextureDataBase::TextureData>();
-		SceneTextureData->Init();
-
-		SceneTextureData->CreateTextureData(Scenenumber_);
-		SceneTextureData->Loading(Scenenumber_);
-		Ui_ = GameObjectFactory::CreateUI<TetrisUI::UIManager>(0);
-		Ui_->InitAll();
 		TitleDrawTime_ = 0;
 
 		TetrisUI::Fade::SetStartFade(1);
@@ -53,28 +50,24 @@ void Scene::Init()
 		BlocksData = GameObjectFactory::CreateBlockData<BlockData>();
 		BlocksData->Init();
 
-		SceneTextureData = GameObjectFactory::CreateTexture<TextureDataBase::TextureData>();
-		SceneTextureData->Init();
-		SceneTextureData->CreateTextureData(Scenenumber_);
-		SceneTextureData->Loading(Scenenumber_);
+		for (const auto Obj : Actor_)
+		{
+			Obj->Init();
+		}
 		/////////////////////////////////////////////////
 		Collection_ = GameObjectFactory::CreateBlock<TetrisBlocks::BlockCollection>();
 		Collection_->Init();
-		Ui_ = GameObjectFactory::CreateUI<TetrisUI::UIManager>(1);
-		Ui_->InitAll();
+
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::GameSceneNumber;
 		break;
 	case SceneNumber::ResultSceneNumber:
+		
+		for (const auto Obj : Actor_)
+		{
+			Obj->Init();
+		}
 
-		SceneTextureData = GameObjectFactory::CreateTexture<TextureDataBase::TextureData>();
-		SceneTextureData->Init();
-		SceneTextureData->CreateTextureData(Scenenumber_);
-		SceneTextureData->Loading(Scenenumber_);
-		////////////////////////////////////////////
-
-		Ui_ = GameObjectFactory::CreateUI<TetrisUI::UIManager>(2);
-		Ui_->InitAll();
 
 		TetrisUI::Fade::SetStartFade(1);
 		Scenenumber_ = SceneNumber::ResultSceneNumber;
@@ -87,8 +80,11 @@ void Scene::Update()
 	switch (Scenenumber_)
 	{
 	case SceneNumber::TitleSceneNumber:
+		for (const auto Obj : Actor_)
+		{
+			Obj->Update();
+		}
 		TitleDrawTime_ += 5;
-		Ui_->UpdateAll();
 		break;
 	case SceneNumber::GameSceneNumber:
 		if (CheckHitKey(KEY_INPUT_P) == 0x001)
@@ -101,7 +97,10 @@ void Scene::Update()
 		}
 		if (Pause_ == 1)
 		{
-			Ui_->UpdateAll();
+			for (const auto Obj : Actor_)
+			{
+				Obj->Update();
+			}
 			if (TetrisUI::Fade::GetFadeCheck() == 0x001)
 			{
 				Collection_->Update();
@@ -148,8 +147,10 @@ void Scene::Draw()
 	switch (Scenenumber_)
 	{
 	case SceneNumber::TitleSceneNumber:
-		Ui_->DrawAll();
-
+		for (const auto Obj : Actor_)
+		{
+			Obj->Draw();
+		}
 		if (TitleDrawTime_ > 255)
 		{
 			TitleDrawTime_ = 0;
@@ -161,7 +162,10 @@ void Scene::Draw()
 		DrawString(250, 240 - 32, "て　と　り　す", GetColor(0, 0, 0));
 		break;
 	case SceneNumber::GameSceneNumber:
-		Ui_->DrawAll();
+		for (const auto Obj : Actor_)
+		{
+			Obj->Draw();
+		}
 		Collection_->Draw();
 		DrawString(410, 225, "[H] : ゲームプレイ中（ホールド）", GetColor(0, 0, 0));
 		DrawString(410, 250, "[↑] : ゲームプレイ中（回転）", GetColor(0, 0, 0));
@@ -180,7 +184,10 @@ void Scene::Draw()
 		}
 		break;
 	case SceneNumber::ResultSceneNumber:
-		Ui_->DrawAll();
+		for (const auto Obj : Actor_)
+		{
+			Obj->Draw();
+		}
 		break;
 	}
 }
@@ -191,16 +198,11 @@ void Scene::Release()
 	{
 		delete BlocksData;
 	}
-	if (SceneTextureData != nullptr)
+	for (auto obj : Actor_)
 	{
-		SceneTextureData->Release();
-		delete SceneTextureData;
+		obj->Release();
 	}
-	if (Ui_ != nullptr)
-	{
-		Ui_->ReleaseAll();
-		delete Ui_;
-	}
+	ObjectReleaseMemory(Actor_);
 	if (Collection_ != nullptr)
 	{
 		Collection_->Release();
@@ -280,25 +282,4 @@ void Scene::PauseSelect()
 const TetrisGameType::Block& Scene::GetBlockTypeColor(int type, int x, int y)
 {
 	return BlocksData->GetBlockPosition(type, x, y);
-}
-
-const int& Scene::GetTextureData(int type, int number)
-{
-	if (type == 0)
-	{
-		return SceneTextureData->GetTitleTextureData(number);
-	}
-	else if (type == 1)
-	{
-		return SceneTextureData->GetGameTextureData(number);
-	}
-	else
-	{
-		return SceneTextureData->GetResultTextureData(number);
-	}
-}
-
-const int& Scene::GetNumberTextureData(int number)
-{
-	return SceneTextureData->GetNumberTexture(number);
 }

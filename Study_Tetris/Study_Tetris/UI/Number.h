@@ -15,6 +15,7 @@ namespace TetrisUI
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void Release() override;
+		virtual void LoadTexture(int handle, int texturenumber = 0) override;
 		void DrawNumber(int x, int y, int num);
 		void NumDraw(int x, int y, int Num);
 		static void SetDrawNumber(int x, int y, int num, int size, signed short int resizecheck);

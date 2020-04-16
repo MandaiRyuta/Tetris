@@ -21,20 +21,6 @@ TetrisUI::Number::~Number()
 
 void TetrisUI::Number::Init()
 {
-    if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::GAME)
-    { 
-        for (int i = 0; i < 10; i++)
-        {
-            DrawNumberTexture_[i] = Scene::GetNumberTextureData(i);
-        }
-    }
-    if (SceneManager::GetNowScene() == TetrisGameType::SCENETYPE::RESULT)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            DrawNumberTexture_[i] = Scene::GetNumberTextureData(i);
-        }
-    }
 }
 
 void TetrisUI::Number::Update()
@@ -76,6 +62,43 @@ void TetrisUI::Number::Release()
     for (int i = 0; i < 10; i++)
     {
         DeleteGraph(DrawNumberTexture_[i]);
+    }
+}
+
+void TetrisUI::Number::LoadTexture(int handle, int texturenumber)
+{
+    switch (texturenumber)
+    {
+    case 0:
+        DrawNumberTexture_[0] = handle;
+        break;
+    case 1:
+        DrawNumberTexture_[1] = handle;
+        break;
+    case 2:
+        DrawNumberTexture_[2] = handle;
+        break;
+    case 3:
+        DrawNumberTexture_[3] = handle;
+        break;
+    case 4:
+        DrawNumberTexture_[4] = handle;
+        break;
+    case 5:
+        DrawNumberTexture_[5] = handle;
+        break;
+    case 6:
+        DrawNumberTexture_[6] = handle;
+        break;
+    case 7:
+        DrawNumberTexture_[7] = handle;
+        break;
+    case 8:
+        DrawNumberTexture_[8] = handle;
+        break;
+    case 9:
+        DrawNumberTexture_[9] = handle;
+        break;
     }
 }
 

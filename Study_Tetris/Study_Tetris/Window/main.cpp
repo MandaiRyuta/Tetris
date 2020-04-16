@@ -28,7 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	app = new ApplicationManager;
 	app->Init();
 	
-	while (ProcessMessage() == 0 && Scene::GetTextureData(0, 0) || Scene::GetTextureData(1, 5) || Scene::GetTextureData(2, 2))
+	while (ProcessMessage() == 0 && TetrisUI::UIManager::GetTextureHandle(0,0) || TetrisUI::UIManager::GetTextureHandle(1,5) || TetrisUI::UIManager::GetTextureHandle(2,2))
 	{
 		if (loopscene)
 		{

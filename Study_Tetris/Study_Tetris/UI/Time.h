@@ -12,16 +12,14 @@ namespace TetrisUI
 			endtime_(0),
 			Min_(0),
 			Sec_(0),
-			MinSec_(0)
-		{
-
-		}
+			MinSec_(0){}
 		~Time() {}
 	public:
 		virtual void Init() override;
 		virtual void Update() override;
 		virtual void Draw() override;
 		virtual void Release() override;
+		virtual void LoadTexture(int handle, int texturenumber = 0) override;
 		static int GetNowTime();
 	private:
 		int TimeFontTexture_;

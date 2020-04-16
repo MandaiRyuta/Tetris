@@ -14,27 +14,24 @@ void TetrisUI::Fade::Init()
 
 void TetrisUI::Fade::Update()
 {
-	if (Scene::GetTextureData(0, 0) || Scene::GetTextureData(1, 5) || Scene::GetTextureData(2, 2))
+	switch (State_)
 	{
-		switch (State_)
+	case 0:
+		break;
+	case 1:
+		FadeCheck_ = FadeIn();
+		if (FadeCheck_ == 0x001)
 		{
-		case 0:
-			break;
-		case 1:
-			FadeCheck_ = FadeIn();
-			if (FadeCheck_ == 0x001)
-			{
-				State_ = 0;
-			}
-			break;
-		case 2:
-			FadeCheck_ = FadeOut();
-			if (FadeCheck_ == 0x001)
-			{
-				State_ = 0;
-			}
-			break;
+			State_ = 0;
 		}
+		break;
+	case 2:
+		FadeCheck_ = FadeOut();
+		if (FadeCheck_ == 0x001)
+		{
+			State_ = 0;
+		}
+		break;
 	}
 }
 
@@ -55,6 +52,10 @@ void TetrisUI::Fade::Draw()
 }
 
 void TetrisUI::Fade::Release()
+{
+}
+
+void TetrisUI::Fade::LoadTexture(int handle, int texturenumber)
 {
 }
 
