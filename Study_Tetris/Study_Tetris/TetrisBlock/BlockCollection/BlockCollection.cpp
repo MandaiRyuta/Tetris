@@ -229,28 +229,6 @@ void TetrisBlocks::BlockCollection::StageBlockLineClear()
 	}
 }
 
-void TetrisBlocks::BlockCollection::CopyBlock(TetrisGameType::Block src, TetrisGameType::Block dst)
-{
-	for (int i = 0; i < TetrisGameType::StageHeight; i++)
-	{
-		for (int j = 0; j < TetrisGameType::StageWidth; j++)
-		{
-			dst = src;
-		}
-	}
-}
-
-void TetrisBlocks::BlockCollection::Clear(TetrisGameType::Block block)
-{
-	for (int i = 0; i < TetrisGameType::StageHeight; i++)
-	{
-		for (int j = 0; j < TetrisGameType::StageWidth; j++)
-		{
-			block.type = 0;
-		}
-	}
-}
-
 const int& TetrisBlocks::BlockCollection::GetBoardInfo(int x, int y)
 {
 	return Board_[x][y];

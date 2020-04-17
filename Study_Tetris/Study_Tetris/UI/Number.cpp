@@ -4,7 +4,7 @@
 int TetrisUI::Number::Number_[] = {};
 int TetrisUI::Number::PositionX_[] = {};
 int TetrisUI::Number::PositionY_[] = {};
-int TetrisUI::Number::Size_ = NumberDrawSize;
+
 int TetrisUI::Number::ResizeNumber_[] = {};
 int TetrisUI::Number::ReSizePositionX_[] = {};
 int TetrisUI::Number::ReSizePositionY_[] = {};

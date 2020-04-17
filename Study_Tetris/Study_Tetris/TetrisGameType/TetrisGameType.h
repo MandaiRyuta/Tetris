@@ -1,26 +1,31 @@
 #pragma once
+// TetrisGameType.h
+// テトリスゲームに関係する情報をまとめてます
 #include <DxLib.h>
 #include <array>
 
+//デバッグ用のdefineです。
+#define DEBUGCHECK 
+/// <summary>
+/// シーンの番号です
+/// </summary>
 namespace SceneNumber
 {
 	constexpr int TitleSceneNumber = 0;
 	constexpr int GameSceneNumber = 1;
 	constexpr int ResultSceneNumber = 2;
-	constexpr int TitleLoadingScene = 3;
-	constexpr int GameLoadingScene = 4;
-	constexpr int ResultLoadingScene = 5;
 }
-namespace ResourceTexture
-{
-	static int BackgroundTexture = 0;
-}
+/// <summary>
+/// テトリスのゲームにかかわる情報です
+/// </summary>
 namespace TetrisGameType
 {
+	//ブロックの種類
 	namespace TetrisBlockTypeNum
 	{
 		constexpr int MaxNumber = 7;
 	}
+	//ブロックの形状を示す番号
 	namespace TetrisBlockType
 	{
 		constexpr int TYPEI = 0;
@@ -32,21 +37,31 @@ namespace TetrisGameType
 		constexpr int TYPEZ = 6;
 	}
 
+	//ストックするブロックの数
 	constexpr int StockBlockSize = 4;
+	//ブロックの高さ
 	constexpr int BlockHeight = 5;
+	//ブロックの幅
 	constexpr int BlockWidth = 5;
+	//ステージの高さ
 	constexpr int StageHeight = 23;
+	//ステージの幅
 	constexpr int StageWidth = 13;
+	//描画しているブロックの幅
 	constexpr int DrawBlockWidth = 20;
+	//ブロックの速度
 	constexpr int BlockSpeed = 5;
+	//１フレーム
 	constexpr int KeyFrame = 1;
 
+	//オブジェクトのタイプ
 	enum class ObjectType
 	{
 		BACKGROUND,
 		TETRIS,
 	};
 
+	//オブジェクトの形状
 	enum class BlockType
 	{
 		I,
@@ -57,7 +72,7 @@ namespace TetrisGameType
 		T,
 		Z,
 	};
-
+	//シーンの種類
 	enum class SCENETYPE
 	{
 		TITLE,
@@ -65,13 +80,13 @@ namespace TetrisGameType
 		RESULT,
 		NONE,
 	};
-
+	//２次元座標
 	struct Vector2
 	{
 		int x;
 		int y;
 	};
-
+	//色情報
 	struct Color
 	{
 		int r;
@@ -79,7 +94,7 @@ namespace TetrisGameType
 		int b;
 		int a;
 	};
-	
+	//ブロックの形状と色情報
 	struct Block
 	{
 		int r;

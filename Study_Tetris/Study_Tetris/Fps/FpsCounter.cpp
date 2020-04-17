@@ -1,5 +1,6 @@
 #include "FpsCounter.h"
 #include <DxLib.h>
+#include "../TetrisGameType/TetrisGameType.h"
 
 void FPS::FpsCounter::Update()
 {
@@ -19,7 +20,9 @@ void FPS::FpsCounter::Update()
 
 void FPS::FpsCounter::Draw()
 {
-	//DrawFormatString(0, 0, GetColor(0, 0, 0), "%.1f", Fps_);
+#ifndef DEBUGCHECK
+	DrawFormatString(0, 0, GetColor(0, 0, 0), "%.1f", Fps_);
+#endif //!DEBUGCHECK
 }
 
 void FPS::FpsCounter::WaitTime()

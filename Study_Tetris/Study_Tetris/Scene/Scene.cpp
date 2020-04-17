@@ -6,7 +6,7 @@
 Scene::Scene(int type) :
 	Scenenumber_(type)
 {
-	Pause_ = 1;
+	Pause_ = 0x001;
 	PauseKeyMaxTime_ = 60;
 	PauseKeyNowTime_ = 0;
 	DownArrowKeyNowTime_ = 0;
@@ -85,9 +85,16 @@ void Scene::Update()
 		}
 		if (Pause_ == 1)
 		{
-			for (const auto Obj : Actor_)
+			if (TetrisUI::Fade::GetFadeCheck() == 0x001)
 			{
-				Obj->Update();
+				for (const auto Obj : Actor_)
+				{
+					Obj->Update();
+				}
+			}
+			else
+			{
+				Actor_.front()->Update();
 			}
 		}
 		else
@@ -184,7 +191,7 @@ void Scene::Release()
 	{
 		obj->Release();
 	}
-	ObjectReleaseMemory(Actor_);
+	ObjectReleaseMemory();
 }
 
 void Scene::PauseDraw()

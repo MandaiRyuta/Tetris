@@ -14,7 +14,7 @@ const int& TetrisBlocks::TetrisBlock::GetHoldBlockType()
 	std::mt19937 mt(rnd());
 	std::uniform_int_distribution<> rndblocktype(0, 6);
 	
-	HoldStockCheck_;
+
 	if (HoldStockCheck_ == 1 && BreakStockCheck_ == 0x000)
 	{
 		HoldStockCheck_ = -1;
